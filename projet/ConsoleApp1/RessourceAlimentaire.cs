@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     abstract class RessourceAlimentaire : Ressources
     {
-        protected int ValeurNutritionnelle { get; set; }
+        public int ValeurNutritionnelle { get; set; }
 
 
         public RessourceAlimentaire(int Quantite, int ValeurNutritionnelle)

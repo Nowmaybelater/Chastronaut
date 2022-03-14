@@ -47,7 +47,7 @@ namespace ConsoleApp1
 
         public void Manger(RessourceAlimentaire aliment)
         {
-            NiveauDeFaim += aliment.ValeurNutritionelle;
+            NiveauDeFaim += aliment.ValeurNutritionnelle;
             if (NiveauDeFaim >= 10)
             {
                 NiveauDeFaim = 10;

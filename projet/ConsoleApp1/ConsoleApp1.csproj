@@ -46,6 +46,7 @@
     <Compile Include="Agriculteur.cs" />
     <Compile Include="Artiste.cs" />
     <Compile Include="Batisseur.cs" />
+    <Compile Include="Carte.cs" />
     <Compile Include="Chats.cs" />
     <Compile Include="Fonction.cs" />
     <Compile Include="Guerrisseur.cs" />

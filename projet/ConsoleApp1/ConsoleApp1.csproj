@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Artiste.cs" />
+    <Compile Include="Batisseur.cs" />
+    <Compile Include="Guerrisseur.cs" />
+    <Compile Include="Messager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

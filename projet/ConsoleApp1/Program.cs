@@ -11,6 +11,11 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Console.WriteLine("Programme principal");
+            Livre L1 = new Livre(3);
+            Console.WriteLine(L1);
+            SubirAttaque(L1);
+
+            Console.ReadLine();
         }
 
         public static string PresenterJeu(ref bool veutJouer)
@@ -49,6 +54,12 @@ namespace ConsoleApp1
 
             return (nomColonie);
 
+        }
+
+        public static void SubirAttaque(Livre L)
+        {
+            L.EtrePille();
+            Console.WriteLine(L);
         }
 
     }

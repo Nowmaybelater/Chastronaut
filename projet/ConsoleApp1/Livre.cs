@@ -17,5 +17,11 @@ namespace ConsoleApp1
         public override void Utiliser()
         { }
 
+        public override string ToString ()
+        {
+            string chRes = "Nb Livres : " + this.Quantite;
+            return chRes;
+        }
+
     }
 }

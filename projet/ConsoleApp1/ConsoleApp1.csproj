@@ -43,10 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agriculteur.cs" />
     <Compile Include="Artiste.cs" />
     <Compile Include="Batisseur.cs" />
+    <Compile Include="Chats.cs" />
+    <Compile Include="Fonction.cs" />
     <Compile Include="Guerrisseur.cs" />
     <Compile Include="Messager.cs" />
+    <Compile Include="Metier.cs" />
+    <Compile Include="Patissier.cs" />
+    <Compile Include="Pecheur.cs" />
+    <Compile Include="PnJ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

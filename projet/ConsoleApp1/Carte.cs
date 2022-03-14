@@ -38,6 +38,8 @@ namespace ConsoleApp1
                     carte[i, j] = " x ";
                 }
             }
+            carte[12, 24] = "HHH";//Création d'une cantine pour que les chats puissent manger
+
 
 
 

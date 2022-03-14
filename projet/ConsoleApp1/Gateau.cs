@@ -15,12 +15,5 @@ namespace ConsoleApp1
 
         }
 
-        public void VoleGateau()
-        {
-            if (this.Quantite <= 1)
-                this.Quantite = 0;
-            else
-                this.Quantite -= 1;
-        }
     }
 }

@@ -20,5 +20,13 @@ namespace ConsoleApp1
         }
 
         public abstract void Utiliser();
+
+        public void SubirPillage() //les aliens peuvent voler un item 
+        {
+            if (this.Quantite <= 1)
+                this.Quantite = 0;
+            else
+                this.Quantite -= 1;
+        }
     }
 }

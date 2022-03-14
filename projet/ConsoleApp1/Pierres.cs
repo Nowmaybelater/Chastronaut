@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Graine : RessourcePlantation
+    class Pierres : RessourceConstruction
     {
-        public Graine(int Quantite) : base(Quantite, 1) // 1 = 1 jour i.e. quand on passe à la journée d'après les graines sont récoltées 
-        { }
+        public Pierres(int Quantite) : base(Quantite) { }
 
         public override void Utiliser()
         {

@@ -11,7 +11,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Console.WriteLine("Programme principal");
-            Livre L1 = new Livre(3);
+            Livres L1 = new Livres(3);
             Console.WriteLine(L1);
             SubirAttaque(L1);
 
@@ -56,7 +56,7 @@ namespace ConsoleApp1
 
         }
 
-        public static void SubirAttaque(Livre L)
+        public static void SubirAttaque(Livres L)
         {
             L.EtrePille();
             Console.WriteLine(L);

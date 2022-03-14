@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Pierre : RessourceConstruction
+    class Films : RessourceCulturelle
     {
-        public Pierre(int Quantite) : base(Quantite) { }
+        public Films(int Quantite) : base(Quantite, 5) { } //on fixe le taux de divertissement à 5
 
         public override void Utiliser()
-        {
-
-        }
+        { }
     }
 }

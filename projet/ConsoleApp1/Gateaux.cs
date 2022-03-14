@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Film : RessourceCulturelle
+    class Gâteaux : RessourceAlimentaire
     {
-        public Film(int Quantite) : base(Quantite, 5) { } //on fixe le taux de divertissement à 5
+        public Gâteaux(int Quantite) : base(Quantite, 9) { } //on met 9 mais en fait ça remet la barre au max
 
         public override void Utiliser()
-        { }
+        {
+
+        }
+
     }
 }

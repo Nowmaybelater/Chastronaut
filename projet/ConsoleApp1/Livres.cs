@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Livre : RessourceCulturelle
+    class Livres : RessourceCulturelle
     {
         
-        public Livre(int Quantite) : base(Quantite, 3) 
+        public Livres(int Quantite) : base(Quantite, 3) 
         { 
 
         } //on fixe le taux de divertissement à 3

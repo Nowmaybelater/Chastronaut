@@ -13,5 +13,18 @@ namespace ConsoleApp1
             get;
             set;
         }
+
+        public Carte()
+        {
+            carte = new char[20][];
+            for(int j=0; j<50;j++)
+            {
+
+            }
+        }
+
+
+
+
     }
 }

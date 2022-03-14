@@ -63,6 +63,11 @@ namespace ConsoleApp1
 
         }
 
+        public void SeDeplacer()
+        {
+
+        }
+
         public override string ToString()
         {
             return (Nom + " est un chat " + _Fonction.Nom + "\nNiveau de faim actuel : " + NiveauDeFaim + "\nNiveau d'énergie actuel : " + NiveauEnergie);

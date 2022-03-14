@@ -5,3 +5,10 @@ C:\Users\Valentine\source\repos\Chastronaut\projet\ConsoleApp1\bin\Debug\Console
 C:\Users\Valentine\source\repos\Chastronaut\projet\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
 C:\Users\Valentine\source\repos\Chastronaut\projet\ConsoleApp1\obj\Debug\ConsoleApp1.exe
 C:\Users\Valentine\source\repos\Chastronaut\projet\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\clara\source\repos\Chastronaut\projet\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\clara\source\repos\Chastronaut\projet\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\clara\source\repos\Chastronaut\projet\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\clara\source\repos\Chastronaut\projet\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.AssemblyReference.cache
+C:\Users\clara\source\repos\Chastronaut\projet\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\clara\source\repos\Chastronaut\projet\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\clara\source\repos\Chastronaut\projet\ConsoleApp1\obj\Debug\ConsoleApp1.pdb

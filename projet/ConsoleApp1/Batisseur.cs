@@ -21,5 +21,15 @@ namespace ConsoleApp1
 
         }
 
+        public void AbattreUnArbre()
+        {
+
+        }
+
+        public void Miner()
+        {
+
+        }
+
     }
 }

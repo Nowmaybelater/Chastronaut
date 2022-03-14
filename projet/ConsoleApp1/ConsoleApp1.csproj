@@ -48,15 +48,26 @@
     <Compile Include="Batisseur.cs" />
     <Compile Include="Carte.cs" />
     <Compile Include="Chats.cs" />
+    <Compile Include="Film.cs" />
     <Compile Include="Fonction.cs" />
+    <Compile Include="Fruit.cs" />
+    <Compile Include="Gateau.cs" />
+    <Compile Include="Graine.cs" />
     <Compile Include="Guerrisseur.cs" />
+    <Compile Include="Livre.cs" />
     <Compile Include="Messager.cs" />
     <Compile Include="Metier.cs" />
     <Compile Include="Patissier.cs" />
     <Compile Include="Pecheur.cs" />
+    <Compile Include="Pierre.cs" />
     <Compile Include="PnJ.cs" />
+    <Compile Include="Poisson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RessourceAlimentaire.cs" />
+    <Compile Include="RessourceConstruction.cs" />
+    <Compile Include="RessourceCulturelle.cs" />
+    <Compile Include="RessourcePlantation.cs" />
     <Compile Include="Ressources.cs" />
   </ItemGroup>
   <ItemGroup>

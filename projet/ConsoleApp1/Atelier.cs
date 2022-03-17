@@ -16,7 +16,7 @@ namespace ConsoleApp1
         {
             map.carte[Ligne, Colonne] = " At";//Création d'une cantine pour que les chats puissent manger
             map.carte[Ligne, Colonne+1] = "eli";
-            map.carte[Ligne, Colonne+2] = "et ";
+            map.carte[Ligne, Colonne+2] = "er ";
         }
     }
 }

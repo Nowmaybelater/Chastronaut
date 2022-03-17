@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Carrière:Batiments
+    class Carriere:Batiments
     {
-        public Carrière() : base(0, 0)
+        public Carriere() : base(0, 0)
         {
         }
 

@@ -49,9 +49,9 @@
     <Compile Include="Batiments.cs" />
     <Compile Include="Batisseur.cs" />
     <Compile Include="Cantine.cs" />
-    <Compile Include="Carrière.cs" />
+    <Compile Include="Carriere.cs" />
     <Compile Include="Carte.cs" />
-    <Compile Include="Champ.cs" />
+    <Compile Include="Potager.cs" />
     <Compile Include="Chats.cs" />
     <Compile Include="Cuisine.cs" />
     <Compile Include="Dortoir.cs" />

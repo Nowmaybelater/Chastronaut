@@ -15,6 +15,9 @@ namespace ConsoleApp1
             Console.WriteLine(L1);
             SubirAttaque(L1);
 
+            Carte carte = InitialiserCarter();
+            Console.WriteLine(carte);
+
             Console.ReadLine();
         }
 
@@ -60,6 +63,34 @@ namespace ConsoleApp1
         {
             L.EtrePille();
             Console.WriteLine(L);
+        }
+
+        public static Carte InitialiserCarter()
+        {
+            Carte map = new Carte();
+
+            Carriere carriere = new Carriere();//Création d'une carrière pour miner des pierres
+            carriere.Construire(map);
+
+            Foret foret = new Foret();//Création d'une forêt pour abattre des arbres
+            foret.Construire(map);
+
+            Potager potager = new Potager();//Création d'une champ d'agriculture
+            potager.Construire(map);
+
+            Cantine cantine = new Cantine();//Création d'une cantine pour que les chats puissent manger
+            cantine.Construire(map);
+
+            Dortoir dortoir = new Dortoir();//Création d'un dortoir pour que les chats puissent se reposer
+            dortoir.Construire(map);
+
+            Cuisine cuisine = new Cuisine();//Création d'une cuisine pour que les chats pâtissiers puissent faire des gâteaux
+            cuisine.Construire(map);
+
+            Atelier atelier = new Atelier();//Création d'un atelier pour que les chats artistes puissent créer du divertissement
+            atelier.Construire(map);
+
+            return map;
         }
 
     }

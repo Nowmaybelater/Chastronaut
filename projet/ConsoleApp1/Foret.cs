@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Foret:Batiments
+    {
+        public Foret() : base(14, 42)
+        {
+        }
+
+        public override void Construire(Carte map)
+        {
+            for (int i = Ligne+3; i < Ligne+6; i++)
+            {
+                for (int j = Colonne-2; j < 50; j++)
+                {
+                    map.carte[i, j] = " x ";
+                }
+            }
+            for (int i = Ligne; i < Ligne+3; i++)
+            {
+                for (int j = Colonne; j < 50; j++)
+                {
+                    map.carte[i, j] = " x ";
+                }
+            }
+        }
+
+    }
+}

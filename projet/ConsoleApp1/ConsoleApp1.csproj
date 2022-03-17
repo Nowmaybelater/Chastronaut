@@ -45,15 +45,24 @@
   <ItemGroup>
     <Compile Include="Agriculteur.cs" />
     <Compile Include="Artiste.cs" />
+    <Compile Include="Atelier.cs" />
+    <Compile Include="Batiments.cs" />
     <Compile Include="Batisseur.cs" />
+    <Compile Include="Cantine.cs" />
+    <Compile Include="Carrière.cs" />
     <Compile Include="Carte.cs" />
+    <Compile Include="Champ.cs" />
     <Compile Include="Chats.cs" />
+    <Compile Include="Cuisine.cs" />
+    <Compile Include="Dortoir.cs" />
     <Compile Include="Films.cs" />
     <Compile Include="Fonction.cs" />
+    <Compile Include="Foret.cs" />
     <Compile Include="Fruits.cs" />
     <Compile Include="Gateaux.cs" />
     <Compile Include="Graines.cs" />
     <Compile Include="Guerrisseur.cs" />
+    <Compile Include="Infirmerie.cs" />
     <Compile Include="Livres.cs" />
     <Compile Include="Messager.cs" />
     <Compile Include="Metier.cs" />
@@ -62,6 +71,7 @@
     <Compile Include="Pierres.cs" />
     <Compile Include="PnJ.cs" />
     <Compile Include="Poissons.cs" />
+    <Compile Include="Poste.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RessourceAlimentaire.cs" />
@@ -69,6 +79,7 @@
     <Compile Include="RessourceCulturelle.cs" />
     <Compile Include="RessourcePlantation.cs" />
     <Compile Include="Ressources.cs" />
+    <Compile Include="ZoneDePeche.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

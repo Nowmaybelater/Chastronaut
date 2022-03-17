@@ -21,6 +21,9 @@ namespace ConsoleApp1
                     map.carte[i, j] = " / ";
                 }
             }
+            map.carte[Ligne+2, Colonne+2] = " Ca";
+            map.carte[Ligne+2, Colonne + 3] = "rri";
+            map.carte[Ligne+2, Colonne + 4] = "ere";
         }
     }
 }

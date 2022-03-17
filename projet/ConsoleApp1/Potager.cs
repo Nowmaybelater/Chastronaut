@@ -25,6 +25,9 @@ namespace ConsoleApp1
                     map.carte[i, j] = " u ";
                 }
             }
+            map.carte[Ligne + 2, Colonne + 2] = " Po";
+            map.carte[Ligne + 2, Colonne + 3] = "tag";
+            map.carte[Ligne + 2, Colonne + 4] = "er ";
         }
     }
 }

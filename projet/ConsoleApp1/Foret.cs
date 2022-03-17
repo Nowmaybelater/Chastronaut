@@ -28,6 +28,9 @@ namespace ConsoleApp1
                     map.carte[i, j] = " x ";
                 }
             }
+            map.carte[Ligne + 3, Colonne + 2] = "  F";
+            map.carte[Ligne + 3, Colonne + 3] = "ore";
+            map.carte[Ligne + 3, Colonne + 4] = "t  ";
         }
 
     }

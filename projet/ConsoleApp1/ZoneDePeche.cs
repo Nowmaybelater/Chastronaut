@@ -21,7 +21,7 @@ namespace ConsoleApp1
                     map.carte[i, j] = " o ";
                 }
             }
-            for (int i = Ligne; i < Ligne + 2; i++)
+            for (int i = Ligne; i < Ligne + 3; i++)
             {
                 for (int j = Colonne; j < 50; j++)
                 {
@@ -35,6 +35,12 @@ namespace ConsoleApp1
                     map.carte[i, j] = " o ";
                 }
             }
+            map.carte[Ligne, Colonne + 2] = " Zo";
+            map.carte[Ligne, Colonne + 3] = "ne ";
+            map.carte[Ligne, Colonne + 4] = "de ";
+            map.carte[Ligne+1, Colonne + 2] = "  P";
+            map.carte[Ligne+1, Colonne + 3] = "ech";
+            map.carte[Ligne+1, Colonne + 4] = "e  ";
         }
     }
 }

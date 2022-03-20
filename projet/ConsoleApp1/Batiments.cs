@@ -19,6 +19,12 @@ namespace ConsoleApp1
             set;
         }
 
+        public int[] PositionBatiment
+        {
+            get;
+            set;
+        }
+
         public Batiments(int ligne, int colonne)
         {
             Ligne = ligne;

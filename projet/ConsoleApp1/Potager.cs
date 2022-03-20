@@ -10,10 +10,12 @@ namespace ConsoleApp1
     {
         public Potager() : base(11, 1)
         {
+            PositionBatiment = new int[] { Ligne+2, Colonne + 3 };
         }
 
         public Potager(int ligne, int colonne) : base(ligne, colonne)
         {
+            PositionBatiment = new int[] { Ligne + 2, Colonne + 3 };
         }
 
         public override void Construire(Carte map)

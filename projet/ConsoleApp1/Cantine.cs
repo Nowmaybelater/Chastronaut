@@ -10,6 +10,7 @@ namespace ConsoleApp1
     {
         public Cantine():base(16, 25)
         {
+            PositionBatiment = new int[] { Ligne, Colonne + 1 };
         }
 
         public override void Construire(Carte map)

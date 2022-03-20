@@ -10,6 +10,7 @@ namespace ConsoleApp1
     {
         public ZoneDePeche() : base(2, 44)
         {
+            PositionBatiment = new int[] { Ligne, Colonne + 3 };
         }
 
         public override void Construire(Carte map)

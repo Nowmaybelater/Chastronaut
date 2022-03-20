@@ -19,6 +19,8 @@ namespace ConsoleApp1
             get;
             set;
         }
+
+
         public Fonction(string nom, int num)
         {
             Nom = nom;

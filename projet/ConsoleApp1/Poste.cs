@@ -10,6 +10,7 @@ namespace ConsoleApp1
     {
         public Poste() : base(8, 18)
         {
+            PositionBatiment = new int[] { Ligne, Colonne + 1 };
         }
 
         public override void Construire(Carte map)

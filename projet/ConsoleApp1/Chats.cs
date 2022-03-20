@@ -35,6 +35,12 @@ namespace ConsoleApp1
             get;
             set;
         }
+        
+        public int[] PositionChat
+        {
+            get;
+            set;
+        }
 
         public Chats(string nom, Fonction fonction, int niveaufaim, int niveauenergie, int niveaudivertissement)
         {
@@ -43,6 +49,7 @@ namespace ConsoleApp1
             NiveauDeFaim = niveaufaim;
             NiveauEnergie = niveauenergie;
             NiveauDivertissement = niveaudivertissement;
+            PositionChat = new int[] { 10, 26 };
         }
 
         public void Manger(RessourceAlimentaire aliment)

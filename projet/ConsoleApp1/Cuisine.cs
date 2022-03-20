@@ -10,6 +10,7 @@ namespace ConsoleApp1
     {
         public Cuisine() : base(8, 32)
         {
+            PositionBatiment = new int[] { Ligne, Colonne + 1 };
         }
 
         public override void Construire(Carte map)

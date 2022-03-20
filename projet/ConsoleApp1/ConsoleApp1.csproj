@@ -51,6 +51,7 @@
     <Compile Include="Cantine.cs" />
     <Compile Include="Carriere.cs" />
     <Compile Include="Carte.cs" />
+    <Compile Include="Extraterrestre.cs" />
     <Compile Include="Potager.cs" />
     <Compile Include="Chats.cs" />
     <Compile Include="Cuisine.cs" />

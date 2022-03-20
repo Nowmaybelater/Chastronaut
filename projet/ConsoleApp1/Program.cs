@@ -15,7 +15,7 @@ namespace ConsoleApp1
             Console.WriteLine(L1);
             SubirAttaque(L1);
 
-            Carte carte = InitialiserCarter();
+            Carte carte = InitialiserCarte();
             Console.WriteLine(carte);
 
             Console.ReadLine();
@@ -65,7 +65,7 @@ namespace ConsoleApp1
             Console.WriteLine(L);
         }
 
-        public static Carte InitialiserCarter()
+        public static Carte InitialiserCarte()
         {
             Carte map = new Carte();
 

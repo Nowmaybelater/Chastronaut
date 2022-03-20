@@ -56,16 +56,15 @@ namespace ConsoleApp1
 
         public void SeReposer()
         {
-
+            NiveauEnergie += 10;
         }
-        public void SeDivertir()
+        public void SeDivertir(RessourceCulturelle divertissement)
         {
-
-        }
-
-        public void SeDeplacer()
-        {
-
+            NiveauDivertissement += divertissement.TauxDivertissement;
+            if (NiveauDivertissement >= 10)
+            {
+                NiveauDivertissement = 10;
+            }
         }
 
         public override string ToString()

@@ -18,7 +18,7 @@ namespace ConsoleApp1
 
         public void Recolter(Chats chat, Fruits fruits, Graines graines)
         {
-            fruits.Quantite += 3;
+            fruits.Quantite += 1;
             graines.Quantite += 3;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
@@ -27,7 +27,7 @@ namespace ConsoleApp1
 
         public void Planter(Chats chat, Graines graines)
         {
-            graines.Quantite -= 3;
+            graines.Quantite -= 1;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;

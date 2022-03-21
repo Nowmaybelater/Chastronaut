@@ -16,9 +16,9 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Soigner()
+        public void Soigner(Chats chat)
         {
-
+            chat.NiveauEnergie = 10;
         }
     }
 }

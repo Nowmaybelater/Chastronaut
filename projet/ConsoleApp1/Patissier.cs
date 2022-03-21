@@ -16,9 +16,12 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Patisser()
+        public void Patisser(Chats chat, Gateaux gateau)
         {
-
+            gateau.Quantite += 1;
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
     }
 }

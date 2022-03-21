@@ -16,7 +16,7 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Livrer(Livres livre, Films film, Fruits fruit, Poissons poisson, Graines graine, Pierres pierre, Bois bois)
+        public void Livrer(Livres livre, Films film, Fruits fruit, Poissons poisson, Graines graine, Pierres pierre, Bois bois, Chats chat)
         {
             Random rnd = new Random();
             int numero=rnd.Next(1,6);
@@ -64,6 +64,9 @@ namespace ConsoleApp1
                     }
                 }
             }
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
     }
 }

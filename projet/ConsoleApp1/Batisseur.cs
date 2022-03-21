@@ -16,7 +16,7 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Construire(int numeroBatiment, Carte map)
+        public void Construire(int numeroBatiment, Carte map, Chats chat)
         {
             if (numeroBatiment == 7)
             {
@@ -48,17 +48,26 @@ namespace ConsoleApp1
                     }
                 }
             }
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
 
-        public void AbattreUnArbre(Bois bois)
+        public void AbattreUnArbre(Bois bois,Chats chat)
         {
-            bois.Quantite += 3;
+            bois.Quantite += 2;
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
 
 
-        public void Miner(Pierres pierre)
+        public void Miner(Pierres pierre,Chats chat)
         {
-            pierre.Quantite += 3;
+            pierre.Quantite += 2;
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
 
     }

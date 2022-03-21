@@ -44,19 +44,21 @@ namespace ConsoleApp1
                             ZoneDePeche zoneDePeche = new ZoneDePeche();
                             zoneDePeche.Construire(map);
                         }
-                        
-                        }
+
                     }
                 }
-
-        public void AbattreUnArbre()
-        {
-
+            }
         }
 
-        public void Miner()
+        public void AbattreUnArbre(Bois bois)
         {
+            bois.Quantite += 3;
+        }
 
+
+        public void Miner(Pierres pierre)
+        {
+            pierre.Quantite += 3;
         }
 
     }

@@ -10,9 +10,6 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Livres L1 = new Livres(3);
-            Console.WriteLine(L1);
-            SubirAttaque(L1);
 
             //pour tester l'initialisation du jeu
             bool veutJouer = true;

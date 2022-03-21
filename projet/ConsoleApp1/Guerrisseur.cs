@@ -11,7 +11,7 @@ namespace ConsoleApp1
         public Guerisseur() : base("Guérisseur", 2)
         { }
 
-        public override void AllerAuTravail()
+        public override void AllerActivite()
         {
 
         }

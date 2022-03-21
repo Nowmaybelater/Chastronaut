@@ -11,7 +11,7 @@ namespace ConsoleApp1
         public Messager() : base("Messager", 1)
         { }
 
-        public override void AllerAuTravail()
+        public override void AllerActivite()
         {
 
         }

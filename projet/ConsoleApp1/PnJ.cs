@@ -11,7 +11,7 @@ namespace ConsoleApp1
         public PnJ(string nom, int num) : base(nom, num)
         {
         }
-        public abstract void AllerAuTravail();//méthode abstraite que l'on redéfinit dans ses classes filles
+        public abstract void AllerActivite();//méthode abstraite que l'on redéfinit dans ses classes filles
 
     }
 }

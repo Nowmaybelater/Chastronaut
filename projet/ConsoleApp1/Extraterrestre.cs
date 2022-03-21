@@ -8,10 +8,18 @@ namespace ConsoleApp1
 {
     class Extraterrestre:PnJ
     {
-        public Extraterrestre() : base("Extraterrestre", 3)
-        { }
+        public int[] PositionExtraterrestre
+        {
+            get;
+            set;
+        }
 
-        public override void AllerAuTravail()
+        public Extraterrestre() : base("Extraterrestre", 3)
+        {
+            PositionExtraterrestre = new int[] { 0, 0 };
+        }
+
+        public override void AllerActivite()
         {
 
         }

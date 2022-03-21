@@ -14,6 +14,6 @@ namespace ConsoleApp1
         {
         }
 
-        public abstract void AllerAuTravail();//méthode abstraite que l'on redéfinit dans ses classes filles
+        public abstract void AllerActivite(Chats chat, Batiments lieu);//méthode abstraite que l'on redéfinit dans ses classes filles
     }
 }

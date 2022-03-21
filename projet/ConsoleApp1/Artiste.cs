@@ -11,9 +11,9 @@ namespace ConsoleApp1
         public Artiste() : base("Artiste", 4)
         { }
 
-        public override void AllerAuTravail()
+        public override void AllerActivite(Chats chat, Batiments lieu)
         {
-
+            chat.PositionChat = lieu.PositionBatiment;
         }
 
         public void Créer()

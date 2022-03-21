@@ -20,29 +20,29 @@ namespace ConsoleApp1
             {
                 for (int j = Colonne+1; j < 49; j++)
                 {
-                    map.carte[i, j] = " o ";
+                    map.Map[i, j] = " o ";
                 }
             }
             for (int i = Ligne; i < Ligne + 3; i++)
             {
                 for (int j = Colonne; j < 50; j++)
                 {
-                    map.carte[i, j] = " o ";
+                    map.Map[i, j] = " o ";
                 }
             }
             for (int i = Ligne+3; i < Ligne+4; i++)
             {
                 for (int j = Colonne+1; j < 49; j++)
                 {
-                    map.carte[i, j] = " o ";
+                    map.Map[i, j] = " o ";
                 }
             }
-            map.carte[Ligne, Colonne + 2] = " Zo";
-            map.carte[Ligne, Colonne + 3] = "ne ";
-            map.carte[Ligne, Colonne + 4] = "de ";
-            map.carte[Ligne+1, Colonne + 2] = "  P";
-            map.carte[Ligne+1, Colonne + 3] = "ech";
-            map.carte[Ligne+1, Colonne + 4] = "e  ";
+            map.Map[Ligne, Colonne + 2] = " Zo";
+            map.Map[Ligne, Colonne + 3] = "ne ";
+            map.Map[Ligne, Colonne + 4] = "de ";
+            map.Map[Ligne+1, Colonne + 2] = "  P";
+            map.Map[Ligne+1, Colonne + 3] = "ech";
+            map.Map[Ligne+1, Colonne + 4] = "e  ";
         }
     }
 }

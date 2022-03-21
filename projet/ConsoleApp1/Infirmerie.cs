@@ -16,10 +16,10 @@ namespace ConsoleApp1
 
         public override void Construire(Carte map)
         {
-            map.carte[Ligne, Colonne] = "Inf";//Création d'une cantine pour que les chats puissent manger
-            map.carte[Ligne, Colonne + 1] = "irm";
-            map.carte[Ligne, Colonne + 2] = "eri";
-            map.carte[Ligne, Colonne + 2] = "e  ";
+            map.Map[Ligne, Colonne] = "Inf";//Création d'une cantine pour que les chats puissent manger
+            map.Map[Ligne, Colonne + 1] = "irm";
+            map.Map[Ligne, Colonne + 2] = "eri";
+            map.Map[Ligne, Colonne + 2] = "e  ";
         }
     }
 }

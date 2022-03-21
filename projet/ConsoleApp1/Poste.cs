@@ -16,9 +16,9 @@ namespace ConsoleApp1
 
         public override void Construire(Carte map)
         {
-            map.carte[Ligne, Colonne] = "  Po";//Création d'une cantine pour que les chats puissent manger
-            map.carte[Ligne, Colonne+1] = "s";
-            map.carte[Ligne, Colonne+2] = "te  ";
+            map.Map[Ligne, Colonne] = "  Po";//Création d'une cantine pour que les chats puissent manger
+            map.Map[Ligne, Colonne+1] = "s";
+            map.Map[Ligne, Colonne+2] = "te  ";
         }
     }
 }

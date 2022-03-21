@@ -14,7 +14,7 @@ namespace ConsoleApp1
             NumeroBatiment = 4;
         }
 
-        public override void Construire(Carte map)
+        public override void Construire(Carte map, Bois bois, Pierres pierre)
         {
             map.Map[Ligne, Colonne] = " Cu";//Création d'une cantine pour que les chats puissent manger
             map.Map[Ligne, Colonne+1] = "isi";

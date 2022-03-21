@@ -20,18 +20,42 @@ namespace ConsoleApp1
             NumeroBatiment = 9;
         }
 
-        public override void Construire(Carte map)
+        public override void Construire(Carte map, Bois bois, Pierres pierre)
         {
-            for (int i = Ligne; i < Ligne + 6; i++)
+            if(Ligne==11)//pas de proclème de ressource pour le potager qui est initialiser au début d'une partie
             {
-                for (int j = Colonne; j < Colonne + 7; j++)
+                for (int i = Ligne; i < Ligne + 6; i++)
                 {
-                    map.Map[i, j] = " u ";
+                    for (int j = Colonne; j < Colonne + 7; j++)
+                    {
+                        map.Map[i, j] = " u ";
+                    }
+                }
+                map.Map[Ligne + 2, Colonne + 2] = " Po";
+                map.Map[Ligne + 2, Colonne + 3] = "tag";
+                map.Map[Ligne + 2, Colonne + 4] = "er ";
+            }
+            else
+            {
+                if(bois.Quantite>=2)
+                {
+                    for (int i = Ligne; i < Ligne + 6; i++)
+                    {
+                        for (int j = Colonne; j < Colonne + 7; j++)
+                        {
+                            map.Map[i, j] = " u ";
+                        }
+                    }
+                    map.Map[Ligne + 2, Colonne + 2] = " Po";
+                    map.Map[Ligne + 2, Colonne + 3] = "tag";
+                    map.Map[Ligne + 2, Colonne + 4] = "er ";
+                }
+                else
+                {
+                    Console.WriteLine("Attention ! Vous ne pocédez pas assez de bois pour construire un deuxième potager");
+
                 }
             }
-            map.Map[Ligne + 2, Colonne + 2] = " Po";
-            map.Map[Ligne + 2, Colonne + 3] = "tag";
-            map.Map[Ligne + 2, Colonne + 4] = "er ";
         }
     }
 }

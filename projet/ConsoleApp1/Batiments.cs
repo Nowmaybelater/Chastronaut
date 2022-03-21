@@ -37,6 +37,6 @@ namespace ConsoleApp1
             Colonne = colonne;
         }
 
-        public abstract void Construire(Carte map);
+        public abstract void Construire(Carte map, Bois bois, Pierres pierre);
     }
 }

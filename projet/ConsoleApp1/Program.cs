@@ -80,10 +80,14 @@ namespace ConsoleApp1
 
         }
 
-        public static void SubirAttaque(Livres L)
+        public static void SubirAttaque(Chats chat)
         {
-            L.EtrePille();
-            Console.WriteLine(L);
+            Extraterrestre ET = new Extraterrestre();
+            ET.VolerFaim(chat);
+            ET.VolerEnergie(chat);
+            ET.VolerDivertissement(chat);
+
+            Console.WriteLine ("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ")
         }
 
         public static Carte InitialiserCarte()

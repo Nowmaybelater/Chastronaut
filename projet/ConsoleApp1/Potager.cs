@@ -26,12 +26,12 @@ namespace ConsoleApp1
             {
                 for (int j = Colonne; j < Colonne + 7; j++)
                 {
-                    map.carte[i, j] = " u ";
+                    map.Map[i, j] = " u ";
                 }
             }
-            map.carte[Ligne + 2, Colonne + 2] = " Po";
-            map.carte[Ligne + 2, Colonne + 3] = "tag";
-            map.carte[Ligne + 2, Colonne + 4] = "er ";
+            map.Map[Ligne + 2, Colonne + 2] = " Po";
+            map.Map[Ligne + 2, Colonne + 3] = "tag";
+            map.Map[Ligne + 2, Colonne + 4] = "er ";
         }
     }
 }

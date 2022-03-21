@@ -20,12 +20,12 @@ namespace ConsoleApp1
             {
                 for (int j = Colonne; j < Colonne+7; j++)
                 {
-                    map.carte[i, j] = " / ";
+                    map.Map[i, j] = " / ";
                 }
             }
-            map.carte[Ligne+2, Colonne+2] = " Ca";
-            map.carte[Ligne+2, Colonne + 3] = "rri";
-            map.carte[Ligne+2, Colonne + 4] = "ere";
+            map.Map[Ligne+2, Colonne+2] = " Ca";
+            map.Map[Ligne+2, Colonne + 3] = "rri";
+            map.Map[Ligne+2, Colonne + 4] = "ere";
         }
     }
 }

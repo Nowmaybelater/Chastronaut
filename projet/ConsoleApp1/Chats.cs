@@ -59,11 +59,15 @@ namespace ConsoleApp1
             {
                 NiveauDeFaim = 10;
             }
+            NiveauDivertissement -= 1;
+            NiveauEnergie -= 1;
         }
 
         public void SeReposer()
         {
-            NiveauEnergie += 10;
+            NiveauEnergie = 10;
+            NiveauDivertissement -= 1;
+            NiveauDeFaim -= 1;
         }
         public void SeDivertir(RessourceCulturelle divertissement)
         {
@@ -72,6 +76,8 @@ namespace ConsoleApp1
             {
                 NiveauDivertissement = 10;
             }
+            NiveauDeFaim -= 1;
+            NiveauEnergie -= 1;
         }
 
         public override string ToString()

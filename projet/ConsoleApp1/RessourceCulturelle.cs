@@ -10,6 +10,7 @@ namespace ConsoleApp1
     {
         public int TauxDivertissement { get; set; }
 
+
         public RessourceCulturelle(int Quantite, int TauxDivertissement) : base(Quantite)
         {
             this.TauxDivertissement = TauxDivertissement;

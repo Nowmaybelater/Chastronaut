@@ -16,14 +16,21 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Recolter()
+        public void Recolter(Chats chat, Fruits fruits, Graines graines)
         {
-
+            fruits.Quantite += 3;
+            graines.Quantite += 3;
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
 
-        public void Planter()
+        public void Planter(Chats chat, Graines graines)
         {
-
+            graines.Quantite -= 3;
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
     }
 }

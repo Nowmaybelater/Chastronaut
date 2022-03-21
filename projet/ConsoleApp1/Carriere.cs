@@ -11,6 +11,7 @@ namespace ConsoleApp1
         public Carriere() : base(0, 0)
         {
             PositionBatiment = new int[] { Ligne+2, Colonne + 3 };
+            NumeroBatiment = 3;
         }
 
         public override void Construire(Carte map)

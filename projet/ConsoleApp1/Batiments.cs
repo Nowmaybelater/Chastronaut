@@ -25,6 +25,12 @@ namespace ConsoleApp1
             set;
         }
 
+        public int NumeroBatiment
+        {
+            get;
+            set;
+        }
+
         public Batiments(int ligne, int colonne)
         {
             Ligne = ligne;

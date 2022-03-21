@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Fruits : RessourceAlimentaire
+    class Bois:RessourceConstruction
     {
-
-        public Fruits(int Quantite) : base(Quantite, 2) 
+        public Bois(int Quantite) : base(Quantite)
         {
-            Numero = 4;
+            Numero = 7;
         }
 
         public override void Utiliser()

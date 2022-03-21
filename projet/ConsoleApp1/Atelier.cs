@@ -11,6 +11,7 @@ namespace ConsoleApp1
         public Atelier() : base(4, 25)
         {
             PositionBatiment = new int[] { Ligne, Colonne + 1 };
+            NumeroBatiment = 1;
         }
 
         public override void Construire(Carte map)

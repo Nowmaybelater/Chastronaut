@@ -19,9 +19,10 @@ namespace ConsoleApp1
             PositionExtraterrestre = new int[] { 0, 0 };
         }
 
-        public override void AllerActivite()
+        public override void AllerActivite(Chats chat, Batiments lieu)
         {
-
+            PositionExtraterrestre[0] = chat.PositionChat[0];
+            PositionExtraterrestre[1] = chat.PositionChat[1];
         }
 
         public void VolerFaim(Chats chat)

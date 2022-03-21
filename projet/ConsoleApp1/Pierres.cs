@@ -8,7 +8,10 @@ namespace ConsoleApp1
 {
     class Pierres : RessourceConstruction
     {
-        public Pierres(int Quantite) : base(Quantite) { }
+        public Pierres(int Quantite) : base(Quantite)
+        {
+            Numero = 6;
+        }
 
         public override void Utiliser()
         {

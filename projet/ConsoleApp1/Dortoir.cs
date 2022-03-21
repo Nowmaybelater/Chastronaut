@@ -11,6 +11,7 @@ namespace ConsoleApp1
         public Dortoir() : base(12, 32)
         {
             PositionBatiment = new int[] { Ligne, Colonne + 1 };
+            NumeroBatiment = 5;
         }
 
         public override void Construire(Carte map)

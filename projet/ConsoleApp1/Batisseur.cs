@@ -16,10 +16,38 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Construire()
+        public void Construire(int numeroBatiment, Carte map)
         {
-
-        }
+            if (numeroBatiment == 7)
+            {
+                Infirmerie infirmerie = new Infirmerie();
+                infirmerie.Construire(map);
+            }
+            else
+            {
+                if (numeroBatiment == 8)
+                {
+                    Poste poste = new Poste();
+                    poste.Construire(map);
+                }
+                else
+                {
+                    if (numeroBatiment == 9)
+                    {
+                        Potager potager = new Potager();
+                        potager.Construire(map);
+                    }
+                    else
+                    {
+                        if (numeroBatiment == 10)
+                        {
+                            ZoneDePeche zoneDePeche = new ZoneDePeche();
+                            zoneDePeche.Construire(map);
+                        }
+                        
+                        }
+                    }
+                }
 
         public void AbattreUnArbre()
         {

@@ -8,7 +8,12 @@ namespace ConsoleApp1
 {
     abstract class Ressources
     {
-        protected int Quantite { get; set; }
+        public int Quantite { get; set; }
+        public int Numero
+        {
+            get;
+            set;
+        }
 
         public Ressources()
         {

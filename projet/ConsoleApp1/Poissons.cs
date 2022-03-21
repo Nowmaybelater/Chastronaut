@@ -8,7 +8,10 @@ namespace ConsoleApp1
 {
     class Poissons : RessourceAlimentaire
     {
-        public Poissons(int Quantite) : base(Quantite, 5) { }
+        public Poissons(int Quantite) : base(Quantite, 5) 
+        {
+            Numero = 3;
+        }
         public override void Utiliser()
         {
 

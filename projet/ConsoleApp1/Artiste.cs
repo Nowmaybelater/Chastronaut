@@ -16,9 +16,12 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Créer()
+        public void Créer(Chats chat, RessourceCulturelle divertissement)
         {
-
+            divertissement.Quantite += 1;
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
     }
 }

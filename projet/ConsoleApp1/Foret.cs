@@ -11,6 +11,7 @@ namespace ConsoleApp1
         public Foret() : base(14, 42)
         {
             PositionBatiment = new int[] { Ligne+3, Colonne + 3 };
+            NumeroBatiment = 6;
         }
 
         public override void Construire(Carte map)

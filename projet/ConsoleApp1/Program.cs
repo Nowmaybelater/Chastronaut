@@ -15,7 +15,16 @@ namespace ConsoleApp1
             bool veutJouer = true;
             string nomColonie = PresenterJeu(ref veutJouer);
 
-            Carte carte = InitialiserCarte();
+            Bois bois = new Bois(4);
+            Pierres pierre = new Pierres(4);
+
+            Carte carte = InitialiserCarte(bois, pierre);
+            Console.WriteLine(carte);
+            Batisseur batisseur = new Batisseur();
+            Chats reglisse = new Chats("Réglisse", batisseur, 10, 10, 10);
+            Console.WriteLine(reglisse);
+            batisseur.Construire(7, carte, reglisse, bois, pierre);
+            Console.WriteLine(reglisse);
             Console.WriteLine(carte);
 
             Console.ReadLine();
@@ -87,33 +96,34 @@ namespace ConsoleApp1
             ET.VolerEnergie(chat);
             ET.VolerDivertissement(chat);
 
-            Console.WriteLine ("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ")
+            Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ");
         }
 
-        public static Carte InitialiserCarte()
+        public static Carte InitialiserCarte(Bois bois, Pierres pierre)
         {
             Carte map = new Carte();
 
             Carriere carriere = new Carriere();//Création d'une carrière pour miner des pierres
-            carriere.Construire(map);
+            carriere.Construire(map, bois, pierre);
 
             Foret foret = new Foret();//Création d'une forêt pour abattre des arbres
-            foret.Construire(map);
+            foret.Construire(map, bois, pierre);
 
             Potager potager = new Potager();//Création d'une champ d'agriculture
-            potager.Construire(map);
+            potager.Construire(map, bois, pierre);
 
             Cantine cantine = new Cantine();//Création d'une cantine pour que les chats puissent manger
-            cantine.Construire(map);
+            cantine.Construire(map, bois, pierre);
 
             Dortoir dortoir = new Dortoir();//Création d'un dortoir pour que les chats puissent se reposer
-            dortoir.Construire(map);
+            dortoir.Construire(map, bois, pierre);
 
             Cuisine cuisine = new Cuisine();//Création d'une cuisine pour que les chats pâtissiers puissent faire des gâteaux
-            cuisine.Construire(map);
+            cuisine.Construire(map, bois, pierre);
 
             Atelier atelier = new Atelier();//Création d'un atelier pour que les chats artistes puissent créer du divertissement
-            atelier.Construire(map);
+            atelier.Construire(map, bois, pierre);
+
 
             return map;
         }

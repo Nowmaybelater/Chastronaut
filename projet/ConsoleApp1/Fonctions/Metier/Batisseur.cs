@@ -16,33 +16,40 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Construire(int numeroBatiment, Carte map, Chats chat)
+        public void Construire(int numeroBatiment, Carte map, Chats chat, Bois bois, Pierres pierre)
         {
             if (numeroBatiment == 7)
             {
                 Infirmerie infirmerie = new Infirmerie();
-                infirmerie.Construire(map);
+                infirmerie.Construire(map, bois, pierre);
+                Console.WriteLine("Félicitation ! Vous venez de construire l'infirmerie\n");
             }
             else
             {
                 if (numeroBatiment == 8)
                 {
                     Poste poste = new Poste();
-                    poste.Construire(map);
+                    poste.Construire(map, bois, pierre);
+                    Console.WriteLine("Félicitation ! Vous venez de construire le bureau de poste\n");
+
                 }
                 else
                 {
                     if (numeroBatiment == 9)
                     {
                         Potager potager = new Potager();
-                        potager.Construire(map);
+                        potager.Construire(map, bois, pierre);
+                        Console.WriteLine("Félicitation ! Vous venez de construire un deuxième potager\n");
+
                     }
                     else
                     {
                         if (numeroBatiment == 10)
                         {
                             ZoneDePeche zoneDePeche = new ZoneDePeche();
-                            zoneDePeche.Construire(map);
+                            zoneDePeche.Construire(map, bois, pierre);
+                            Console.WriteLine("Félicitation ! Vous venez de construire la zone de pêche\n");
+
                         }
 
                     }

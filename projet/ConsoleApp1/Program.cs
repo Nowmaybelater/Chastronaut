@@ -137,7 +137,7 @@ namespace ConsoleApp1
             }
         }
 
-        public static void FaireAction()
+        public static void FaireAction(int numeroAction)
         {
 
         }

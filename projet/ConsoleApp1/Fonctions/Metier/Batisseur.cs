@@ -16,65 +16,95 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Construire(int numeroBatiment, Carte map, Chats chat, Bois bois, Pierres pierre)
+        public bool Construire(int numeroBatiment, Carte map, Chats chat, Bois bois, Pierres pierre)
         {
-            if (numeroBatiment == 7)
+            bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
+            if (chat._Fonction is Agriculteur)
             {
-                Infirmerie infirmerie = new Infirmerie();
-                infirmerie.Construire(map, bois, pierre);
-                Console.WriteLine("Félicitation ! Vous venez de construire l'infirmerie\n");
-            }
-            else
-            {
-                if (numeroBatiment == 8)
+                if (numeroBatiment == 7)
                 {
-                    Poste poste = new Poste();
-                    poste.Construire(map, bois, pierre);
-                    Console.WriteLine("Félicitation ! Vous venez de construire le bureau de poste\n");
-
+                    Infirmerie infirmerie = new Infirmerie();
+                    infirmerie.Construire(map, bois, pierre);
+                    Console.WriteLine("Félicitation ! Vous venez de construire l'infirmerie\n");
                 }
                 else
                 {
-                    if (numeroBatiment == 9)
+                    if (numeroBatiment == 8)
                     {
-                        Potager potager = new Potager();
-                        potager.Construire(map, bois, pierre);
-                        Console.WriteLine("Félicitation ! Vous venez de construire un deuxième potager\n");
+                        Poste poste = new Poste();
+                        poste.Construire(map, bois, pierre);
+                        Console.WriteLine("Félicitation ! Vous venez de construire le bureau de poste\n");
 
                     }
                     else
                     {
-                        if (numeroBatiment == 10)
+                        if (numeroBatiment == 9)
                         {
-                            ZoneDePeche zoneDePeche = new ZoneDePeche();
-                            zoneDePeche.Construire(map, bois, pierre);
-                            Console.WriteLine("Félicitation ! Vous venez de construire la zone de pêche\n");
+                            Potager potager = new Potager();
+                            potager.Construire(map, bois, pierre);
+                            Console.WriteLine("Félicitation ! Vous venez de construire un deuxième potager\n");
 
                         }
+                        else
+                        {
+                            if (numeroBatiment == 10)
+                            {
+                                ZoneDePeche zoneDePeche = new ZoneDePeche();
+                                zoneDePeche.Construire(map, bois, pierre);
+                                Console.WriteLine("Félicitation ! Vous venez de construire la zone de pêche\n");
 
+                            }
+
+                        }
                     }
                 }
+                chat.NiveauDeFaim -= 1;
+                chat.NiveauDivertissement -= 1;
+                chat.NiveauEnergie -= 1;
             }
-            chat.NiveauDeFaim -= 1;
-            chat.NiveauDivertissement -= 1;
-            chat.NiveauEnergie -= 1;
+            else
+            {
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                action = false;
+            }
+            return action;
         }
 
-        public void AbattreUnArbre(Bois bois,Chats chat)
+        public bool AbattreUnArbre(Bois bois,Chats chat)
         {
-            bois.Quantite += 2;
-            chat.NiveauDeFaim -= 1;
-            chat.NiveauDivertissement -= 1;
-            chat.NiveauEnergie -= 1;
+            bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
+            if (chat._Fonction is Agriculteur)
+            {
+                bois.Quantite += 2;
+                chat.NiveauDeFaim -= 1;
+                chat.NiveauDivertissement -= 1;
+                chat.NiveauEnergie -= 1;
+            }
+            else
+            {
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                action = false;
+            }
+            return action;
         }
 
 
-        public void Miner(Pierres pierre,Chats chat)
+        public bool Miner(Pierres pierre,Chats chat)
         {
-            pierre.Quantite += 2;
-            chat.NiveauDeFaim -= 1;
-            chat.NiveauDivertissement -= 1;
-            chat.NiveauEnergie -= 1;
+            bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
+            if (chat._Fonction is Agriculteur)
+            {
+                pierre.Quantite += 2;
+                chat.NiveauDeFaim -= 1;
+                chat.NiveauDivertissement -= 1;
+                chat.NiveauEnergie -= 1;
+            }
+            else
+            {
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                action = false;
+            }
+            return action;
         }
 
     }

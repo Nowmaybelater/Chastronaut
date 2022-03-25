@@ -128,5 +128,18 @@ namespace ConsoleApp1
             return map;
         }
 
+        public static void AfficherResources(List<Ressources> ListeRessources)//affiche toutes les ressources
+            //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
+        {
+            foreach(Ressources r in ListeRessources)
+            {
+                Console.WriteLine(r);
+            }
+        }
+
+        public static void FaireAction()
+        {
+
+        }
     }
 }

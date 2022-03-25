@@ -16,12 +16,22 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Pecher(Chats chat,Poissons poisson)
+        public bool Pecher(Chats chat,Poissons poisson)
         {
-            poisson.Quantite += 1;
-            chat.NiveauDeFaim -= 1;
-            chat.NiveauDivertissement -= 1;
-            chat.NiveauEnergie -= 1;
+            bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
+            if (chat._Fonction is Agriculteur)
+            {
+                poisson.Quantite += 1;
+                chat.NiveauDeFaim -= 1;
+                chat.NiveauDivertissement -= 1;
+                chat.NiveauEnergie -= 1;
+            }
+            else
+            {
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                action = false;
+            }
+            return action;
         }
 
 

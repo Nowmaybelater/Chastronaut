@@ -12,6 +12,7 @@ namespace ConsoleApp1
         public Fruits(int Quantite) : base(Quantite, 2) 
         {
             Numero = 4;
+            Nom = "Fruits";
         }
 
         public override void Utiliser()

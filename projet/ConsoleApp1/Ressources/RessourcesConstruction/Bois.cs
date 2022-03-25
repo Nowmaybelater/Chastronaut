@@ -11,6 +11,7 @@ namespace ConsoleApp1
         public Bois(int Quantite) : base(Quantite)
         {
             Numero = 7;
+            Nom = "Bois";
         }
 
         public override void Utiliser()

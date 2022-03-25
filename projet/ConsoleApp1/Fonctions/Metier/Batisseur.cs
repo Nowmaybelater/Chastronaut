@@ -19,7 +19,7 @@ namespace ConsoleApp1
         public bool Construire(int numeroBatiment, Carte map, Chats chat, Bois bois, Pierres pierre)
         {
             bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
-            if (chat._Fonction is Agriculteur)
+            if (chat._Fonction is Batisseur)
             {
                 if (numeroBatiment == 7)
                 {
@@ -64,7 +64,7 @@ namespace ConsoleApp1
             }
             else
             {
-                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Construire");
                 action = false;
             }
             return action;
@@ -73,7 +73,7 @@ namespace ConsoleApp1
         public bool AbattreUnArbre(Bois bois,Chats chat)
         {
             bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
-            if (chat._Fonction is Agriculteur)
+            if (chat._Fonction is Batisseur)
             {
                 bois.Quantite += 2;
                 chat.NiveauDeFaim -= 1;
@@ -82,7 +82,7 @@ namespace ConsoleApp1
             }
             else
             {
-                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action AbattreUnArbre");
                 action = false;
             }
             return action;
@@ -92,7 +92,7 @@ namespace ConsoleApp1
         public bool Miner(Pierres pierre,Chats chat)
         {
             bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
-            if (chat._Fonction is Agriculteur)
+            if (chat._Fonction is Batisseur)
             {
                 pierre.Quantite += 2;
                 chat.NiveauDeFaim -= 1;
@@ -101,7 +101,7 @@ namespace ConsoleApp1
             }
             else
             {
-                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Miner");
                 action = false;
             }
             return action;

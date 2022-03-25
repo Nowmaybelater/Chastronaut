@@ -19,7 +19,7 @@ namespace ConsoleApp1
         public bool Pecher(Chats chat,Poissons poisson)
         {
             bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
-            if (chat._Fonction is Agriculteur)
+            if (chat._Fonction is Pecheur)
             {
                 poisson.Quantite += 1;
                 chat.NiveauDeFaim -= 1;
@@ -28,7 +28,7 @@ namespace ConsoleApp1
             }
             else
             {
-                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Pecher");
                 action = false;
             }
             return action;

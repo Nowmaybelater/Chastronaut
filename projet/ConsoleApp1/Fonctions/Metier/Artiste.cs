@@ -28,7 +28,7 @@ namespace ConsoleApp1
             }
             else
             {
-                Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                Console.WriteLine("Attention ! Vous devez jouer en tant que chat artiste pour réaliser l'action Créer");
                 action = false;
             }
             return action;

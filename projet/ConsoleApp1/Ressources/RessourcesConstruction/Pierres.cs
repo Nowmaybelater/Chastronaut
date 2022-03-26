@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Gateaux : RessourceAlimentaire
+    class Pierres : RessourceConstruction
     {
-        public Gateaux(int Quantite) : base(Quantite, 9) { } //on met 9 mais en fait ça remet la barre au max
+        public Pierres(int Quantite) : base(Quantite)
+        {
+            Numero = 6;
+            Nom = "Pierres";
+        }
 
         public override void Utiliser()
         {
 
         }
-
     }
 }

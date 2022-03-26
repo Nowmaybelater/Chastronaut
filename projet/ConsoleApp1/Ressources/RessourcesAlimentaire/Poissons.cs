@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Bois:RessourceConstruction
+    class Poissons : RessourceAlimentaire
     {
-        public Bois(int Quantite) : base(Quantite)
+        public Poissons(int Quantite) : base(Quantite, 5) 
         {
-            Numero = 7;
+            Numero = 3;
+            Nom = "Poissons";
         }
-
         public override void Utiliser()
         {
 

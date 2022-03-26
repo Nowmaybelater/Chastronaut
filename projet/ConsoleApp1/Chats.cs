@@ -82,7 +82,7 @@ namespace ConsoleApp1
 
         public override string ToString()
         {
-            return (Nom + " est un chat " + _Fonction.Nom + "\nNiveau de faim actuel : " + NiveauDeFaim + "\nNiveau d'énergie actuel : " + NiveauEnergie);
+            return (Nom + " le chat " + _Fonction.Nom + "\nNiveau de faim actuel : " + NiveauDeFaim + "\nNiveau d'énergie actuel : " + NiveauEnergie + "\nNiveau de divertissement actuel : " + NiveauDivertissement+"\n");
         }
 
 

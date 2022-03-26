@@ -33,14 +33,15 @@ namespace ConsoleApp1
             {
                 Console.WriteLine(" \n ================================== HISTOIRE ================================== \n ");
                 Console.WriteLine(" Dans une galaxie éloignée de la notre, un peuple de chats vivait dans la paix et la " +
-                    "\n prospérité. Alors que leur nombre grandissait, les plus courageux d'entre eux décidèrent de " +
-                    "\n partir explorer l'espace à la recherche d'une nouvelle planète : on les baptisa les Chastronautes." +
-                    "\n Au cours d'un long voyage à bord de leur vaisseau et de nombreuses péripéties, l'appareil qui " +
-                    "\n permettait aux Chastronautes de rester en contact avec leur colonie fut endommagé. Contraints" +
-                    "\n d'interrrompre leur voyage pour réparer l'appareil, les Chastronautes atterrirent sur une planète" +
-                    "\n d'apparence accueillante. Un peuple d'extraterrestres habitait déjà la planète, mais après plusieurs " +
-                    "\n négociations, ils acceptèrent de partager leur territoire le temps pour les Chastronautes de reprendre" +
-                    "\n contact avec les leurs..."); 
+                    "\n prospérité. Alors que leur nombre grandissait, les plus courageux d'entre eux " +
+                    "\n décidèrent de partir explorer l'espace à la recherche d'une nouvelle planète : " +
+                    "\n on les baptisa les Chastronautes. Au cours d'un long voyage à bord de leur vaisseau " +
+                    "\n et de nombreuses péripéties, l'appareil qui permettait aux Chastronautes de rester " +
+                    "\n en contact avec leur colonie fut endommagé. Contraints d'interrrompre leur voyage " +
+                    "\n pour réparer l'appareil, les Chastronautes atterrirent sur une planète d'apparence " +
+                    "\n accueillante. Un peuple d'extraterrestres habitait déjà la planète, mais après " +
+                    "\n plusieurs négociations, ils acceptèrent de partager leur territoire le temps " +
+                    "\n pour les Chastronautes de reprendre contact avec les leurs..."); 
 
                 Console.WriteLine(" \n ================================ REGLES DU JEU ================================ \n ");
                 Console.WriteLine(" Au cours de la partie, vous allez devoir aider les Chastronautes à survivre le temps" +

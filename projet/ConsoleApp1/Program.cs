@@ -245,23 +245,16 @@ namespace ConsoleApp1
                                                     {
                                                         if (numeroAction == 100)
                                                         {
-                                                            Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit \n2 : Gateaux \n3 : Poissons");
-                                                            int numNourriture = int.Parse(Console.ReadLine()) - 1;
-                                                            chat.PositionChat = listeBatiments[1].PositionBatiment;
-                                                            chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
+                                                            chat.PositionChat = listeBatiments[4].PositionBatiment;
+                                                            chat.SeReposer();
                                                         }
                                                         else
                                                         {
                                                             if (numeroAction == 110)
                                                             {
-                                                                Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit \n2 : Gateaux \n3 : Poissons");
-                                                                int numNourriture = int.Parse(Console.ReadLine()) - 1;
-                                                                chat.PositionChat = listeBatiments[1].PositionBatiment;
-                                                                chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
-                                                            }
-                                                            else
-                                                            {
-
+                                                                Console.WriteLine("Que voulez-vous utiliser comme ressources pour que votre chat se divertisse ? \n1 : Film \n2 : Livre");
+                                                                int numDivertissement = int.Parse(Console.ReadLine()) + 5;
+                                                                chat.SeDivertir(listeRessources[numDivertissement] as RessourceCulturelle);
                                                             }
                                                         }
                                                     }

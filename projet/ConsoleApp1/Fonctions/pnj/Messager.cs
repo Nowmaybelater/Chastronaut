@@ -8,6 +8,7 @@ namespace ConsoleApp1
 {
     class Messager : PnJ
     {
+
         public Messager() : base("Messager", 8)
         { }
 

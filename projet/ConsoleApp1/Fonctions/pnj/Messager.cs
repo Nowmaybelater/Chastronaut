@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     class Messager : PnJ
     {
-        public Messager() : base("Messager", 1)
+        public Messager() : base("Messager", 8)
         { }
 
         public override void AllerActivite(Chats chat, Batiments lieu)

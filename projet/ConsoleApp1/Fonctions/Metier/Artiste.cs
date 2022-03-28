@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     class Artiste : Metier
     {
-        public Artiste() : base("Artiste", 4)
+        public Artiste() : base("Artiste", 2)
         { }
 
         public override void AllerActivite(Chats chat, Batiments lieu)

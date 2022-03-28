@@ -138,9 +138,13 @@ namespace ConsoleApp1
             }
         }
 
-        public static void FaireAction(int numeroAction)
+        public static void FaireAction(int numeroAction, Chats chat, Fonction fonction, Ressources[] ressources)
         {
-
+            if(numeroAction==11 && chat._Fonction is Agriculteur)
+            {
+                Agriculteur agriculteur = fonction as Agriculteur;
+                agriculteur.Recolter(chat, )
+            }
         }
     }
 }

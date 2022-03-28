@@ -11,7 +11,7 @@ namespace ConsoleApp1
         
         public Livres(int Quantite) : base(Quantite, 3)  //on fixe le taux de divertissement à 3
         {
-            Numero = 2;
+            Numero = 7;
             Nom = "Livres";
         }
 

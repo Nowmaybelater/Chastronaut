@@ -11,7 +11,7 @@ namespace ConsoleApp1
 
         public Fruits(int Quantite) : base(Quantite, 2) 
         {
-            Numero = 4;
+            Numero = 1;
             Nom = "Fruits";
         }
 

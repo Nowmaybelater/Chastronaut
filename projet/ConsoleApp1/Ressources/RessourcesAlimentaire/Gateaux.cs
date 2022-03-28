@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
         public Gateaux(int Quantite) : base(Quantite, 9) //on met 9 mais en fait ça remet la barre au max
         {
-            Numero = 5;
+            Numero = 2;
             Nom = "Gateaux";
         }
 

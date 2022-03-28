@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     class Pecheur : Metier
     {
-        public Pecheur() : base("Pêcheur", 1)
+        public Pecheur() : base("Pêcheur", 5)
         { }
 
         public override void AllerActivite(Chats chat, Batiments lieu)

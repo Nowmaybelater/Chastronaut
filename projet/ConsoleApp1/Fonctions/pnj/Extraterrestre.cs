@@ -14,7 +14,7 @@ namespace ConsoleApp1
             set;
         }
 
-        public Extraterrestre() : base("Extraterrestre", 3)
+        public Extraterrestre() : base("Extraterrestre", 6)
         {
             PositionExtraterrestre = new int[] { 0, 0 };
         }

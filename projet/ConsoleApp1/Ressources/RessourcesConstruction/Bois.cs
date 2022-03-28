@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
         public Bois(int Quantite) : base(Quantite)
         {
-            Numero = 7;
+            Numero = 4;
             Nom = "Bois";
         }
 

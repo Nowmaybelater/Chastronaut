@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     class Guerisseur : PnJ
     {
-        public Guerisseur() : base("Guérisseur", 2)
+        public Guerisseur() : base("Guérisseur", 7)
         { }
 
         public override void AllerActivite(Chats chat, Batiments lieu)

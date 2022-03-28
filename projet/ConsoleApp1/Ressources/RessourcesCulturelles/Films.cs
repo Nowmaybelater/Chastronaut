@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
         public Films(int Quantite) : base(Quantite, 5) //on fixe le taux de divertissement à 5
         {
-            Numero = 1;
+            Numero = 6;
             Nom = "Films";
         } 
 

@@ -52,8 +52,9 @@ namespace ConsoleApp1
             PositionChat = new int[] { 10, 26 };
         }
 
-        public void Manger(RessourceAlimentaire aliment)
+        public bool Manger(RessourceAlimentaire aliment)
         {
+            bool actionRealisee = true;
             NiveauDeFaim += aliment.ValeurNutritionnelle;
             if (NiveauDeFaim >= 10)
             {
@@ -61,16 +62,20 @@ namespace ConsoleApp1
             }
             NiveauDivertissement -= 1;
             NiveauEnergie -= 1;
+            return actionRealisee;
         }
 
-        public void SeReposer()
+        public bool SeReposer()
         {
+            bool actionRealisee = true;
             NiveauEnergie = 10;
             NiveauDivertissement -= 1;
             NiveauDeFaim -= 1;
+            return actionRealisee;
         }
-        public void SeDivertir(RessourceCulturelle divertissement)
+        public bool SeDivertir(RessourceCulturelle divertissement)
         {
+            bool actionRealisee = true;
             NiveauDivertissement += divertissement.TauxDivertissement;
             if (NiveauDivertissement >= 10)
             {
@@ -78,6 +83,7 @@ namespace ConsoleApp1
             }
             NiveauDeFaim -= 1;
             NiveauEnergie -= 1;
+            return actionRealisee;
         }
 
         public override string ToString()

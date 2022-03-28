@@ -17,8 +17,9 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Livrer(List<Ressources> ListeRessources, Chats chat)
+        public bool Livrer(List<Ressources> ListeRessources, Chats chat)
         {
+            bool actionRealisee = true;
             Random rnd = new Random();
             int numero=rnd.Next(1,8);
             int nombreDeResources = rnd.Next(1, 10);
@@ -75,6 +76,7 @@ namespace ConsoleApp1
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
+            return actionRealisee;
         }
     }
 }

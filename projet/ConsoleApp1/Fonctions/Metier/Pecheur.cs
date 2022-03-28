@@ -16,7 +16,7 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public bool Pecher(Chats chat,Poissons poisson)
+        public bool Pecher(Poissons poisson, Chats chat)
         {
             bool action = true; //la variable est vraie quand le joueur veut effectuer une action réalisable par le chat incarné, elle est fausse quand il choisie une action non réalisable
             if (chat._Fonction is Pecheur)

@@ -26,7 +26,7 @@ namespace ConsoleApp1
                     Infirmerie infirmerie = new Infirmerie();
                     infirmerie.Construire(map, bois, pierre);
                     Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un Chastronaute Guérisseur. " +
-                        "\n Celui - ci peut remettre au maximum les barres de faim, d'énergie et de divertissement du chat " +
+                        "\n Celui - ci peut remettre au maximum les barres d'énergie du chat " +
                         "\n que vous incarnez. Pour cela, il vous faut vous rendre à l'infirmerie.Attention, vous ne pouvez " +
                         "\n consulter le Guérisseur qu'une seule fois tous les x tours.");
                 }

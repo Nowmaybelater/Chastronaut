@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    abstract class Fonction
+    class Fonction
     {
         public string Nom
         {

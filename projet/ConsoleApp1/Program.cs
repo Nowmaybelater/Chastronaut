@@ -50,7 +50,7 @@ namespace ConsoleApp1
                     "\n pour réparer l'appareil, les Chastronautes atterrirent sur une planète d'apparence " +
                     "\n accueillante. Un peuple d'extraterrestres habitait déjà la planète, mais après " +
                     "\n plusieurs négociations, ils acceptèrent de partager leur territoire le temps " +
-                    "\n pour les Chastronautes de reprendre contact avec les leurs..."); 
+                    "\n pour les Chastronautes de reprendre contact avec les leurs...");
 
                 Console.WriteLine(" \n ================================ REGLES DU JEU ================================ \n ");
                 Console.WriteLine(" Au cours de la partie, vous allez devoir aider les Chastronautes à survivre le temps" +
@@ -66,7 +66,7 @@ namespace ConsoleApp1
                     "\n la postePour remporter la partie, vous devez vous assurer de maintenir" +
                     "\n les niveaux de faim, de divertissement et de repos de chacun des personnages que vous " +
                     "\n incarnerez. Attention cependant aux extraterrestres qui, voyant que les Chastronautes" +
-                    "\n tardent à repartir, lancent des attaques pour tenter de les chasser de la planète !"); 
+                    "\n tardent à repartir, lancent des attaques pour tenter de les chasser de la planète !");
                 Console.WriteLine(" \n ==================================================================================== \n ");
 
             }
@@ -74,7 +74,7 @@ namespace ConsoleApp1
             Console.Write(" \n Choisissez le nom de votre colonie : ");
             string nomColonie = Console.ReadLine();
 
-            Console.WriteLine(" Prêt à aider les Chastronautes dans leur mission ? (tapez QUITTER si vous ne souhaitez pas poursuivre, appuyez sur la touche entrée sinon)");
+            Console.WriteLine("\n Prêt à aider les Chastronautes dans leur mission ? (tapez QUITTER si vous ne souhaitez pas poursuivre, appuyez sur la touche entrée sinon)");
             string sortie = Console.ReadLine();
 
             if (sortie != "QUITTER")

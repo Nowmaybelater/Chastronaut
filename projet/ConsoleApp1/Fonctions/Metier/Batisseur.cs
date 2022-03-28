@@ -25,7 +25,10 @@ namespace ConsoleApp1
                 {
                     Infirmerie infirmerie = new Infirmerie();
                     infirmerie.Construire(map, bois, pierre);
-                    Console.WriteLine("Félicitation ! Vous venez de construire l'infirmerie\n");
+                    Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un Chastronaute Guérisseur. " +
+                        "\n Celui - ci peut remettre au maximum les barres de faim, d'énergie et de divertissement du chat " +
+                        "\n que vous incarnez. Pour cela, il vous faut vous rendre à l'infirmerie.Attention, vous ne pouvez " +
+                        "\n consulter le Guérisseur qu'une seule fois tous les x tours.");
                 }
                 else
                 {
@@ -33,7 +36,10 @@ namespace ConsoleApp1
                     {
                         Poste poste = new Poste();
                         poste.Construire(map, bois, pierre);
-                        Console.WriteLine("Félicitation ! Vous venez de construire le bureau de poste\n");
+                        Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un Chastronaute Messager. " +
+                            "\n Celui - ci peut vous offrir des ressources supplémentaires, que vous obtiendrez en vous " +
+                            "\n rendant au bureau de poste. Attention, vous ne pouvez consulter le Messager que tous les" +
+                            "\n x tours.");
 
                     }
                     else
@@ -42,7 +48,7 @@ namespace ConsoleApp1
                         {
                             Potager potager = new Potager();
                             potager.Construire(map, bois, pierre);
-                            Console.WriteLine("Félicitation ! Vous venez de construire un deuxième potager\n");
+                            Console.WriteLine("La construction du potager vous a permis de débloquer un deuxième Chastronaute Agriculteur.");
 
                         }
                         else
@@ -51,7 +57,10 @@ namespace ConsoleApp1
                             {
                                 ZoneDePeche zoneDePeche = new ZoneDePeche();
                                 zoneDePeche.Construire(map, bois, pierre);
-                                Console.WriteLine("Félicitation ! Vous venez de construire la zone de pêche\n");
+                                Console.WriteLine("La construction de la zone de pêche vous a permis de débloquer un Chastronaute Pêcheur." +
+                                    "\n Celui - ci peut réaliser l'action 'Pêcher', qui ajoute des poissons parmi les ressources " +
+                                    "\n consommables par les Chastronautes. Lorsqu'un Chastronaute mange un poisson, 5 points sont" +
+                                    "\n ajoutés à sa barre de faim.");
 
                             }
 

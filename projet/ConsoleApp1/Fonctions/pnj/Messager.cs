@@ -16,48 +16,55 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Livrer(Livres livre, Films film, Fruits fruit, Poissons poisson, Graines graine, Pierres pierre, Bois bois, Chats chat)
+        public void Livrer(List<Ressources> ListeRessources, Chats chat)
         {
             Random rnd = new Random();
-            int numero=rnd.Next(1,6);
+            int numero=rnd.Next(1,8);
             int nombreDeResources = rnd.Next(1, 10);
             if(numero==1)
             {
-                film.Quantite += nombreDeResources;
+                ListeRessources[0].Quantite += nombreDeResources;
             }
             else
             {
                 if (numero == 2)
                 {
-                    livre.Quantite += nombreDeResources;
+                    ListeRessources[1].Quantite += nombreDeResources;
                 }
                 else
                 {
                     if (numero == 3)
                     {
-                        poisson.Quantite += nombreDeResources;
+                        ListeRessources[2].Quantite += nombreDeResources;
                     }
                     else
                     {
                         if (numero == 4)
                         {
-                            fruit.Quantite += nombreDeResources;
+                            ListeRessources[3].Quantite += nombreDeResources;
                         }
                         else
                         {
                             if (numero == 5)
                             {
-                                graine.Quantite += nombreDeResources;
+                                ListeRessources[4].Quantite += nombreDeResources;
                             }
                             else
                             {
                                 if (numero == 6)
                                 {
-                                    pierre.Quantite += nombreDeResources;
+                                    ListeRessources[5].Quantite += nombreDeResources;
                                 }
                                 else
                                 {
-                                    bois.Quantite += nombreDeResources;
+                                    if (numero == 7)
+                                    {
+                                        ListeRessources[6].Quantite += nombreDeResources;
+                                    }
+                                    else
+                                    {
+                                        ListeRessources[6].Quantite += nombreDeResources;
+                                    }
                                 }
                             }
                         }

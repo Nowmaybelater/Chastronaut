@@ -129,7 +129,7 @@ namespace ConsoleApp1
             return map;
         }
 
-        public static void AfficherResources(List<Ressources> listeRessources)//affiche toutes les ressources
+        public static void AfficherRessources(List<Ressources> listeRessources)//affiche toutes les ressources
                                                                               //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
         {
             foreach (Ressources r in listeRessources)

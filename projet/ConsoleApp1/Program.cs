@@ -15,7 +15,7 @@ namespace ConsoleApp1
             bool veutJouer = true;
             string nomColonie = PresenterJeu(ref veutJouer);
 
-
+            //Création liste de ressources
             Bois bois = new Bois(4);
             Pierres pierre = new Pierres(4);
             Fruits fruit = new Fruits(4);
@@ -24,9 +24,36 @@ namespace ConsoleApp1
             Films film = new Films(4);
             Livres livre = new Livres(4);
             Graines graine = new Graines(4);
-
             List<Ressources> listeRessouces = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine };
-            List<Batiments> listeBatiments = new List<Batiments> { };
+
+            //Création liste des Chats
+            Agriculteur agriculteur = new Agriculteur();
+            Chats ChatAgriculteur = new Chats("Chat1", agriculteur, 10, 10, 10);
+            Artiste artiste = new Artiste();
+            Chats ChatArtiste = new Chats("Chat2", artiste, 10, 10, 10);
+            Batisseur batisseur = new Batisseur();
+            Chats ChatBatisseur = new Chats("Chat3", batisseur, 10, 10, 10);
+            Patissier patissier = new Patissier();
+            Chats ChatPatissier = new Chats("Chat4", patissier, 10, 10, 10);
+            Pecheur pecheur = new Pecheur();
+            Chats ChatPecheur = new Chats("Chat5", pecheur, 10, 10, 10);
+            Guerisseur guerisseur = new Guerisseur();
+            Chats ChatGuerrisseur = new Chats("Chat6", guerisseur, 10, 10, 10);
+            Messager messager = new Messager();
+            Chats ChatMessager = new Chats("Chat7", messager, 10, 10, 10);
+
+            //création des batiments pour test
+            Atelier atelier = new Atelier();
+            Cantine cantine = new Cantine();
+            Carriere carriere = new Carriere();
+            Cuisine cuisine = new Cuisine();
+            Dortoir dortoir = new Dortoir();
+            Foret foret = new Foret();
+            Infirmerie infirmerie = new Infirmerie();
+            Poste poste = new Poste();
+            Potager potager = new Potager();
+            ZoneDePeche zonedepeche = new ZoneDePeche();
+            List<Batiments> listeBatiments = new List<Batiments> {atelier, cantine, carriere, cuisine, dortoir, foret,infirmerie, poste, potager, zonedepeche};
             List<PnJ> listePnj = new List<PnJ> { };
             int compteurAction = 0;
 
@@ -34,16 +61,13 @@ namespace ConsoleApp1
             
             Carte carte = InitialiserCarte(listeRessouces);
             Console.WriteLine(carte);
-            Batisseur batisseur = new Batisseur();
-            Chats reglisse = new Chats("Réglisse", batisseur, 10, 10, 10);
             Console.WriteLine("\n");
 
-            Console.WriteLine(listeRessouces[3]);
-            Console.WriteLine("\n");
-            Console.WriteLine(listeRessouces[4]);
-            Console.WriteLine("\n");
-            compteurAction = FaireAction(31, reglisse, reglisse._Fonction, listeRessouces, listeBatiments, listePnj, carte, compteurAction);
-            Console.WriteLine(carte);
+            compteurAction = FaireAction(2, ChatArtiste, ChatArtiste._Fonction, listeRessouces, listeBatiments, listePnj, carte, compteurAction);
+            Console.WriteLine(listeRessouces[6]);
+            Console.WriteLine(listeRessouces[5]);
+            Console.WriteLine(compteurAction);
+
             Console.ReadLine();
         }
 
@@ -199,11 +223,11 @@ namespace ConsoleApp1
                                 artiste.AllerActivite(chat, listeBatiments[0]);
                                 if (numRessourceCulturelle == 1)
                                 {
-                                    artiste.Créer(chat, listeRessources[6] as Films);
+                                    artiste.Créer(chat, listeRessources[6] as RessourceCulturelle);
                                 }
                                 else
                                 {
-                                    artiste.Créer(chat, listeRessources[7] as Livres);
+                                    artiste.Créer(chat, listeRessources[7] as RessourceCulturelle);
                                 }
 
                             }

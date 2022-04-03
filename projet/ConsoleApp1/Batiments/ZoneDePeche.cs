@@ -14,9 +14,10 @@ namespace ConsoleApp1
             NumeroBatiment = 10;
         }
 
-        public override void Construire(Carte map, Bois bois, Pierres pierre)
+        public override void Construire(Carte map, List<Ressources> listeRessources)
         {
-            if(pierre.Quantite>=2)
+            Pierres pierre = listeRessources[4] as Pierres;
+            if (pierre.Quantite>=2)
             {
                 for (int i = Ligne - 1; i < Ligne; i++)
                 {
@@ -45,6 +46,7 @@ namespace ConsoleApp1
                 map.Map[Ligne + 1, Colonne + 2] = "  P";
                 map.Map[Ligne + 1, Colonne + 3] = "ech";
                 map.Map[Ligne + 1, Colonne + 4] = "e  ";
+                pierre.Quantite -= 2;
             }
             else
             {

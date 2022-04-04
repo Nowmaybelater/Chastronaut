@@ -15,17 +15,58 @@ namespace ConsoleApp1
             bool veutJouer = true;
             string nomColonie = PresenterJeu(ref veutJouer);
 
+            //Création liste de ressources
             Bois bois = new Bois(4);
             Pierres pierre = new Pierres(4);
+            Fruits fruit = new Fruits(4);
+            Gateaux gateau = new Gateaux(4);
+            Poissons poisson = new Poissons(4);
+            Films film = new Films(4);
+            Livres livre = new Livres(4);
+            Graines graine = new Graines(4);
+            List<Ressources> listeRessouces = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine };
 
-            Carte carte = InitialiserCarte(bois, pierre);
-            Console.WriteLine(carte);
+            //Création liste des Chats
+            Agriculteur agriculteur = new Agriculteur();
+            Chats ChatAgriculteur = new Chats("Chat1", agriculteur, 10, 10, 10);
+            Artiste artiste = new Artiste();
+            Chats ChatArtiste = new Chats("Chat2", artiste, 10, 10, 10);
             Batisseur batisseur = new Batisseur();
-            Chats reglisse = new Chats("Réglisse", batisseur, 10, 10, 10);
-            Console.WriteLine(reglisse);
-            batisseur.Construire(7, carte, reglisse, bois, pierre);
-            Console.WriteLine(reglisse);
+            Chats ChatBatisseur = new Chats("Chat3", batisseur, 10, 10, 10);
+            Patissier patissier = new Patissier();
+            Chats ChatPatissier = new Chats("Chat4", patissier, 10, 10, 10);
+            Pecheur pecheur = new Pecheur();
+            Chats ChatPecheur = new Chats("Chat5", pecheur, 10, 10, 10);
+            Guerisseur guerisseur = new Guerisseur();
+            Chats ChatGuerrisseur = new Chats("Chat6", guerisseur, 10, 10, 10);
+            Messager messager = new Messager();
+            Chats ChatMessager = new Chats("Chat7", messager, 10, 10, 10);
+
+            //création des batiments pour test
+            Atelier atelier = new Atelier();
+            Cantine cantine = new Cantine();
+            Carriere carriere = new Carriere();
+            Cuisine cuisine = new Cuisine();
+            Dortoir dortoir = new Dortoir();
+            Foret foret = new Foret();
+            Infirmerie infirmerie = new Infirmerie();
+            Poste poste = new Poste();
+            Potager potager = new Potager();
+            ZoneDePeche zonedepeche = new ZoneDePeche();
+            List<Batiments> listeBatiments = new List<Batiments> {atelier, cantine, carriere, cuisine, dortoir, foret,infirmerie, poste, potager, zonedepeche};
+            List<PnJ> listePnj = new List<PnJ> { };
+            int compteurAction = 0;
+
+
+            
+            Carte carte = InitialiserCarte(listeRessouces);
             Console.WriteLine(carte);
+            Console.WriteLine("\n");
+
+            compteurAction = FaireAction(2, ChatArtiste, ChatArtiste._Fonction, listeRessouces, listeBatiments, listePnj, carte, compteurAction);
+            Console.WriteLine(listeRessouces[6]);
+            Console.WriteLine(listeRessouces[5]);
+            Console.WriteLine(compteurAction);
 
             Console.ReadLine();
         }
@@ -100,30 +141,31 @@ namespace ConsoleApp1
             Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ");
         }
 
-        public static Carte InitialiserCarte(Bois bois, Pierres pierre)
+        public static Carte InitialiserCarte(List<Ressources> listeRessources)
         {
             Carte map = new Carte();
-
+            Bois bois = listeRessources[3] as Bois;
+            Pierres pierre = listeRessources[4] as Pierres;
             Carriere carriere = new Carriere();//Création d'une carrière pour miner des pierres
-            carriere.Construire(map, bois, pierre);
+            carriere.Construire(map, listeRessources);
 
             Foret foret = new Foret();//Création d'une forêt pour abattre des arbres
-            foret.Construire(map, bois, pierre);
+            foret.Construire(map, listeRessources);
 
             Potager potager = new Potager();//Création d'une champ d'agriculture
-            potager.Construire(map, bois, pierre);
+            potager.Construire(map, listeRessources);
 
             Cantine cantine = new Cantine();//Création d'une cantine pour que les chats puissent manger
-            cantine.Construire(map, bois, pierre);
+            cantine.Construire(map, listeRessources);
 
             Dortoir dortoir = new Dortoir();//Création d'un dortoir pour que les chats puissent se reposer
-            dortoir.Construire(map, bois, pierre);
+            dortoir.Construire(map, listeRessources);
 
             Cuisine cuisine = new Cuisine();//Création d'une cuisine pour que les chats pâtissiers puissent faire des gâteaux
-            cuisine.Construire(map, bois, pierre);
+            cuisine.Construire(map, listeRessources);
 
             Atelier atelier = new Atelier();//Création d'un atelier pour que les chats artistes puissent créer du divertissement
-            atelier.Construire(map, bois, pierre);
+            atelier.Construire(map, listeRessources);
 
 
             return map;
@@ -181,11 +223,11 @@ namespace ConsoleApp1
                                 artiste.AllerActivite(chat, listeBatiments[0]);
                                 if (numRessourceCulturelle == 1)
                                 {
-                                    artiste.Créer(chat, listeRessources[6] as Films);
+                                    artiste.Créer(chat, listeRessources[6] as RessourceCulturelle);
                                 }
                                 else
                                 {
-                                    artiste.Créer(chat, listeRessources[7] as Livres);
+                                    artiste.Créer(chat, listeRessources[7] as RessourceCulturelle);
                                 }
 
                             }
@@ -203,7 +245,8 @@ namespace ConsoleApp1
                                         Console.WriteLine("Que voulez-vous construire ?  \n1 : Infirmarie \n2 : Poste \n3 : Potager \n4 : Zone de pêche ");
                                         int numConstruction = int.Parse(Console.ReadLine()) + 6;
                                         Batisseur batisseur = fonction as Batisseur;
-                                        batisseur.Construire(numConstruction, map, chat, listeRessources[4] as Bois, listeRessources[5] as Pierres);
+                                        batisseur.Construire(numConstruction, map, chat, listeRessources);
+                                        
                                     }
                                     else
                                     {

@@ -20,9 +20,10 @@ namespace ConsoleApp1
             NumeroBatiment = 9;
         }
 
-        public override void Construire(Carte map, Bois bois, Pierres pierre)
+        public override void Construire(Carte map, List<Ressources> listeRessources)
         {
-            if(Ligne==11)//pas de proclème de ressource pour le potager qui est initialiser au début d'une partie
+            Bois bois = listeRessources[3] as Bois;
+            if (Ligne==11)//pas de proclème de ressource pour le potager qui est initialiser au début d'une partie
             {
                 for (int i = Ligne; i < Ligne + 6; i++)
                 {
@@ -49,6 +50,7 @@ namespace ConsoleApp1
                     map.Map[Ligne + 2, Colonne + 2] = " Po";
                     map.Map[Ligne + 2, Colonne + 3] = "tag";
                     map.Map[Ligne + 2, Colonne + 4] = "er ";
+                    bois.Quantite -= 2;
                 }
                 else
                 {

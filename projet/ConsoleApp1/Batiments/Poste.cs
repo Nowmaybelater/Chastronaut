@@ -14,13 +14,17 @@ namespace ConsoleApp1
             NumeroBatiment = 8;
         }
 
-        public override void Construire(Carte map, Bois bois, Pierres pierre)
+        public override void Construire(Carte map, List<Ressources> listeRessources)
         {
-            if(pierre.Quantite>=1 && bois.Quantite>=1)
+            Bois bois = listeRessources[3] as Bois;
+            Pierres pierre = listeRessources[4] as Pierres;
+            if (pierre.Quantite>=1 && bois.Quantite>=1)
             {
                 map.Map[Ligne, Colonne] = "  Po";//Création d'une cantine pour que les chats puissent manger
                 map.Map[Ligne, Colonne + 1] = "s";
                 map.Map[Ligne, Colonne + 2] = "te  ";
+                pierre.Quantite -= 1;
+                bois.Quantite -= 1;
             }
             else
             {

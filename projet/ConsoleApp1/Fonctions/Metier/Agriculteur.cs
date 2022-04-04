@@ -33,7 +33,7 @@ namespace ConsoleApp1
             chat.NiveauEnergie -= 1;
         }
 
-        public void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources)
+        public void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Agriculteur A = chat._Fonction as Agriculteur;
 
@@ -52,7 +52,7 @@ namespace ConsoleApp1
             }
 
             //comportement automatique pour se divertir
-            if (listeRessources[6].Quantite != 0) //le chat commencer automatiquement par se divertir avec un livre
+            if (listeRessources[6].Quantite != 0) //le chat commence automatiquement par se divertir avec un livre
             {
                 chat.SeDivertir(listeRessources[6] as Livres);
             }

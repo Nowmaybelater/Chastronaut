@@ -24,7 +24,7 @@ namespace ConsoleApp1
             Films film = new Films(4);
             Livres livre = new Livres(4);
             Graines graine = new Graines(4);
-            List<Ressources> listeRessouces = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine };
+            List<Ressources> listeRessources = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine };
 
             //Création liste des Chats
             Agriculteur agriculteur = new Agriculteur();
@@ -59,15 +59,45 @@ namespace ConsoleApp1
 
 
             
-            Carte carte = InitialiserCarte(listeRessouces);
+            Carte carte = InitialiserCarte(listeRessources);
             Console.WriteLine(carte);
             Console.WriteLine("\n");
 
-            compteurAction = FaireAction(2, ChatArtiste, ChatArtiste._Fonction, listeRessouces, listeBatiments, listePnj, carte, compteurAction);
-            Console.WriteLine(listeRessouces[6]);
-            Console.WriteLine(listeRessouces[5]);
+            compteurAction = FaireAction(2, ChatArtiste, ChatArtiste._Fonction, listeRessources, listeBatiments, listePnj, carte, compteurAction);
+            Console.WriteLine(listeRessources[6]);
+            Console.WriteLine(listeRessources[5]);
             Console.WriteLine(compteurAction);
 
+            //tests pour les fonctions AgirAutomatiquement
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine(listeRessources[i]);
+            }
+            agriculteur.AgirAutomatiquement(ChatAgriculteur, listeRessources);
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine(listeRessources[i]);
+            }
+            artiste.AgirAutomatiquement(ChatArtiste, listeRessources);
+            for (int i = 0; i<8; i++)
+            {
+                Console.WriteLine(listeRessources[i]);
+            }
+            batisseur.AgirAutomatiquement(ChatBatisseur, listeRessources);
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine(listeRessources[i]);
+            }
+            patissier.AgirAutomatiquement(ChatPatissier, listeRessources);
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine(listeRessources[i]);
+            }
+            pecheur.AgirAutomatiquement(ChatPecheur, listeRessources);
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine(listeRessources[i]);
+            }
             Console.ReadLine();
         }
 
@@ -82,9 +112,10 @@ namespace ConsoleApp1
             if (afficheHistoire != "NON")
             {
                 Console.WriteLine(" \n ================================== HISTOIRE ================================== \n ");
-                Console.WriteLine(" Dans une galaxie éloignée de la notre, un peuple de chats vivait dans la paix et la " +
-                    "\n prospérité. Alors que leur nombre grandissait, les plus courageux d'entre eux " +
-                    "\n décidèrent de partir explorer l'espace à la recherche d'une nouvelle planète : " +
+                Console.WriteLine(" Sur une charmante planète, dans une galaxie éloignée de la notre, " +
+                    "\n un peuple de chats vivait dans la paix et la prospérité. Alors que leur nombre" +
+                    "\n grandissait, l'espace vint à manquer sur la planète des chats. Les plus courageux " +
+                    "\n d'entre eux décidèrent de partir explorer l'espace à la recherche d'une nouvelle planète : " +
                     "\n on les baptisa les Chastronautes. Au cours d'un long voyage à bord de leur vaisseau " +
                     "\n et de nombreuses péripéties, l'appareil qui permettait aux Chastronautes de rester " +
                     "\n en contact avec leur colonie fut endommagé. Contraints d'interrrompre leur voyage " +

@@ -88,7 +88,7 @@ namespace ConsoleApp1
 
         public void AfficherNiveaux()
         {
-            Console.WriteLine("\nNiveau de faim actuel : " + NiveauDeFaim + "\nNiveau d'énergie actuel : " + NiveauEnergie + "\nNiveau de divertissement actuel : " + NiveauDivertissement + "\n)
+            Console.WriteLine("\nNiveau de faim actuel : " + NiveauDeFaim + "\nNiveau d'énergie actuel : " + NiveauEnergie + "\nNiveau de divertissement actuel : " + NiveauDivertissement + "\n");
         }
 
 

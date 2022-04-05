@@ -14,7 +14,7 @@ namespace ConsoleApp1
             NumeroBatiment = 10;
         }
 
-        public override void Construire(Carte map, List<Ressources> listeRessources)
+        public override void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
             Pierres pierre = listeRessources[4] as Pierres;
             if (pierre.Quantite>=2)

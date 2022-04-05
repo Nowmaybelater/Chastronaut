@@ -14,7 +14,7 @@ namespace ConsoleApp1
             NumeroBatiment = 3;
         }
 
-        public override void Construire(Carte map, List<Ressources> listeRessources)
+        public override void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
             for (int i = Ligne; i < Ligne + 5; i++)
             {

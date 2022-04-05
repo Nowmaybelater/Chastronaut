@@ -37,6 +37,7 @@ namespace ConsoleApp1
             Colonne = colonne;
         }
 
-        public abstract void Construire(Carte map, List<Ressources> listeRessources);
+        public abstract void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments);
+        
     }
 }

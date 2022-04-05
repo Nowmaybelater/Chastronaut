@@ -14,11 +14,12 @@ namespace ConsoleApp1
             NumeroBatiment = 2;
         }
 
-        public override void Construire(Carte map, List<Ressources> listeRessources)
+        public override void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
             map.Map[Ligne, Colonne] = " Ca";//Création d'une cantine pour que les chats puissent manger
             map.Map[Ligne, Colonne+1] = "nti";
             map.Map[Ligne, Colonne+2] = "ne ";
+            listeBatiments.Add(this);
         }
     }
 }

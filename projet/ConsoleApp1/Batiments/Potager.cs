@@ -20,7 +20,7 @@ namespace ConsoleApp1
             NumeroBatiment = 9;
         }
 
-        public override void Construire(Carte map, List<Ressources> listeRessources)
+        public override void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
             Bois bois = listeRessources[3] as Bois;
             if (Ligne==11)//pas de proclème de ressource pour le potager qui est initialiser au début d'une partie

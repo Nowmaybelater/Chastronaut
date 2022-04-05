@@ -14,7 +14,7 @@ namespace ConsoleApp1
             NumeroBatiment = 7;
         }
 
-        public override void Construire(Carte map, List<Ressources> listeRessources)
+        public override void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
             Bois bois = listeRessources[3] as Bois;
             Pierres pierre = listeRessources[4] as Pierres;

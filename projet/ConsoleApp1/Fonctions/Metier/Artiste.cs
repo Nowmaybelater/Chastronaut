@@ -16,7 +16,7 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Créer(Chats chat, RessourceCulturelle divertissement)
+        public void Creer(Chats chat, RessourceCulturelle divertissement)
         {
             divertissement.Quantite += 1;
             chat.NiveauDeFaim -= 1;
@@ -58,10 +58,10 @@ namespace ConsoleApp1
             chat.SeReposer();
 
             //comportement automatique de fabrication d'un livre (propre au chat artiste)
-            A.Créer(chat, listeRessources[6] as Livres);
+            A.Creer(chat, listeRessources[6] as Livres);
 
             //comportement automatique de fabrication d'un film (propre au chat artiste)
-            A.Créer(chat, listeRessources[5] as Films);
+            A.Creer(chat, listeRessources[5] as Films);
         }
     }
 }

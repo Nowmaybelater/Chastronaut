@@ -69,8 +69,9 @@ namespace ConsoleApp1
             chat.NiveauEnergie -= 1;
         }
 
-        public void AbattreUnArbre(Bois bois, Chats chat)
+        public void AbattreUnArbre(List<Ressources> listeRessources, Chats chat)
         {
+            Bois bois = listeRessources[3] as Bois;
             bois.Quantite += 2;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
@@ -78,9 +79,9 @@ namespace ConsoleApp1
         }
 
 
-        public void Miner(Pierres pierre, Chats chat)
+        public void Miner(List<Ressources> listeRessources, Chats chat)
         {
-
+            Pierres pierre = listeRessources[4] as Pierres;
             pierre.Quantite += 2;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
@@ -121,10 +122,10 @@ namespace ConsoleApp1
             chat.SeReposer();
 
             //comportement automatique de la récolte de bois (propre au chat batisseur)
-            B.AbattreUnArbre(listeRessources[3] as Bois, chat);
+            B.AbattreUnArbre(listeRessources, chat);
 
             //comportement automatique de la récolte de pierres (propre au chat batisseur)
-            B.Miner(listeRessources[4] as Pierres, chat);
+            B.Miner(listeRessources, chat);
         }
 
     }

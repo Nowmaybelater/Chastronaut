@@ -63,13 +63,19 @@ namespace ConsoleApp1
             Console.WriteLine(carte);
             Console.WriteLine("\n");
 
-            compteurAction = FaireAction(2, ChatArtiste, ChatArtiste._Fonction, listeRessources, listeBatiments, listePnj, carte, compteurAction);
-            Console.WriteLine(listeRessources[6]);
-            Console.WriteLine(listeRessources[5]);
+
+            Console.WriteLine(listeRessources[3]);
+            Console.WriteLine(ChatAgriculteur.PositionChat[0]);
+            Console.WriteLine(ChatAgriculteur.PositionChat[1]);
+            compteurAction = FaireAction(11, ChatAgriculteur, ChatAgriculteur._Fonction, listeRessources, listeBatiments, listePnj, carte, compteurAction);
+            Console.WriteLine(ChatAgriculteur.PositionChat[0]);
+            Console.WriteLine(ChatAgriculteur.PositionChat[1]);
+            Console.WriteLine(listeRessources[3]);
+
             Console.WriteLine(compteurAction);
 
             //tests pour les fonctions AgirAutomatiquement
-            for (int i = 0; i < 8; i++)
+            /*for (int i = 0; i < 8; i++)
             {
                 Console.WriteLine(listeRessources[i]);
             }
@@ -97,7 +103,7 @@ namespace ConsoleApp1
             for (int i = 0; i < 8; i++)
             {
                 Console.WriteLine(listeRessources[i]);
-            }
+            }*/
             Console.ReadLine();
         }
 
@@ -254,11 +260,11 @@ namespace ConsoleApp1
                                 artiste.AllerActivite(chat, listeBatiments[0]);
                                 if (numRessourceCulturelle == 1)
                                 {
-                                    artiste.Créer(chat, listeRessources[6] as RessourceCulturelle);
+                                    artiste.Creer(chat, listeRessources[5] as RessourceCulturelle);
                                 }
                                 else
                                 {
-                                    artiste.Créer(chat, listeRessources[7] as RessourceCulturelle);
+                                    artiste.Creer(chat, listeRessources[6] as RessourceCulturelle);
                                 }
 
                             }
@@ -292,7 +298,7 @@ namespace ConsoleApp1
                                             {
                                                 Batisseur batisseur = fonction as Batisseur;
                                                 batisseur.AllerActivite(chat, listeBatiments[5]);
-                                                batisseur.AbattreUnArbre(listeRessources[4] as Bois, chat);
+                                                batisseur.AbattreUnArbre(listeRessources, chat);
                                             }
                                             else
                                             {
@@ -307,7 +313,7 @@ namespace ConsoleApp1
                                                     {
                                                         Batisseur batisseur = fonction as Batisseur;
                                                         batisseur.AllerActivite(chat, listeBatiments[2]);
-                                                        batisseur.Miner(listeRessources[5] as Pierres, chat);
+                                                        batisseur.Miner(listeRessources, chat);
                                                     }
                                                     else
                                                     {

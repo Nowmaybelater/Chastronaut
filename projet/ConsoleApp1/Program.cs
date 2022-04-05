@@ -38,9 +38,10 @@ namespace ConsoleApp1
             Pecheur pecheur = new Pecheur();
             Chats ChatPecheur = new Chats("Chat5", pecheur, 10, 10, 10);
             Guerisseur guerisseur = new Guerisseur();
-            Chats ChatGuerrisseur = new Chats("Chat6", guerisseur, 10, 10, 10);
+            Chats ChatGuerisseur = new Chats("Chat6", guerisseur, 10, 10, 10);
             Messager messager = new Messager();
             Chats ChatMessager = new Chats("Chat7", messager, 10, 10, 10);
+            List<Chats> listeChats = new List<Chats> { ChatAgriculteur, ChatArtiste, ChatBatisseur, ChatPatissier, ChatPecheur, ChatGuerisseur, ChatMessager };
 
             //création des batiments pour test
             Atelier atelier = new Atelier();
@@ -53,24 +54,25 @@ namespace ConsoleApp1
             Poste poste = new Poste();
             Potager potager = new Potager();
             ZoneDePeche zonedepeche = new ZoneDePeche();
-            List<Batiments> listeBatiments = new List<Batiments> {atelier, cantine, carriere, cuisine, dortoir, foret,infirmerie, poste, potager, zonedepeche};
-            List<PnJ> listePnj = new List<PnJ> { };
+            List<Batiments> listeBatiments = new List<Batiments> { atelier, cantine, carriere, cuisine, dortoir, foret, infirmerie, poste, potager, zonedepeche };
+            List<PnJ> listePnj = new List<PnJ> { guerisseur, messager };
             int compteurAction = 0;
 
 
-            
             Carte carte = InitialiserCarte(listeRessources);
+            infirmerie.Construire(carte, listeRessources);
+            poste.Construire(carte, listeRessources);
+
+            ChatBatisseur.NiveauDivertissement -= 7;
             Console.WriteLine(carte);
             Console.WriteLine("\n");
-
-
-            Console.WriteLine(listeRessources[3]);
-            Console.WriteLine(ChatAgriculteur.PositionChat[0]);
-            Console.WriteLine(ChatAgriculteur.PositionChat[1]);
-            compteurAction = FaireAction(11, ChatAgriculteur, ChatAgriculteur._Fonction, listeRessources, listeBatiments, listePnj, carte, compteurAction);
-            Console.WriteLine(ChatAgriculteur.PositionChat[0]);
-            Console.WriteLine(ChatAgriculteur.PositionChat[1]);
-            Console.WriteLine(listeRessources[3]);
+            Console.WriteLine(ChatBatisseur);
+            Console.WriteLine(ChatBatisseur.PositionChat[0]);
+            Console.WriteLine(ChatBatisseur.PositionChat[1]);
+            compteurAction = FaireActionBasique(4, ChatBatisseur, ChatBatisseur._Fonction, listeRessources, listeBatiments, listeChats, carte, compteurAction);
+            Console.WriteLine(ChatBatisseur.PositionChat[0]);
+            Console.WriteLine(ChatBatisseur.PositionChat[1]);
+            Console.WriteLine(ChatBatisseur);
 
             Console.WriteLine(compteurAction);
 
@@ -209,50 +211,58 @@ namespace ConsoleApp1
         }
 
         public static void AfficherRessources(List<Ressources> listeRessources)//affiche toutes les ressources
-                                                                              //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
+                                                                               //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
         {
-            foreach (Ressources r in listeRessources)
+            foreach (Ressources ressource in listeRessources)
             {
-                Console.WriteLine(r);
+                Console.WriteLine(ressource);
             }
         }
 
-        public static int FaireAction(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, Carte map, int compteurAction)
+        public static void AfficherChats(List<Chats> listeChats)//affiche toutes les ressources
+                                                                               //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
+        {
+            int i = 1;
+            foreach (Chats chat in listeChats)
+            {
+                Console.WriteLine(i+":"+chat);
+                i += 1;
+            }
+        }
+
+        public static int FaireActionMetier(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, Carte map, int compteurAction)
         //ajouter le fait qu'il puisse se faire attaquer par extraterrestre
         //rajouter test si list pnj vide
         {
             bool actionRealisee = true;
-            if (numeroAction == 11 && chat._Fonction is Agriculteur)
+            if (numeroAction == 11 && chat._Fonction is Agriculteur) //Recolter
             {
                 Agriculteur agriculteur = fonction as Agriculteur;
                 agriculteur.AllerActivite(chat, listeBatiments[8]);
                 agriculteur.Recolter(chat, listeRessources[0] as Fruits, listeRessources[7] as Graines);
             }
             else
-            {
-                if (numeroAction == 11)
+            {   if (numeroAction == 11)
                 {
                     Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
                     actionRealisee = false;
                 }
                 else
-                {
-                    if (numeroAction == 12 && chat._Fonction is Agriculteur)
+                {   if (numeroAction == 12 && chat._Fonction is Agriculteur) //Planter
                     {
                         Agriculteur agriculteur = fonction as Agriculteur;
                         agriculteur.AllerActivite(chat, listeBatiments[8]);
                         agriculteur.Planter(chat, listeRessources[7] as Graines);
                     }
                     else
-                    {
-                        if (numeroAction == 12)
+                    {   if (numeroAction == 12)
                         {
                             Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Planter");
                             actionRealisee = false;
                         }
                         else
                         {
-                            if (numeroAction == 2 && chat._Fonction is Artiste)
+                            if (numeroAction == 2 && chat._Fonction is Artiste) //Creer
                             {
                                 Console.WriteLine("Que voulez-vous créer ?  \n1 : Film \n2 : Livre");
                                 int numRessourceCulturelle = int.Parse(Console.ReadLine());
@@ -269,156 +279,82 @@ namespace ConsoleApp1
 
                             }
                             else
-                            {
-                                if (numeroAction == 2)
+                            {   if (numeroAction == 2)
                                 {
                                     Console.WriteLine("Attention ! Vous devez jouer en tant que chat artiste pour réaliser l'action Créer");
                                     actionRealisee = false;
                                 }
                                 else
-                                {
-                                    if (numeroAction == 31 && chat._Fonction is Batisseur)
+                                {   if (numeroAction == 31 && chat._Fonction is Batisseur) //Construire
                                     {
                                         Console.WriteLine("Que voulez-vous construire ?  \n1 : Infirmarie \n2 : Poste \n3 : Potager \n4 : Zone de pêche ");
                                         int numConstruction = int.Parse(Console.ReadLine()) + 6;
                                         Batisseur batisseur = fonction as Batisseur;
                                         batisseur.Construire(numConstruction, map, chat, listeRessources);
-                                        
+
                                     }
                                     else
-                                    {
-                                        if (numeroAction == 31)
+                                    {   if (numeroAction == 31)
                                         {
                                             Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Construire");
                                             actionRealisee = false;
                                         }
                                         else
-                                        {
-                                            if (numeroAction == 32 && chat._Fonction is Batisseur)
+                                        {   if (numeroAction == 32 && chat._Fonction is Batisseur) //Abattre un arbre
                                             {
                                                 Batisseur batisseur = fonction as Batisseur;
                                                 batisseur.AllerActivite(chat, listeBatiments[5]);
                                                 batisseur.AbattreUnArbre(listeRessources, chat);
                                             }
                                             else
-                                            {
-                                                if (numeroAction == 32)
+                                            {   if (numeroAction == 32)
                                                 {
                                                     Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action AbattreUnArbre");
                                                     actionRealisee = false;
                                                 }
                                                 else
-                                                {
-                                                    if (numeroAction == 33 && chat._Fonction is Batisseur)
+                                                {   if (numeroAction == 33 && chat._Fonction is Batisseur) //Miner
                                                     {
                                                         Batisseur batisseur = fonction as Batisseur;
                                                         batisseur.AllerActivite(chat, listeBatiments[2]);
                                                         batisseur.Miner(listeRessources, chat);
                                                     }
                                                     else
-                                                    {
-                                                        if (numeroAction == 33)
+                                                    {   if (numeroAction == 33)
                                                         {
                                                             Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Miner");
                                                             actionRealisee = false;
                                                         }
                                                         else
-                                                        {
-                                                            if (numeroAction == 4 && chat._Fonction is Patissier)
+                                                        {   if (numeroAction == 4 && chat._Fonction is Patissier) //Faire un gateau (patisser)
                                                             {
                                                                 Patissier patissier = fonction as Patissier;
                                                                 patissier.AllerActivite(chat, listeBatiments[3]);
                                                                 patissier.Patisser(listeRessources[1] as Gateaux, chat);
                                                             }
                                                             else
-                                                            {
-                                                                if (numeroAction == 4)
+                                                            {   if (numeroAction == 4)
                                                                 {
                                                                     Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Patisser");
                                                                     actionRealisee = false;
                                                                 }
                                                                 else
-                                                                {
-                                                                    if (numeroAction == 5 && chat._Fonction is Pecheur)
+                                                                {   if (numeroAction == 5 && chat._Fonction is Pecheur) //Pecher
                                                                     {
                                                                         Pecheur pecheur = fonction as Pecheur;
                                                                         pecheur.AllerActivite(chat, listeBatiments[9]);
                                                                         pecheur.Pecher(listeRessources[2] as Poissons, chat);
                                                                     }
                                                                     else
-                                                                    {
-                                                                        if (numeroAction == 5)
+                                                                    {   if (numeroAction == 5)
                                                                         {
                                                                             Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Pecher");
                                                                             actionRealisee = false;
                                                                         }
-                                                                        else
-                                                                        {
-                                                                            if (numeroAction == 7 && map.Map[12, 18] == "Inf")
-                                                                            {
-                                                                                Guerisseur guerisseur = listePnj[0] as Guerisseur;
-                                                                                guerisseur.AllerActivite(chat, listeBatiments[6]);
-                                                                                guerisseur.Soigner(chat);
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                if (numeroAction == 7)
-                                                                                {
-                                                                                    Console.WriteLine("Attention ! Vous devez d'abord débloquer le chat guérisseur en construisant l'infirmerie pour réaliser l'action Soigner");
-                                                                                    actionRealisee = false;
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    if (numeroAction == 8 && map.Map[8, 18] == " Po")
-                                                                                    {
-                                                                                        Messager messager = listePnj[1] as Messager;
-                                                                                        messager.AllerActivite(chat, listeBatiments[7]);
-                                                                                        messager.Livrer(listeRessources, chat);
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        if (numeroAction == 8)
-                                                                                        {
-                                                                                            Console.WriteLine("Attention ! Vous devez d'abord débloquer le chat messager en construisant le bureau de poste pour réaliser l'action Livrer");
-                                                                                            actionRealisee = false;
-                                                                                        }
-                                                                                        else
-                                                                                        {
-                                                                                            if (numeroAction == 9)
-                                                                                            {
-                                                                                                Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit \n2 : Gateaux \n3 : Poissons");
-                                                                                                int numNourriture = int.Parse(Console.ReadLine()) - 1;
-                                                                                                chat.PositionChat = listeBatiments[1].PositionBatiment;
-                                                                                                chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
-                                                                                            }
-                                                                                            else
-                                                                                            {
-                                                                                                if (numeroAction == 100)
-                                                                                                {
-                                                                                                    chat.PositionChat = listeBatiments[4].PositionBatiment;
-                                                                                                    chat.SeReposer();
-                                                                                                }
-                                                                                                else
-                                                                                                {
-                                                                                                    if (numeroAction == 110)
-                                                                                                    {
-                                                                                                        Console.WriteLine("Que voulez-vous utiliser comme ressources pour que votre chat se divertisse ? \n1 : Film \n2 : Livre");
-                                                                                                        int numDivertissement = int.Parse(Console.ReadLine()) + 5;
-                                                                                                        chat.SeDivertir(listeRessources[numDivertissement] as RessourceCulturelle);
-                                                                                                    }
-                                                                                                }
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
                                                                     }
                                                                 }
                                                             }
-
                                                         }
-
                                                     }
                                                 }
                                             }
@@ -436,5 +372,107 @@ namespace ConsoleApp1
             }
             return compteurAction;
         }
+
+        public static int FaireActionBasique(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, Carte map, int compteurAction)
+        {
+            bool actionRealisee = true;
+            if (numeroAction == 1) //Se nourrir
+            {
+                Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit \n2 : Gateaux \n3 : Poissons");
+                int numNourriture = int.Parse(Console.ReadLine()) - 1;
+                chat.PositionChat = listeBatiments[1].PositionBatiment;
+                chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
+            }
+            else
+            {
+                if (numeroAction == 2) //Se reposer
+                {
+                    chat.PositionChat = listeBatiments[4].PositionBatiment;
+                    chat.SeReposer();
+                }
+                else
+                {
+                    if (numeroAction == 3) //Se divertir
+                    {
+                        Console.WriteLine("Que voulez-vous utiliser comme ressources pour que votre chat se divertisse ? \n1 : Film \n2 : Livre");
+                        int numDivertissement = int.Parse(Console.ReadLine()) + 4;
+                        chat.SeDivertir(listeRessources[numDivertissement] as RessourceCulturelle);
+                    }
+                    else
+                    {
+                        if (numeroAction == 4) //Changer le nom  d'un chat
+                        {
+                            Console.WriteLine("Voici la liste de vos chats, quel nom voulez-vous changer ?");
+                            AfficherChats(listeChats);
+                            int numChats = int.Parse(Console.ReadLine()) -1;
+                            Console.WriteLine("Quel nom voulez-vous lui donner ?");
+                            listeChats[numChats].Nom = Console.ReadLine();
+                            actionRealisee = false;
+                        }
+                        else
+                        {
+                            if(numeroAction==5) //Afficher les différents niveau du chat en train de jouer
+                            {
+                                chat.AfficherNiveaux();
+                                actionRealisee = false;
+                            }
+                        }
+                    }
+                }
+            }
+            if (actionRealisee == true)
+            {
+                compteurAction += 1;
+            }
+            return compteurAction;
+
+        }
+
+
+
+        public static int FaireActionPnj(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, Carte map, int compteurAction)
+        {
+            bool actionRealisee = true;
+            if (numeroAction == 6 && map.Map[12, 18] == "Inf") //Se faire soigner
+            {
+                Guerisseur guerisseur = listePnj[0] as Guerisseur;
+                guerisseur.AllerActivite(chat, listeBatiments[6]);
+                guerisseur.Soigner(chat);
+            }
+            else
+            {
+                if (numeroAction == 6)
+                {
+                    Console.WriteLine("Attention ! Vous devez d'abord débloquer le chat guérisseur en construisant l'infirmerie pour réaliser l'action Soigner");
+                    actionRealisee = false;
+                }
+                else
+                {
+                    if (numeroAction == 7 && map.Map[8, 18] == "  Po") //Recevoir une ressource par le messager
+                    {
+                        Messager messager = listePnj[1] as Messager;
+                        messager.AllerActivite(chat, listeBatiments[7]);
+                        messager.Livrer(listeRessources, chat);
+                    }
+                    else
+                    {
+                        if (numeroAction == 7)
+                        {
+                            Console.WriteLine("Attention ! Vous devez d'abord débloquer le chat messager en construisant le bureau de poste pour réaliser l'action Livrer");
+                            actionRealisee = false;
+                        }
+                    }
+                }
+            }
+            if (actionRealisee == true)
+            {
+                compteurAction += 1;
+            }
+            return compteurAction;
+        }
     }
 }
+
+
+
+

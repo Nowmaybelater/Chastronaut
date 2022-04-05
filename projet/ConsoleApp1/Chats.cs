@@ -86,9 +86,15 @@ namespace ConsoleApp1
             return actionRealisee;
         }
 
+        public void AfficherNiveaux()
+        {
+            Console.WriteLine("\nNiveau de faim actuel : " + NiveauDeFaim + "\nNiveau d'énergie actuel : " + NiveauEnergie + "\nNiveau de divertissement actuel : " + NiveauDivertissement + "\n)
+        }
+
+
         public override string ToString()
         {
-            return (Nom + " le chat " + _Fonction.Nom + "\nNiveau de faim actuel : " + NiveauDeFaim + "\nNiveau d'énergie actuel : " + NiveauEnergie + "\nNiveau de divertissement actuel : " + NiveauDivertissement+"\n");
+            return (Nom + " est un chat " + _Fonction.Nom + "\n");
         }
 
 

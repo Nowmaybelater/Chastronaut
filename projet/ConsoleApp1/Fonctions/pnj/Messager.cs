@@ -17,61 +17,13 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Livrer(List<Ressources> ListeRessources, Chats chat)
+        public void Livrer(List<Ressources> listeRessources, Chats chat)
         {
             Random rnd = new Random();
-            int numero=rnd.Next(1,8);
+            int numero = rnd.Next(1, 8);
             int nombreDeResources = rnd.Next(1, 10);
-            if(numero==1)
-            {
-                ListeRessources[0].Quantite += nombreDeResources;
-            }
-            else
-            {
-                if (numero == 2)
-                {
-                    ListeRessources[1].Quantite += nombreDeResources;
-                }
-                else
-                {
-                    if (numero == 3)
-                    {
-                        ListeRessources[2].Quantite += nombreDeResources;
-                    }
-                    else
-                    {
-                        if (numero == 4)
-                        {
-                            ListeRessources[3].Quantite += nombreDeResources;
-                        }
-                        else
-                        {
-                            if (numero == 5)
-                            {
-                                ListeRessources[4].Quantite += nombreDeResources;
-                            }
-                            else
-                            {
-                                if (numero == 6)
-                                {
-                                    ListeRessources[5].Quantite += nombreDeResources;
-                                }
-                                else
-                                {
-                                    if (numero == 7)
-                                    {
-                                        ListeRessources[6].Quantite += nombreDeResources;
-                                    }
-                                    else
-                                    {
-                                        ListeRessources[6].Quantite += nombreDeResources;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            listeRessources[numero - 1].Quantite += nombreDeResources;
+            Console.WriteLine("Vous avez reçu " + nombreDeResources + " " + listeRessources[numero - 1].Nom + " de la part du chat messager");
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;

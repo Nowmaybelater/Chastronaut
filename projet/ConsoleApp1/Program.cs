@@ -48,7 +48,7 @@ namespace ConsoleApp1
             List<PnJ> listePnj = new List<PnJ> { guerisseur, messager };
             int compteurAction = 0;
 
-            Carte carte = InitialiserCarte(listeRessources, listeBatiments, ChatBatisseur, listeChats);
+            Carte carte = InitialiserCarte(listeRessources, listeBatiments);
 
             ChatBatisseur.NiveauDivertissement -= 7;
             Console.WriteLine(carte);
@@ -62,7 +62,6 @@ namespace ConsoleApp1
             Console.WriteLine(ChatBatisseur);
 
             Console.WriteLine(compteurAction);
-
 
             //tests pour les fonctions AgirAutomatiquement
             /*for (int i = 0; i < 8; i++)
@@ -96,8 +95,6 @@ namespace ConsoleApp1
             }*/
             Console.ReadLine();
         }
-
-        
 
         public static string PresenterJeu(ref bool veutJouer)
         {
@@ -170,9 +167,20 @@ namespace ConsoleApp1
             Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ");
         }
 
-        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments, Chats chat, List<Chats> ListeChats)
+        public static void FaireApparaitreET(Chats chat)
         {
-            Carte map = new Carte(ListeChats, chat);
+            Random rnd = new Random();
+            int intervention = rnd.Next(1, 6);
+            if (intervention == 1)
+            {
+                SubirAttaque(chat);
+            }
+
+        }
+
+        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments)
+        {
+            Carte map = new Carte();
             Bois bois = listeRessources[3] as Bois;
             Pierres pierre = listeRessources[4] as Pierres;
             Carriere carriere = new Carriere();//Création d'une carrière pour miner des pierres
@@ -195,6 +203,7 @@ namespace ConsoleApp1
 
             Atelier atelier = new Atelier();//Création d'un atelier pour que les chats artistes puissent créer du divertissement
             atelier.Construire(map, listeRessources, listeBatiments);
+
 
             return map;
         }
@@ -285,7 +294,7 @@ namespace ConsoleApp1
                                     else
                                     {   if (numeroAction == 31)
                                         {
-                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Construire");
+                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action Construire");
                                             actionRealisee = false;
                                         }
                                         else
@@ -298,7 +307,7 @@ namespace ConsoleApp1
                                             else
                                             {   if (numeroAction == 32)
                                                 {
-                                                    Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action AbattreUnArbre");
+                                                    Console.WriteLine("Attention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action AbattreUnArbre");
                                                     actionRealisee = false;
                                                 }
                                                 else
@@ -311,7 +320,7 @@ namespace ConsoleApp1
                                                     else
                                                     {   if (numeroAction == 33)
                                                         {
-                                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Miner");
+                                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action Miner");
                                                             actionRealisee = false;
                                                         }
                                                         else
@@ -324,11 +333,11 @@ namespace ConsoleApp1
                                                             else
                                                             {   if (numeroAction == 4)
                                                                 {
-                                                                    Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Patisser");
+                                                                    Console.WriteLine("Attention ! Vous devez jouer en tant que chat Pâtissier pour réaliser l'action Patisser");
                                                                     actionRealisee = false;
                                                                 }
                                                                 else
-                                                                {   if (numeroAction == 5 && chat._Fonction is Pecheur) //Pecher
+                                                                {   if (numeroAction == 5 && chat._Fonction is Pecheur && map.Map[2,46] == " Zo") //Pecher
                                                                     {
                                                                         Pecheur pecheur = fonction as Pecheur;
                                                                         pecheur.AllerActivite(chat, listeBatiments[9]);
@@ -337,7 +346,7 @@ namespace ConsoleApp1
                                                                     else
                                                                     {   if (numeroAction == 5)
                                                                         {
-                                                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Pecher");
+                                                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat Pêcheur pour réaliser l'action Pecher");
                                                                             actionRealisee = false;
                                                                         }
                                                                     }
@@ -459,8 +468,91 @@ namespace ConsoleApp1
             }
             return compteurAction;
         }
+
+        public static void ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, int compteurAction)
+        {
+            //Affichage de la liste des actions 
+            Console.WriteLine(" Vous pouvez choisir une action à effectuer parmi la liste suivante : ");
+            Console.WriteLine("\n 1 : Se nourrir");
+            Console.WriteLine("\n 2 : Se reposer");
+            Console.WriteLine("\n 3 : Se divertir");
+            Console.WriteLine("\n 4 : Changer le nom d'un chat");
+            Console.WriteLine("\n 5 : Afficher les différents niveaux d'un chat");
+            Console.WriteLine("\n 6 : Récolter");
+            Console.WriteLine("\n 7 : Planter");
+            Console.WriteLine("\n 8 : Construire");
+            Console.WriteLine("\n 9 : Abattre un arbre");
+            Console.WriteLine("\n 10 : Miner");
+            Console.WriteLine("\n 11 : Patisser");
+
+            if (map.Map[2, 46] == " Zo")
+            Console.WriteLine("\n 12 : Pecher");
+
+            if (map.Map[12, 18] == "Inf")
+            {
+                Console.WriteLine("\n 13 : Aller voir le guérisseur "); //6
+            }
+
+            if(map.Map[8, 18] == "  Po")
+            {
+                Console.WriteLine("\n 14 : Aller voir le messager"); //7
+            }
+
+            //Choix de l'action à effectuer par le joueur
+
+            int numeroAction;
+            do
+            {
+                Console.WriteLine("Choisissez une action à effectuer : ");
+                numeroAction = int.Parse(Console.ReadLine());
+
+                //On regarde la valeur de numeroAction et on le convertit en fonction des numérotations des fonctions FaireActionMetier et FaireActionPnj
+                if (numeroAction == 6)
+                    numeroAction = 11;
+
+                if (numeroAction == 7)
+                    numeroAction = 12;
+
+                if (numeroAction == 8)
+                    numeroAction = 31;
+
+                if (numeroAction == 9)
+                    numeroAction = 32;
+
+                if (numeroAction == 10)
+                    numeroAction = 33;
+
+                if (numeroAction == 11)
+                    numeroAction = 4;
+
+                if (numeroAction == 12)
+                    numeroAction = 5;
+
+                if (numeroAction == 13)
+                    numeroAction = 6;
+
+                if (numeroAction == 14)
+                    numeroAction = 7;
+
+
+                //boucle pour choisir le "FaireAction"
+
+                if (numeroAction >= 1 && numeroAction <= 5)
+                    FaireActionBasique(numeroAction, chat, chat._Fonction, listeRessources, listeBatiments, listeChats, map, compteurAction);
+                else if (numeroAction >= 6 && numeroAction <= 12)
+                    FaireActionMetier(numeroAction, chat, chat._Fonction, listeRessources, listeBatiments, map, compteurAction);
+                else if (numeroAction >= 13 && numeroAction <= 14)
+                    FaireActionPnj(numeroAction, chat, chat._Fonction, listeRessources, listeBatiments, listePnj, map, compteurAction);
+                else
+                    Console.WriteLine("Attention, vous devez choisir un numéro d'action entre 1 et 14");
+                //Regarder comment faire pour relancer la proposition
+            }
+            while (numeroAction >= 13 && numeroAction <= 14); //boucle do...while pour redemander au joueur de choisir une action à faire tant que le numéro d'action saisi n'est pas correct
+           
+        }
     }
 }
+
 
 
 

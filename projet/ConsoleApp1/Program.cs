@@ -49,6 +49,7 @@ namespace ConsoleApp1
             int compteurAction = 0;
 
             Carte carte = InitialiserCarte(listeRessources, listeBatiments);
+            carte.VisualiserChats(listeChats, ChatBatisseur);
 
             ChatBatisseur.NiveauDivertissement -= 7;
             Console.WriteLine(carte);

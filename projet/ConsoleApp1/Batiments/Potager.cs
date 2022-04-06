@@ -14,7 +14,7 @@ namespace ConsoleApp1
             NumeroBatiment = 9;
         }
 
-        public Potager(int ligne, int colonne) : base(ligne, colonne)
+        public Potager(int ligne, int colonne) : base(ligne, colonne)//Contsructeur pour le deuxième potager dont on choisi le placement
         {
             PositionBatiment = new int[] { Ligne + 2, Colonne + 3 };
             NumeroBatiment = 9;

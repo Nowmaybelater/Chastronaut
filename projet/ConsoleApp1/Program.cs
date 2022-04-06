@@ -48,7 +48,7 @@ namespace ConsoleApp1
             List<PnJ> listePnj = new List<PnJ> { guerisseur, messager };
             int compteurAction = 0;
 
-            Carte carte = InitialiserCarte(listeRessources, listeBatiments);
+            Carte carte = InitialiserCarte(listeRessources, listeBatiments, ChatBatisseur, listeChats);
 
             ChatBatisseur.NiveauDivertissement -= 7;
             Console.WriteLine(carte);
@@ -62,6 +62,7 @@ namespace ConsoleApp1
             Console.WriteLine(ChatBatisseur);
 
             Console.WriteLine(compteurAction);
+
 
             //tests pour les fonctions AgirAutomatiquement
             /*for (int i = 0; i < 8; i++)
@@ -95,6 +96,8 @@ namespace ConsoleApp1
             }*/
             Console.ReadLine();
         }
+
+        
 
         public static string PresenterJeu(ref bool veutJouer)
         {
@@ -167,9 +170,9 @@ namespace ConsoleApp1
             Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ");
         }
 
-        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments)
+        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments, Chats chat, List<Chats> ListeChats)
         {
-            Carte map = new Carte();
+            Carte map = new Carte(ListeChats, chat);
             Bois bois = listeRessources[3] as Bois;
             Pierres pierre = listeRessources[4] as Pierres;
             Carriere carriere = new Carriere();//Création d'une carrière pour miner des pierres
@@ -192,7 +195,6 @@ namespace ConsoleApp1
 
             Atelier atelier = new Atelier();//Création d'un atelier pour que les chats artistes puissent créer du divertissement
             atelier.Construire(map, listeRessources, listeBatiments);
-
 
             return map;
         }

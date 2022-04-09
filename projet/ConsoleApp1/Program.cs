@@ -266,7 +266,7 @@ namespace ConsoleApp1
             }
         }
 
-        public static int FaireActionMetier(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, Carte map, int compteurAction)
+        public static int FaireActionMetier(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, Carte map, int compteurAction, List<Chats> listeChats, List<PnJ> listePnj)
         //ajouter le fait qu'il puisse se faire attaquer par extraterrestre
         //rajouter test si list pnj vide
         {
@@ -326,7 +326,7 @@ namespace ConsoleApp1
                                         Console.WriteLine("Que voulez-vous construire ?  \n1 : Infirmarie \n2 : Poste \n3 : Potager \n4 : Zone de pêche ");
                                         int numConstruction = int.Parse(Console.ReadLine()) + 6;
                                         Batisseur batisseur = fonction as Batisseur;
-                                        batisseur.Construire(numConstruction, map, chat, listeRessources, listeBatiments);
+                                        batisseur.Construire(numConstruction, map, chat, listeRessources, listeBatiments,listeChats, listePnj);
 
                                     }
                                     else
@@ -578,7 +578,7 @@ namespace ConsoleApp1
                 if (numeroAction >= 1 && numeroAction <= 5)
                     FaireActionBasique(numeroAction, chat, chat._Fonction, listeRessources, listeBatiments, listeChats, map, compteurAction);
                 else if (numeroAction >= 6 && numeroAction <= 12)
-                    FaireActionMetier(numeroAction, chat, chat._Fonction, listeRessources, listeBatiments, map, compteurAction);
+                    FaireActionMetier(numeroAction, chat, chat._Fonction, listeRessources, listeBatiments, map, compteurAction,listeChats, listePnj);
                 else if (numeroAction >= 13 && numeroAction <= 14)
                     FaireActionPnj(numeroAction, chat, chat._Fonction, listeRessources, listeBatiments, listePnj, map, compteurAction);
                 else

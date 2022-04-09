@@ -26,26 +26,6 @@ namespace ConsoleApp1
                 }
             }
         }
-
-        public void VisualiserChats(List<Chats> ListeChats, Chats Chat)
-        {
-            string affichagePosition = Map[Chat.PositionChat[0], Chat.PositionChat[1]];
-            Console.BackgroundColor = ConsoleColor.DarkMagenta;
-            Map[Chat.PositionChat[0], Chat.PositionChat[1]] = affichagePosition;
-            Console.BackgroundColor = ConsoleColor.Black;
-
-            for (int k = 0; k < ListeChats.Count; k++)
-            {
-                if (ListeChats[k].PositionChat[0] != Chat.PositionChat[0] && ListeChats[k].PositionChat[1] != Chat.PositionChat[1])
-                {
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Map[ListeChats[k].PositionChat[0], ListeChats[k].PositionChat[1]] = affichagePosition;
-                    Console.BackgroundColor = ConsoleColor.Black;
-                }
-
-            }
-        }
-
         public override string ToString()
         {
             string affichage = "";

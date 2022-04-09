@@ -48,11 +48,10 @@ namespace ConsoleApp1
             List<PnJ> listePnj = new List<PnJ> { guerisseur, messager };
             int compteurAction = 0;
 
-            Carte carte = InitialiserCarte(listeRessources, listeBatiments);
-            carte.VisualiserChats(listeChats, ChatBatisseur);
+            Carte carte = InitialiserCarte(listeRessources, listeBatiments, ChatBatisseur);
 
             ChatBatisseur.NiveauDivertissement -= 7;
-            Console.WriteLine(carte);
+            AfficherCarte(carte, ChatBatisseur, listeChats);
             Console.WriteLine("\n");
             Console.WriteLine(ChatBatisseur);
             Console.WriteLine(ChatBatisseur.PositionChat[0]);
@@ -179,7 +178,7 @@ namespace ConsoleApp1
 
         }
 
-        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments)
+        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments, Chats chat)
         {
             Carte map = new Carte();
             Bois bois = listeRessources[3] as Bois;
@@ -207,6 +206,42 @@ namespace ConsoleApp1
 
 
             return map;
+        }
+
+        public static void AfficherCarte(Carte carte, Chats chat, List<Chats> ListeChats)// on utilise cette fonction plutôt que le ToString de Carte car cela permet un affichage avec des couleurs
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 50; j++)
+                {
+                    if (i == chat.PositionChat[0] && j == chat.PositionChat[1])
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                        Console.Write(carte.Map[i, j]);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        bool estUnChat = false;//ne focnitonne pas encore
+                        for(int k=0;k<ListeChats.Count;k++)
+                        {
+                            if(i==ListeChats[k].PositionChat[0] && j == ListeChats[k].PositionChat[1] && i!=chat.PositionChat[0] && j!=chat.PositionChat[1])
+                            {
+                                estUnChat = true;
+                                Console.BackgroundColor = ConsoleColor.Gray;
+                                Console.Write(carte.Map[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                        }
+                        if(estUnChat==false)
+                        {
+                            Console.Write(carte.Map[i, j]);
+                        }
+
+                    }
+                }
+                Console.Write("\n");
+            }
         }
 
         public static void AfficherRessources(List<Ressources> listeRessources)//affiche toutes les ressources

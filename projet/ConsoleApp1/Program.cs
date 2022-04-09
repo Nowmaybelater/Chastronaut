@@ -14,52 +14,24 @@ namespace ConsoleApp1
             //pour tester l'initialisation du jeu
             bool veutJouer = true;
             string nomColonie = PresenterJeu(ref veutJouer);
-
-            //Création liste de ressources
-            Bois bois = new Bois(4);
-            Pierres pierre = new Pierres(4);
-            Fruits fruit = new Fruits(4);
-            Gateaux gateau = new Gateaux(4);
-            Poissons poisson = new Poissons(4);
-            Films film = new Films(4);
-            Livres livre = new Livres(4);
-            Graines graine = new Graines(4);
-            List<Ressources> listeRessources = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine };
-
-            //Création liste des Chats
-            Agriculteur agriculteur = new Agriculteur();
-            Chats ChatAgriculteur = new Chats("Chat1", agriculteur, 10, 10, 10);
-            Artiste artiste = new Artiste();
-            Chats ChatArtiste = new Chats("Chat2", artiste, 10, 10, 10);
-            Batisseur batisseur = new Batisseur();
-            Chats ChatBatisseur = new Chats("Chat3", batisseur, 10, 10, 10);
-            Patissier patissier = new Patissier();
-            Chats ChatPatissier = new Chats("Chat4", patissier, 10, 10, 10);
-            Pecheur pecheur = new Pecheur();
-            Chats ChatPecheur = new Chats("Chat5", pecheur, 10, 10, 10);
-            Guerisseur guerisseur = new Guerisseur();
-            Chats ChatGuerisseur = new Chats("Chat6", guerisseur, 10, 10, 10);
-            Messager messager = new Messager();
-            Chats ChatMessager = new Chats("Chat7", messager, 10, 10, 10);
-            List<Chats> listeChats = new List<Chats> { ChatAgriculteur, ChatArtiste, ChatBatisseur, ChatPatissier, ChatPecheur, ChatGuerisseur, ChatMessager };
-
-            //création de la liste de batiments pour test
-            List<Batiments> listeBatiments = new List<Batiments> {};
-            List<PnJ> listePnj = new List<PnJ> { guerisseur, messager };
+            List<Ressources> listeRessources = CreerListeRessoucres();//Création liste de ressources
+            List<Chats> listeChats = CreerListeChats();//Création liste des Chats
+            List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
+            List<PnJ> listePnj = new List<PnJ> {};
             int compteurAction = 0;
 
-            Carte carte = InitialiserCarte(listeRessources, listeBatiments, ChatBatisseur);
+            Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[2]);
 
-            ChatBatisseur.NiveauDivertissement -= 7;
-            AfficherCarte(carte, ChatBatisseur, listeChats);
+            listeChats[2].NiveauDivertissement -= 7;
+            AfficherCarte(carte, listeChats[2], listeChats);
             Console.WriteLine("\n");
-            Console.WriteLine(ChatBatisseur);
-            Console.WriteLine(ChatBatisseur.PositionChat[0]);
-            Console.WriteLine(ChatBatisseur.PositionChat[1]);
-            compteurAction = FaireActionBasique(4, ChatBatisseur, ChatBatisseur._Fonction, listeRessources, listeBatiments, listeChats, carte, compteurAction);
-            Console.WriteLine(ChatBatisseur.PositionChat[0]);
-            Console.WriteLine(ChatBatisseur.PositionChat[1]);
-            Console.WriteLine(ChatBatisseur);
+            Console.WriteLine(listeChats[2]);
+            Console.WriteLine(listeChats[2].PositionChat[0]);
+            Console.WriteLine(listeChats[2].PositionChat[1]);
+            compteurAction = FaireActionBasique(4, listeChats[2], listeChats[2]._Fonction, listeRessources, listeBatiments, listeChats, carte, compteurAction);
+            Console.WriteLine(listeChats[2].PositionChat[0]);
+            Console.WriteLine(listeChats[2].PositionChat[1]);
+            Console.WriteLine(listeChats[2]);
 
             Console.WriteLine(compteurAction);
 
@@ -155,6 +127,36 @@ namespace ConsoleApp1
 
             return (nomColonie);
 
+        }
+
+        public static List<Ressources> CreerListeRessoucres()
+        {
+            Bois bois = new Bois(4);
+            Pierres pierre = new Pierres(4);
+            Fruits fruit = new Fruits(4);
+            Gateaux gateau = new Gateaux(4);
+            Poissons poisson = new Poissons(4);
+            Films film = new Films(4);
+            Livres livre = new Livres(4);
+            Graines graine = new Graines(4);
+            List<Ressources> listeRessources = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine };
+            return listeRessources;
+        }
+
+        public static List<Chats> CreerListeChats()
+        {
+            Agriculteur agriculteur1 = new Agriculteur();
+            Chats chatAgriculteur1 = new Chats("Chat1", agriculteur1, 10, 10, 10);
+            Artiste artiste = new Artiste();
+            Chats chatArtiste = new Chats("Chat2", artiste, 10, 10, 10);
+            Batisseur batisseur1 = new Batisseur();
+            Chats chatBatisseur1 = new Chats("Chat3", batisseur1, 10, 10, 10);
+            Batisseur batisseur2 = new Batisseur();
+            Chats chatBatisseur2 = new Chats("Chat4", batisseur2, 10, 10, 10);
+            Patissier patissier = new Patissier();
+            Chats chatPatissier = new Chats("Chat5", patissier, 10, 10, 10);
+            List<Chats> listeChats = new List<Chats> { chatAgriculteur1, chatArtiste, chatBatisseur1, chatBatisseur2, chatPatissier};
+            return listeChats;
         }
 
         public static void SubirAttaque(Chats chat)

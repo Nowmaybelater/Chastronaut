@@ -53,7 +53,7 @@
     <Compile Include="Batiments\Carriere.cs" />
     <Compile Include="Carte.cs" />
     <Compile Include="Fonctions\pnj\Extraterrestre.cs" />
-    <Compile Include="Fonctions\pnj\Guerrisseur.cs" />
+    <Compile Include="Fonctions\pnj\Guerisseur.cs" />
     <Compile Include="Fonctions\pnj\Messager.cs" />
     <Compile Include="Fonctions\pnj\PnJ.cs" />
     <Compile Include="Batiments\Potager.cs" />

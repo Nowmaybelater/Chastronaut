@@ -101,10 +101,10 @@ namespace ConsoleApp1
                     "\n 5 actions réalisées, un nouveau tour commence, au cours duquel vous incarnez " +
                     "\n un nouveau Chastronaute. Selon vos stratégies de jeu, vous incarnerez entre" +
                     "\n 5 et 9 des Chastronautes. Il existe également un messager et un guérisseur " +
-                    "\n que vous pouvez débloquer mais que vous ne pourrez pas enrôler. en construisant" +
-                    "\n la postePour remporter la partie, vous devez vous assurer de maintenir" +
-                    "\n les niveaux de faim, de divertissement et de repos de chacun des personnages que vous " +
-                    "\n incarnerez. Attention cependant aux extraterrestres qui, voyant que les Chastronautes" +
+                    "\n que vous pouvez débloquer mais que vous ne pourrez pas enrôler. Pour remporter" +
+                    "\n la partie, vous devez vous assurer de maintenir les niveaux de faim, de " +
+                    "\n divertissement et de repos de chacun des personnages que vous incarnerez." +
+                    "\n Attention cependant aux extraterrestres qui, voyant que les Chastronautes" +
                     "\n tardent à repartir, lancent des attaques pour tenter de les chasser de la planète !");
                 Console.WriteLine(" \n ==================================================================================== \n ");
 

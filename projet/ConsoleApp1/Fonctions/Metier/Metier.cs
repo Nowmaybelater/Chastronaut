@@ -15,5 +15,7 @@ namespace ConsoleApp1
         }
 
         public abstract void AllerActivite(Chats chat, Batiments lieu);//méthode abstraite que l'on redéfinit dans ses classes filles
+
+        public abstract void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources);//on le met en abstract pour que la fonction soient reconnu en temps que méthode de Metier dans la fonction FaireUnTour dans program.cs
     }
 }

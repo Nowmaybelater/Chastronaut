@@ -24,9 +24,9 @@ namespace ConsoleApp1
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
         }
-        public void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
+        public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
-            Patissier P = chat._Fonction as Patissier;
+            Patissier P = chat.Fonction as Patissier;
 
             //comportement automatique pour se nourrir
             if (listeRessources[0].Quantite != 0) //le chat va commencer par manger le fruit de façon automatique car c'est le moins nourissant

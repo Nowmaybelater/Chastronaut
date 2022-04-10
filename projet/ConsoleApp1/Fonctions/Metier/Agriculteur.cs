@@ -33,9 +33,9 @@ namespace ConsoleApp1
             chat.NiveauEnergie -= 1;
         }
 
-        public void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
+        public override void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
-            Agriculteur A = chat._Fonction as Agriculteur;
+            Agriculteur A = chat.Fonction as Agriculteur;
 
             //comportement automatique pour se nourrir
             if (listeRessources[0].Quantite != 0) //le chat va commencer par manger le fruit de façon automatique car c'est le moins nourissant

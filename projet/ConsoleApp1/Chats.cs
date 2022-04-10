@@ -14,7 +14,7 @@ namespace ConsoleApp1
             set;
         }
 
-        public Fonction _Fonction
+        public Fonction Fonction
         {
             get;
             set;
@@ -45,7 +45,7 @@ namespace ConsoleApp1
         public Chats(string nom, Fonction fonction, int niveaufaim, int niveauenergie, int niveaudivertissement)
         {
             Nom = nom;
-            _Fonction = fonction;
+            Fonction = fonction;
             NiveauDeFaim = niveaufaim;
             NiveauEnergie = niveauenergie;
             NiveauDivertissement = niveaudivertissement;
@@ -94,7 +94,7 @@ namespace ConsoleApp1
 
         public override string ToString()
         {
-            return (Nom + " est un chat " + _Fonction.Nom + "\n");
+            return (Nom + " est un chat " + Fonction.Nom + "\n");
         }
 
 

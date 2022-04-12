@@ -8,11 +8,9 @@ namespace ConsoleApp1
 {
     abstract class RessourcePlantation : Ressources
     {
-        protected int TempsPousse { get; set; }
 
-        public RessourcePlantation(int Quantite, int TempsPousse) : base(Quantite)
+        public RessourcePlantation(int Quantite) : base(Quantite)
         {
-            this.TempsPousse = TempsPousse;
         }
     }
 }

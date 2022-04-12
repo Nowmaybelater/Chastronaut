@@ -23,14 +23,6 @@ namespace ConsoleApp1
 
         public abstract void Utiliser();
 
-        public void EtrePille() //les aliens volent un item des ressources
-        {
-            if (this.Quantite <= 1)
-                this.Quantite = 0;
-            else
-                this.Quantite -= 1;
-        }
-
         public override string ToString()
         {
             return "Quantité de " + Nom + " : " + Quantite+"\n";

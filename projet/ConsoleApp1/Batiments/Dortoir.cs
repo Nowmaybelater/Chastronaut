@@ -19,6 +19,7 @@ namespace ConsoleApp1
             map.Map[Ligne, Colonne] = " Do";//Création d'une cantine pour que les chats puissent manger
             map.Map[Ligne, Colonne+1] = "rto";
             map.Map[Ligne, Colonne+2] = "ir ";
+            listeBatiments.Add(this);
         }
     }
 }

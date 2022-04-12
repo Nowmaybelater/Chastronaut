@@ -13,8 +13,5 @@ namespace ConsoleApp1
             Numero = 6;
             Nom = "Films";
         } 
-
-        public override void Utiliser()
-        { }
     }
 }

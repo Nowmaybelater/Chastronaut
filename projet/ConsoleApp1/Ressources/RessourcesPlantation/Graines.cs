@@ -13,10 +13,5 @@ namespace ConsoleApp1
             Numero = 8;
             Nom = "Graines";
         }
-
-        public override void Utiliser()
-        {
-
-        }
     }
 }

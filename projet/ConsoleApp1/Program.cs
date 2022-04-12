@@ -21,19 +21,12 @@ namespace ConsoleApp1
             int compteurAction = 0;
 
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[2]);
-
-            listeChats[2].NiveauDivertissement -= 7;
-            AfficherCarte(carte, listeChats[2], listeChats);
-            Console.WriteLine("\n");
-            Console.WriteLine(listeChats[2]);
-            Console.WriteLine(listeChats[2].PositionChat[0]);
-            Console.WriteLine(listeChats[2].PositionChat[1]);
-            compteurAction = FaireActionBasique(4, listeChats[2], listeChats[2].Fonction, listeRessources, listeBatiments, listeChats, carte, compteurAction);
-            Console.WriteLine(listeChats[2].PositionChat[0]);
-            Console.WriteLine(listeChats[2].PositionChat[1]);
-            Console.WriteLine(listeChats[2]);
-
+            AfficherCarte(carte, listeChats[0], listeChats);
             Console.WriteLine(compteurAction);
+            int compteurAttaque = 0;
+            ProposerAction(listeChats[0], carte, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque);
+            Console.WriteLine(compteurAction);
+            AfficherCarte(carte, listeChats[0], listeChats);
 
             //tests pour les fonctions AgirAutomatiquement
             /*for (int i = 0; i < 8; i++)
@@ -129,14 +122,15 @@ namespace ConsoleApp1
 
         }
 
-        public static void FaireUnTour(List<Chats> listeChats, int chatJoue, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, int compteurTour)
+        public static void FaireUnTour(List<Chats> listeChats, int chatJoue, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, ref int compteurTour)
         {
             Chats chatCourant = listeChats[chatJoue];
+            int compteurAttaque = 0;
             Console.WriteLine("Vous commencez le tour numéro {0}, \nVous incarnez actuellement un chat {1} \nComme à chaque tour, vous allez pouvoir réaliser un total de 5 action pendant ce tour \nN'oubliez de veuillez au bon état de santé de votre chat durant ce tour.", compteurTour, chatCourant.Fonction.Nom);
             int compteurAction = 0;
             while(compteurAction<5)
             {
-                ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, compteurAction);
+                ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque);
                 for(int i=0;i<listeChats.Count;i++)
                 {
                     if(i!=chatJoue)
@@ -195,15 +189,22 @@ namespace ConsoleApp1
             Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ");
         }
 
-        public static void FaireApparaitreET(Chats chat)
+        public static int FaireApparaitreET(Chats chat, int compteurAttaque)
         {
-            Random rnd = new Random();
-            int intervention = rnd.Next(1, 6);
-            if (intervention == 1)
+            if(compteurAttaque==0)
             {
-                SubirAttaque(chat);
+                Random rnd = new Random();
+                int intervention = rnd.Next(1, 6);
+                if (intervention == 1)
+                {
+                    Console.WriteLine("Vous êtes sur le point de vous faire attaquer par un extraterrestre, deux choix s'offre à vous :\n 1 : Se proterger et perdre une action sur le tour\n 2 : Ne pas de se protéger et perdre 1 point dans chaque niveau de santé");//donc le joueur perdrait un point de NiveauFai, un point de NiveauDivertissement et un point de NiveauEnergie si il ne se protège pas.
+                    Console.WriteLine("Que voulez-vous faire ?");
+                    
+                    SubirAttaque(chat);
+                }
+                compteurAttaque += 1;
             }
-
+            return compteurAttaque;
         }
 
         public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments, Chats chat)
@@ -250,22 +251,7 @@ namespace ConsoleApp1
                     }
                     else
                     {
-                        bool estUnChat = false;//ne focnitonne pas encore
-                        for(int k=0;k<ListeChats.Count;k++)
-                        {
-                            if(i==ListeChats[k].PositionChat[0] && j == ListeChats[k].PositionChat[1] && i!=chat.PositionChat[0] && j!=chat.PositionChat[1])
-                            {
-                                estUnChat = true;
-                                Console.BackgroundColor = ConsoleColor.Gray;
-                                Console.Write(carte.Map[i, j]);
-                                Console.BackgroundColor = ConsoleColor.Black;
-                            }
-                        }
-                        if(estUnChat==false)
-                        {
-                            Console.Write(carte.Map[i, j]);
-                        }
-
+                        Console.Write(carte.Map[i, j]);
                     }
                 }
                 Console.Write("\n");
@@ -292,7 +278,7 @@ namespace ConsoleApp1
             }
         }
 
-        public static int FaireActionMetier(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, Carte map, int compteurAction, List<Chats> listeChats, List<PnJ> listePnj)
+        public static int FaireActionMetier(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, Carte map, ref int compteurAction, List<Chats> listeChats, List<PnJ> listePnj)
         //ajouter le fait qu'il puisse se faire attaquer par extraterrestre
         //rajouter test si list pnj vide
         {
@@ -435,20 +421,24 @@ namespace ConsoleApp1
             return compteurAction;
         }
 
-        public static int FaireActionBasique(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, Carte map, int compteurAction)
+        public static int FaireActionBasique(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, Carte map, ref int compteurAction)
         {
             bool actionRealisee = true;
             if (numeroAction == 1) //Se nourrir
             {
-                Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit \n2 : Gateaux \n3 : Poissons");
+                Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
                 int numNourriture = int.Parse(Console.ReadLine()) - 1;
-                chat.PositionChat = listeBatiments[1].PositionBatiment;
+                chat.PositionChat = listeBatiments[3].PositionBatiment;
                 chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
+                Console.WriteLine("\nVous venez de manger des {0}", listeRessources[numNourriture].Nom);
+                Console.WriteLine("\n{0} a à présent un niveau de faim de {1}", chat.Nom, chat.NiveauDeFaim);
             }
             else
             {
                 if (numeroAction == 2) //Se reposer
                 {
+                    Console.WriteLine("\nVous venez de vous reposer au dortoir");
+                    Console.WriteLine("\n{0} a à présent un niveau d'énergie de {1}", chat.Nom, chat.NiveauEnergie);
                     chat.PositionChat = listeBatiments[4].PositionBatiment;
                     chat.SeReposer();
                 }
@@ -492,7 +482,7 @@ namespace ConsoleApp1
 
 
 
-        public static int FaireActionPnj(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, Carte map, int compteurAction)
+        public static int FaireActionPnj(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, Carte map, ref int compteurAction)
         {
             bool actionRealisee = true;
             if (numeroAction == 6 && map.Map[12, 18] == "Inf") //Se faire soigner
@@ -533,7 +523,7 @@ namespace ConsoleApp1
             return compteurAction;
         }
 
-        public static void ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, int compteurAction)
+        public static void ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque)
         {
             //Affichage de la liste des actions 
             Console.WriteLine(" Vous pouvez choisir une action à effectuer parmi la liste suivante : ");
@@ -567,58 +557,90 @@ namespace ConsoleApp1
             int numeroAction;
             do
             {
-                Console.WriteLine("Choisissez une action à effectuer : ");
+                Console.WriteLine("\nChoisissez une action à effectuer : ");
                 numeroAction = int.Parse(Console.ReadLine());
 
                 //On regarde la valeur de numeroAction et on le convertit en fonction des numérotations des fonctions FaireActionMetier et FaireActionPnj
                 if (numeroAction == 6)
+                {
                     numeroAction = 11;
-
-                if (numeroAction == 7)
-                    numeroAction = 12;
-
-                if (numeroAction == 8)
-                    numeroAction = 31;
-
-                if (numeroAction == 9)
-                    numeroAction = 32;
-
-                if (numeroAction == 10)
-                    numeroAction = 33;
-
-                if (numeroAction == 11)
-                    numeroAction = 4;
-
-                if (numeroAction == 12)
-                    numeroAction = 5;
-
-                if (numeroAction == 13)
-                    numeroAction = 6;
-
-                if (numeroAction == 14)
-                    numeroAction = 7;
-
-
+                }
+                else
+                {
+                    if (numeroAction == 7)
+                    {
+                        numeroAction = 12;
+                    }
+                    else
+                    {
+                        if (numeroAction == 8)
+                        {
+                            numeroAction = 31;
+                        }
+                        else
+                        {
+                            if (numeroAction == 9)
+                            {
+                                numeroAction = 32;
+                            }
+                            else
+                            {
+                                if (numeroAction == 10)
+                                {
+                                    numeroAction = 33;
+                                }
+                                else
+                                {
+                                    if (numeroAction == 11)
+                                    {
+                                        numeroAction = 4;
+                                    }
+                                    else
+                                    {
+                                        if (numeroAction == 12)
+                                        {
+                                            numeroAction = 5;
+                                        }
+                                        else
+                                        {
+                                            if (numeroAction == 13)
+                                            {
+                                                numeroAction = 6;
+                                            }
+                                            else
+                                            {
+                                                if (numeroAction == 14)
+                                                {
+                                                    numeroAction = 7;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 //boucle pour choisir le "FaireAction"
 
                 if (numeroAction >= 1 && numeroAction <= 5)
                 {
-                    FaireApparaitreET(chat);
-                    FaireActionBasique(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listeChats, map, compteurAction);
+                    compteurAttaque = FaireApparaitreET(chat, compteurAttaque);
+                    FaireActionBasique(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listeChats, map, ref compteurAction);
                 }
                 else
                 {
                     if (numeroAction >= 6 && numeroAction <= 12)
                     {
-                        FaireApparaitreET(chat);
-                        FaireActionMetier(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, map, compteurAction, listeChats, listePnj);
+                        compteurAttaque = FaireApparaitreET(chat, compteurAttaque);
+                        FaireActionMetier(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, map, ref compteurAction, listeChats, listePnj);
                     }
                     else
                     {
                         if (numeroAction >= 13 && numeroAction <= 14)
                         {
-                            SubirAttaque(chat);
-                            FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, compteurAction);
+                            compteurAttaque = FaireApparaitreET(chat, compteurAttaque);
+                            FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, ref compteurAction);
                         }
                         else
                             Console.WriteLine("Attention, vous devez choisir un numéro d'action entre 1 et 14");

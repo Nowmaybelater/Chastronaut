@@ -13,9 +13,5 @@ namespace ConsoleApp1
             Numero = 3;
             Nom = "Poissons";
         }
-        public override void Utiliser()
-        {
-
-        }
     }
 }

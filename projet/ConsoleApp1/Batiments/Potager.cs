@@ -35,6 +35,7 @@ namespace ConsoleApp1
                 map.Map[Ligne + 2, Colonne + 2] = " Po";
                 map.Map[Ligne + 2, Colonne + 3] = "tag";
                 map.Map[Ligne + 2, Colonne + 4] = "er ";
+                listeBatiments.Add(this);
             }
             else
             {

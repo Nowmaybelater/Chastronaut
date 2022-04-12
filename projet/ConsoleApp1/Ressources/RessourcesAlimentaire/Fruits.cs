@@ -15,9 +15,5 @@ namespace ConsoleApp1
             Nom = "Fruits";
         }
 
-        public override void Utiliser()
-        {
-
-        }
     }
 }

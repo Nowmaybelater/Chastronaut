@@ -47,6 +47,7 @@ namespace ConsoleApp1
                 map.Map[Ligne + 1, Colonne + 3] = "ech";
                 map.Map[Ligne + 1, Colonne + 4] = "e  ";
                 pierre.Quantite -= 2;
+                listeBatiments.Add(this);
             }
             else
             {

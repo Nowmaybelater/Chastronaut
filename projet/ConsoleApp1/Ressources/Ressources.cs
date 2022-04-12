@@ -21,7 +21,6 @@ namespace ConsoleApp1
             this.Quantite = Quantite;
         }
 
-        public abstract void Utiliser();
 
         public override string ToString()
         {

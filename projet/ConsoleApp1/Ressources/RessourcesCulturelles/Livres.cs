@@ -15,9 +15,5 @@ namespace ConsoleApp1
             Nom = "Livres";
         }
 
-        public override void Utiliser()
-        { }
-
-
     }
 }

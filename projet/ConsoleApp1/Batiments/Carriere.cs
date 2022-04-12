@@ -26,6 +26,7 @@ namespace ConsoleApp1
             map.Map[Ligne+2, Colonne+2] = " Ca";
             map.Map[Ligne+2, Colonne + 3] = "rri";
             map.Map[Ligne+2, Colonne + 4] = "ere";
+            listeBatiments.Add(this);
         }
     }
 }

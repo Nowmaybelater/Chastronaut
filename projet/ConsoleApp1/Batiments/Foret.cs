@@ -33,6 +33,7 @@ namespace ConsoleApp1
             map.Map[Ligne + 3, Colonne + 2] = "  F";
             map.Map[Ligne + 3, Colonne + 3] = "ore";
             map.Map[Ligne + 3, Colonne + 4] = "t  ";
+            listeBatiments.Add(this);
         }
 
     }

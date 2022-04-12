@@ -25,6 +25,7 @@ namespace ConsoleApp1
                 map.Map[Ligne, Colonne + 2] = "te  ";
                 pierre.Quantite -= 1;
                 bois.Quantite -= 1;
+                listeBatiments.Add(this);
             }
             else
             {

@@ -14,9 +14,5 @@ namespace ConsoleApp1
             Nom = "Bois";
         }
 
-        public override void Utiliser()
-        {
-
-        }
     }
 }

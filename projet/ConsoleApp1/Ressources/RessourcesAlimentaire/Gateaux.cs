@@ -13,11 +13,5 @@ namespace ConsoleApp1
             Numero = 2;
             Nom = "Gateaux";
         }
-
-        public override void Utiliser()
-        {
-
-        }
-
     }
 }

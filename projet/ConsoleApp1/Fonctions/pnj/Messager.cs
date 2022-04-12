@@ -21,9 +21,9 @@ namespace ConsoleApp1
         {
             Random rnd = new Random();
             int numero = rnd.Next(1, 8);
-            int nombreDeResources = rnd.Next(1, 10);
-            listeRessources[numero - 1].Quantite += nombreDeResources;
-            Console.WriteLine("Vous avez reçu " + nombreDeResources + " " + listeRessources[numero - 1].Nom + " de la part du chat messager");
+            int nombreDeRessources = rnd.Next(1, 10);
+            listeRessources[numero - 1].Quantite += nombreDeRessources;
+            Console.WriteLine("Vous avez reçu " + nombreDeRessources + " " + listeRessources[numero - 1].Nom + " de la part du chat messager");
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;

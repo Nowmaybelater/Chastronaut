@@ -85,7 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
+    <None Include="Batiments\ClassDiagramBatiments.cd" />
+    <None Include="Ressources\ClassDiagramRessources.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

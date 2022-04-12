@@ -11,6 +11,5 @@ namespace ConsoleApp1
         public RessourceConstruction(int Quantite) : base(Quantite)
         { }
 
-        //est-ce qu'il faut rajouter la méthode abstract ??
     }
 }

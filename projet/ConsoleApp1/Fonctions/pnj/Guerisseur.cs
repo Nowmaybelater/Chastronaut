@@ -11,9 +11,9 @@ namespace ConsoleApp1
         public Guerisseur() : base("Guérisseur", 7)
         { }
 
-        public override void AllerActivite(Chats chat, Batiments lieu)
+        public override void AllerActivite(Chats chat, int[] lieu)
         {
-            chat.PositionChat = lieu.PositionBatiment;
+            chat.PositionChat = lieu;
         }
 
         public void Soigner(Chats chat)

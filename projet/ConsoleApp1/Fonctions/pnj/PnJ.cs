@@ -11,7 +11,7 @@ namespace ConsoleApp1
         public PnJ(string nom, int num) : base(nom, num)
         {
         }
-        public abstract void AllerActivite(Chats chat, Batiments lieu);//cette méthode permettra aux Chastronautes (et non aux PnJ)de se rendre au lieu dans lequel se trouvent les PnJ afin de réaliser l'action qui leur est associée
+        public abstract void AllerActivite(Chats chat, int[] lieu);//cette méthode permettra aux Chastronautes (et non aux PnJ)de se rendre au lieu dans lequel se trouvent les PnJ afin de réaliser l'action qui leur est associée
 
     }
 }

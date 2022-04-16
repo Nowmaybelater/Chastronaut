@@ -21,12 +21,17 @@ namespace ConsoleApp1
             int compteurAction = 0;
 
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[2]);
-            AfficherCarte(carte, listeChats[0], listeChats, false);
+            AfficherCarte(carte, listeChats[1], listeChats, false);
             Console.WriteLine(compteurAction);
             int compteurAttaque = 0;
-            ProposerAction(listeChats[0], carte, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque);
+            ProposerAction(listeChats[1], carte, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque);
             Console.WriteLine(compteurAction);
-            AfficherCarte(carte, listeChats[0], listeChats, false);
+            Console.WriteLine("\n\n" + listeRessources[8].Quantite);
+            AfficherCarte(carte, listeChats[1], listeChats, false);
+            ProposerAction(listeChats[1], carte, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque);
+            Console.WriteLine(compteurAction);
+            Console.WriteLine("\n\n" + listeRessources[8].Quantite);
+            AfficherCarte(carte, listeChats[1], listeChats, false);
 
             //tests pour les fonctions AgirAutomatiquement
             /*for (int i = 0; i < 8; i++)
@@ -151,15 +156,16 @@ namespace ConsoleApp1
 
         public static List<Ressources> CreerListeRessoucres()
         {
-            Bois bois = new Bois(4);
-            Pierres pierre = new Pierres(4);
-            Fruits fruit = new Fruits(4);
+            Bois bois = new Bois(6);
+            Pierres pierre = new Pierres(6);
+            Fruits fruit = new Fruits(6);
             Gateaux gateau = new Gateaux(4);
-            Poissons poisson = new Poissons(4);
-            Films film = new Films(4);
-            Livres livre = new Livres(4);
-            Graines graine = new Graines(4);
-            List<Ressources> listeRessources = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine };
+            Poissons poisson = new Poissons(5);
+            Films film = new Films(6);
+            Livres livre = new Livres(6);
+            Graines graine = new Graines(3);
+            Graines grainePlantee = new Graines(5);
+            List<Ressources> listeRessources = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine, grainePlantee}; //grainePlantee a pour quantité le nombre de graine plantées au tour précédant, il est initialisé à 5 en début de partie.
             return listeRessources;
         }
 
@@ -305,7 +311,10 @@ namespace ConsoleApp1
             {
                 Agriculteur agriculteur = fonction as Agriculteur;
                 agriculteur.AllerActivite(chat, listeBatiments[2]);
-                agriculteur.Recolter(chat, listeRessources[0] as Fruits, listeRessources[7] as Graines);
+                agriculteur.Recolter(chat, listeRessources);
+                Console.WriteLine("Vous venez de récolter {0} fruits et {0} graines.\nVoici vos ressources alimentaires et vos ressources de plantation.", listeRessources[8].Quantite);
+                Console.WriteLine(listeRessources[0] +""+ listeRessources[1] + listeRessources[2] + listeRessources[7] + " ");
+
             }
             else
             {   if (numeroAction == 11)
@@ -318,7 +327,7 @@ namespace ConsoleApp1
                     {
                         Agriculteur agriculteur = fonction as Agriculteur;
                         agriculteur.AllerActivite(chat, listeBatiments[2]);//la place des batiments dans la liste dépends de la liste créer par InitialiserCarte()
-                        agriculteur.Planter(chat, listeRessources[7] as Graines);
+                        listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines);
                     }
                     else
                     {   if (numeroAction == 12)

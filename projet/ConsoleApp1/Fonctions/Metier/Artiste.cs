@@ -18,7 +18,7 @@ namespace ConsoleApp1
 
         public void Creer(Chats chat, RessourceCulturelle divertissement)
         {
-            divertissement.Quantite += 1;
+            divertissement.Quantite += 5;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;

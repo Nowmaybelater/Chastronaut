@@ -19,7 +19,7 @@ namespace ConsoleApp1
         public void Patisser(Gateaux gateau, Chats chat)
         {
 
-            gateau.Quantite += 1;
+            gateau.Quantite += 3;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;

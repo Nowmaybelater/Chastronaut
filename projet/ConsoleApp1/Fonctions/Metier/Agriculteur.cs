@@ -16,21 +16,34 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Recolter(Chats chat, Fruits fruits, Graines graines)
+        public void Recolter(Chats chat, List<Ressources> listeRessources)
         {
-            fruits.Quantite += 1;
-            graines.Quantite += 3;
+            listeRessources[0].Quantite += listeRessources[8].Quantite;
+            listeRessources[7].Quantite += listeRessources[8].Quantite;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
+            listeRessources[8].Quantite = 0;
+
         }
 
-        public void Planter(Chats chat, Graines graines)
+        public int Planter(Chats chat, Graines graines)
         {
-            graines.Quantite -= 1;
-            chat.NiveauDeFaim -= 1;
-            chat.NiveauDivertissement -= 1;
-            chat.NiveauEnergie -= 1;
+            if(graines.Quantite>=5)
+            {
+                graines.Quantite -= 5;
+                chat.NiveauDeFaim -= 1;
+                chat.NiveauDivertissement -= 1;
+                chat.NiveauEnergie -= 1;
+                Console.WriteLine("Vous venez de planter 5 graines. Un chat agriculteur pourra les ramasser lors du prochain tour.");
+                return 5;
+            }
+            else//le chat agriculteur en récolte que ce qui a été planté au tour dernier
+            {
+                Console.WriteLine("Vous avez pû planter {0} graines, elle pourront être récolter par un chat agriculteur lors du prochain tour. \n", graines.Quantite);
+                return graines.Quantite;
+            }
+
         }
 
         public override void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
@@ -66,7 +79,7 @@ namespace ConsoleApp1
             chat.SeReposer();
 
             //comportement automatique de récolte (propre au chat agriculteur)
-            A.Recolter(chat, listeRessources[0] as Fruits, listeRessources[7] as Graines);
+            A.Recolter(chat, listeRessources);
 
             //comportement automatique de plantation (propre au chat agriculteur)
             A.Planter(chat, listeRessources[7] as Graines);

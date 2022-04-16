@@ -18,7 +18,6 @@ namespace ConsoleApp1
 
         public void Pecher(Poissons poisson, Chats chat)
         {
-
             poisson.Quantite += 5;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;

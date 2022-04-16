@@ -26,7 +26,7 @@ namespace ConsoleApp1
                 Chats chatGuerisseur = new Chats("Chat6", guerisseur, 10, 10, 10);
                 listeChats.Add(chatGuerisseur);
                 listePnj.Add(guerisseur);
-                Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un Chastronaute Guérisseur. " +
+                Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un chat guérisseur. " +
                     "\n Celui - ci peut remettre au maximum les barres d'énergie du chat " +
                     "\n que vous incarnez. Pour cela, il vous faut vous rendre à l'infirmerie.Attention, vous ne pouvez " +
                     "\n consulter le Guérisseur qu'une seule fois tous les x tours.");
@@ -41,7 +41,7 @@ namespace ConsoleApp1
                     Chats chatMessager = new Chats("Chat7", messager, 10, 10, 10);
                     listeChats.Add(chatMessager);
                     listePnj.Add(messager);
-                    Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un Chastronaute Messager. " +
+                    Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un chat messager. " +
                         "\n Celui - ci peut vous offrir des ressources supplémentaires, que vous obtiendrez en vous " +
                         "\n rendant au bureau de poste. Attention, vous ne pouvez consulter le Messager que tous les" +
                         "\n x tours.");
@@ -56,7 +56,7 @@ namespace ConsoleApp1
                         Agriculteur agriculteur2 = new Agriculteur();
                         Chats chatAgriculteur2 = new Chats("Chat8", agriculteur2, 10, 10, 10);
                         listeChats.Add(chatAgriculteur2);
-                        Console.WriteLine("La construction du potager vous a permis de débloquer un deuxième Chastronaute Agriculteur.");
+                        Console.WriteLine("La construction du potager vous a permis de débloquer un deuxième chat agriculteur.");
 
                     }
                     else
@@ -90,6 +90,8 @@ namespace ConsoleApp1
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
+            Console.WriteLine("Vous venez d'abattre un arbre, cela vous à permis d'ajouter 2 planches de bois en plus dans vos ressoucres.");
+            Console.WriteLine("Voici vos ressources actuelle de construction : {0} bois et {1} pierre(s)", listeRessources[3].Quantite, listeRessources[4].Quantite);
         }
 
 
@@ -100,7 +102,8 @@ namespace ConsoleApp1
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
-
+            Console.WriteLine("Vous venez de miner, cela vous à permis d'ajouter 2 unité de pierre en plus dans vos ressoucres.");
+            Console.WriteLine("Voici vos ressources actuelle de construction : {0} bois et {1} pierres", listeRessources[3].Quantite, listeRessources[4].Quantite);
         }
 
         public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat

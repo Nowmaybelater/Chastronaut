@@ -143,9 +143,15 @@ namespace ConsoleApp1
                         bool gameover = false;
                         while(numChat!=listeChats.Count-1)
                         {
-                            if(listeChats[numChat].NiveauDeFaim==0 || listeChats[numChat].NiveauDivertissement == 0 || listeChats[numChat].NiveauEnergie== 0)
+                            if(listeChats[numChat].NiveauDeFaim==0)
                             {
-                                gameover = true;
+                                if(listeChats[numChat].NiveauDivertissement == 0 )
+                                {
+                                    if(listeChats[numChat].NiveauEnergie == 0)
+                                    {
+                                        gameover = true;
+                                    }
+                                }
                             }
                             numChat += 1;
                             numChatMort = numChat;

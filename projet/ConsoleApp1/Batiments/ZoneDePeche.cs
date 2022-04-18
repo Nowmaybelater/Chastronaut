@@ -8,16 +8,19 @@ namespace ConsoleApp1
 {
     class ZoneDePeche:Batiments
     {
+        //Constructeur
         public ZoneDePeche() : base(2, 44)
         {
             PositionBatiment = new int[] { Ligne, Colonne + 3 };
             NumeroBatiment = 10;
         }
 
+        //La méthode Construire permet ici de construire une Zone de Pêche dans la carte, dont la présence est nécessaire pour que le Pêcheur puisse pêcher des poissons
         public override void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
             Pierres pierre = listeRessources[4] as Pierres;
-            if (pierre.Quantite>=2)
+            //la boucle permet d'utiliser des symboles "o" pour délimiter la zone occupée par la Zone de Pêche
+            if (pierre.Quantite>=2) //la zone de pêche n'étant pas présente sur la carte au début de la partie, il est possible pour le joueur de la construire. La boucle if permet de s'assurer qu'il dispose des ressources nécessaires
             {
                 for (int i = Ligne - 1; i < Ligne; i++)
                 {
@@ -49,7 +52,7 @@ namespace ConsoleApp1
                 pierre.Quantite -= 2;
                 listeBatiments.Add(this);
             }
-            else
+            else //Si le joueur ne dispose pas des ressources nécessaires pour construire la zone de pêche, un message d'erreur s'affiche
             {
                 Console.WriteLine("Attention ! Vous ne pocédez pas assez de pierres pour construire la zone de pêche");
             }

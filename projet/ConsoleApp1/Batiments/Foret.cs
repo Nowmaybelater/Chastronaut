@@ -8,14 +8,17 @@ namespace ConsoleApp1
 {
     class Foret:Batiments
     {
+        //Constructeur 
         public Foret() : base(14, 42)
         {
             PositionBatiment = new int[] { Ligne+3, Colonne + 3 };
             NumeroBatiment = 6;
         }
 
+        //La méthode Construire permet ici de construire une Forêt dans la carte, dont la présence est nécessaire pour que le Batisseur puisse abattre des arbres
         public override void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
+            //la boucle permet d'utiliser des symboles "x" pour délimiter la zone occupée par la Forêt
             for (int i = Ligne+3; i < Ligne+6; i++)
             {
                 for (int j = Colonne-2; j < 50; j++)

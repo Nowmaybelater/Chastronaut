@@ -31,12 +31,14 @@ namespace ConsoleApp1
             set;
         }
 
+        //Constructeur
         public Batiments(int ligne, int colonne)
         {
             Ligne = ligne;
             Colonne = colonne;
         }
 
+        //La méthode Construire est abstraite ici. Elle sera redéfinie dans les classes dérivées afin de permettre l'affichage dans Batiments sur la carte
         public abstract void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments);
         
     }

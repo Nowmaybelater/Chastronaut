@@ -8,15 +8,17 @@ namespace ConsoleApp1
 {
     class Atelier:Batiments
     {
+        //Constructeur 
         public Atelier() : base(4, 25)
         {
             PositionBatiment = new int[] { Ligne, Colonne + 1 };
             NumeroBatiment = 1;
         }
 
+        //La méthode Construire permet ici de construire un Atelier dans la carte, dont la présence est nécessaire pour que l'Artiste puisse fabriquer les divertissements
         public override void Construire(Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
-            map.Map[Ligne, Colonne] = " At";//Création d'une cantine pour que les chats puissent manger
+            map.Map[Ligne, Colonne] = " At";
             map.Map[Ligne, Colonne+1] = "eli";
             map.Map[Ligne, Colonne+2] = "er ";
             listeBatiments.Add(this);

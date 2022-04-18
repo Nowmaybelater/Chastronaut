@@ -86,9 +86,12 @@ namespace ConsoleApp1
             {
                 chat.SeDivertir(listeRessources[6] as Livres);
             }
-            else if (listeRessources[5].Quantite != 0)//s'il n'y a pas de livre, le chat se divertit avec un film
+            else
             {
-                chat.SeDivertir(listeRessources[5] as Films);
+                if (listeRessources[5].Quantite != 0)//s'il n'y a pas de livre, le chat se divertit avec un film
+                {
+                    chat.SeDivertir(listeRessources[5] as Films);
+                }
             }
 
             //comportement automatique pour se reposer

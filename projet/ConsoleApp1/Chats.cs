@@ -42,6 +42,7 @@ namespace ConsoleApp1
             set;
         }
 
+        //Constructeur qui initialise le nom, la fonction, le niveau de faim, le niveau d'energie et le niveau de divertissement d'un chat, ainsi que sa position initiale 
         public Chats(string nom, Fonction fonction, int niveaufaim, int niveauenergie, int niveaudivertissement)
         {
             Nom = nom;
@@ -49,12 +50,13 @@ namespace ConsoleApp1
             NiveauDeFaim = niveaufaim;
             NiveauEnergie = niveauenergie;
             NiveauDivertissement = niveaudivertissement;
-            PositionChat = new int[] { 10, 26 };
+            PositionChat = new int[] { 10, 26 }; //la position initiale du chat est toujours au centre de la carte
         }
 
+        //La méthode suivante gère ce qu'il se passe quand un chat se nourrit 
         public bool Manger(RessourceAlimentaire aliment)
         {
-            bool actionRealisee = true;
+            bool actionRealisee = true; 
             if(aliment.Quantite>0)
             {
                 NiveauDeFaim += aliment.ValeurNutritionnelle;
@@ -66,17 +68,20 @@ namespace ConsoleApp1
                 NiveauEnergie -= 1;
                 aliment.Quantite -= 1;
             }
-            return actionRealisee;
+            return actionRealisee; // le booléen actionRealisee permet, dans le programme principal, de compter le nombre d'actions effectuées, et donc de gérer la durée restante d'un tour
         }
 
+        //La méthode suivante gère ce qu'il se passe quand un chat se repose
         public bool SeReposer()
         {
             bool actionRealisee = true;
             NiveauEnergie = 10;
             NiveauDivertissement -= 1;
             NiveauDeFaim -= 1;
-            return actionRealisee;
+            return actionRealisee;// le booléen actionRealisee permet, dans le programme principal, de compter le nombre d'actions effectuées, et donc de gérer la durée restante d'un tour
         }
+
+        //La méthode suivante gère ce qu'il se passe quand un chat se divertit
         public bool SeDivertir(RessourceCulturelle divertissement)
         {
             bool actionRealisee = true;
@@ -88,9 +93,10 @@ namespace ConsoleApp1
             NiveauDeFaim -= 1;
             NiveauEnergie -= 1;
             divertissement.Quantite -= 1;
-            return actionRealisee;
+            return actionRealisee;// le booléen actionRealisee permet, dans le programme principal, de compter le nombre d'actions effectuées, et donc de gérer la durée restante d'un tour
         }
 
+        //La méthode suivante permet d'afficher l'état des niveaux de faim, d'énergie et de divertissement du chat
         public void AfficherNiveaux()
         {
             Console.WriteLine("\nNiveau de faim actuel : " + NiveauDeFaim + "\nNiveau d'énergie actuel : " + NiveauEnergie + "\nNiveau de divertissement actuel : " + NiveauDivertissement + "\n");

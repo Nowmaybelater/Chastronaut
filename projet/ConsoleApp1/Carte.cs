@@ -14,7 +14,7 @@ namespace ConsoleApp1
             set;
         }
 
-
+        //Constructeur 
         public Carte()
         {
             Map = new string[20, 50];
@@ -22,10 +22,12 @@ namespace ConsoleApp1
             {
                 for (int j = 0; j < 50; j++)
                 {
-                    Map[i, j] = " . ";
+                    Map[i, j] = " . "; //le fond de la carte est représenté par le symbole "."
                 }
             }
         }
+
+        //à supprimer éventuellement ?
         public override string ToString()
         {
             string affichage = "";

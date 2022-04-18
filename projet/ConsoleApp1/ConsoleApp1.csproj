@@ -86,6 +86,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Batiments\ClassDiagramBatiments.cd" />
+    <None Include="Fonctions\ClassDiagram1.cd" />
     <None Include="Ressources\ClassDiagramRessources.cd" />
   </ItemGroup>
   <ItemGroup />

@@ -20,7 +20,7 @@ namespace ConsoleApp1
             set;
         }
 
-
+        //Constructeur 
         public Fonction(string nom, int num)
         {
             Nom = nom;

@@ -11,10 +11,6 @@ namespace ConsoleApp1
         public Agriculteur() : base("Agriculteur", 1)
         { }
 
-        public override void AllerActivite(Chats chat, Batiments lieu)
-        {
-            chat.PositionChat = lieu.PositionBatiment;
-        }
 
         public void Recolter(Chats chat, List<Ressources> listeRessources, bool afficher)
         {

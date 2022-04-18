@@ -62,6 +62,7 @@ namespace ConsoleApp1
             }
             NiveauDivertissement -= 1;
             NiveauEnergie -= 1;
+            aliment.Quantite -= 1;
             return actionRealisee;
         }
 
@@ -83,6 +84,7 @@ namespace ConsoleApp1
             }
             NiveauDeFaim -= 1;
             NiveauEnergie -= 1;
+            divertissement.Quantite -= 1;
             return actionRealisee;
         }
 

@@ -16,13 +16,16 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment;
         }
 
-        public void Recolter(Chats chat, List<Ressources> listeRessources)
+        public void Recolter(Chats chat, List<Ressources> listeRessources, bool afficher)
         {
             listeRessources[0].Quantite += listeRessources[8].Quantite;
             listeRessources[7].Quantite += listeRessources[8].Quantite;
-            Console.WriteLine("Le chat agriculteur avait planté {0} graine(s) la dernière fois.", listeRessources[8].Quantite);
-            Console.WriteLine("Vous avez donc pû récolter {0} fruits et {0} graines.\nVoici vos ressources alimentaires et vos ressources de plantation.", listeRessources[8].Quantite);
-            Console.WriteLine(listeRessources[0] + "" + listeRessources[1] + listeRessources[2] + listeRessources[7] + " ");
+            if(afficher==true)
+            {
+                Console.WriteLine("Le chat agriculteur avait planté {0} graine(s) la dernière fois.", listeRessources[8].Quantite);
+                Console.WriteLine("Vous avez donc pû récolter {0} fruits et {0} graines.\nVoici vos ressources alimentaires et vos ressources de plantation.", listeRessources[8].Quantite);
+                Console.WriteLine(listeRessources[0] + "" + listeRessources[1] + listeRessources[2] + listeRessources[7] + " ");
+            }
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
@@ -30,7 +33,7 @@ namespace ConsoleApp1
 
         }
 
-        public int Planter(Chats chat, Graines graines)
+        public int Planter(Chats chat, Graines graines, bool afficher)
         {
             if(graines.Quantite>=5)
             {
@@ -38,12 +41,18 @@ namespace ConsoleApp1
                 chat.NiveauDeFaim -= 1;
                 chat.NiveauDivertissement -= 1;
                 chat.NiveauEnergie -= 1;
-                Console.WriteLine("Vous venez de planter 5 graines. Vous pouvez dés à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
+                if (afficher == true)
+                {
+                    Console.WriteLine("Vous venez de planter 5 graines. Vous pouvez dés à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
+                }
                 return 5;
             }
             else//le chat agriculteur en récolte que ce qui a été planté au tour dernier
             {
-                Console.WriteLine("Vous avez pû planter {0} graines. Attention, vous ne pocéder plus de graines dans votre inventaire, \npensez à récolter avant la prochaine plantation de graine.", graines.Quantite);
+                if (afficher == true)
+                {
+                    Console.WriteLine("Vous avez pû planter {0} graines. Attention, vous ne pocéder plus de graines dans votre inventaire, \npensez à récolter avant la prochaine plantation de graine.", graines.Quantite);
+                }
                 return graines.Quantite;
             }
 
@@ -51,7 +60,7 @@ namespace ConsoleApp1
 
         public override void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
-            Agriculteur A = chat.Fonction as Agriculteur;
+            Agriculteur agriculteur = chat.Fonction as Agriculteur;
 
             //comportement automatique pour se nourrir
             if (listeRessources[0].Quantite != 0) //le chat va commencer par manger le fruit de façon automatique car c'est le moins nourissant
@@ -82,10 +91,10 @@ namespace ConsoleApp1
             chat.SeReposer();
 
             //comportement automatique de récolte (propre au chat agriculteur)
-            A.Recolter(chat, listeRessources);
+            agriculteur.Recolter(chat, listeRessources, false);
 
             //comportement automatique de plantation (propre au chat agriculteur)
-            A.Planter(chat, listeRessources[7] as Graines);
+            agriculteur.Planter(chat, listeRessources[7] as Graines, false);
         }
     }
 }

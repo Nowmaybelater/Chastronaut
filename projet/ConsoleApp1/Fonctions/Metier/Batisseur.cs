@@ -89,9 +89,7 @@ namespace ConsoleApp1
             bois.Quantite += 2;
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
-            chat.NiveauEnergie -= 1;
-            Console.WriteLine("Vous venez d'abattre un arbre, cela vous à permis d'ajouter 2 planches de bois en plus dans vos ressoucres.");
-            Console.WriteLine("Voici vos ressources actuelle de construction : {0} bois et {1} pierre(s)", listeRessources[3].Quantite, listeRessources[4].Quantite);
+            chat.NiveauEnergie -= 1;            
         }
 
 
@@ -102,8 +100,6 @@ namespace ConsoleApp1
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
-            Console.WriteLine("Vous venez de miner, cela vous à permis d'ajouter 2 unité de pierre en plus dans vos ressoucres.");
-            Console.WriteLine("Voici vos ressources actuelle de construction : {0} bois et {1} pierres", listeRessources[3].Quantite, listeRessources[4].Quantite);
         }
 
         public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat

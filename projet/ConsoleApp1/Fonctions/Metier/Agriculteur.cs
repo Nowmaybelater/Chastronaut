@@ -23,7 +23,7 @@ namespace ConsoleApp1
             if(afficher==true)
             {
                 Console.WriteLine("Le chat agriculteur avait planté {0} graine(s) la dernière fois.", listeRessources[8].Quantite);
-                Console.WriteLine("Vous avez donc pû récolter {0} fruits et {0} graines.\nVoici vos ressources alimentaires et vos ressources de plantation.", listeRessources[8].Quantite);
+                Console.WriteLine("Vous avez donc pu récolter {0} fruits et {0} graines.\nVoici vos ressources alimentaires et vos ressources de plantation.", listeRessources[8].Quantite);
                 Console.WriteLine(listeRessources[0] + "" + listeRessources[1] + listeRessources[2] + listeRessources[7] + " ");
             }
             chat.NiveauDeFaim -= 1;
@@ -43,7 +43,7 @@ namespace ConsoleApp1
                 chat.NiveauEnergie -= 1;
                 if (afficher == true)
                 {
-                    Console.WriteLine("Vous venez de planter 5 graines. Vous pouvez dés à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
+                    Console.WriteLine("Vous venez de planter 5 graines. Vous pouvez dès à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
                 }
                 return 5;
             }

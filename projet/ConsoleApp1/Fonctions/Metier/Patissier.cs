@@ -15,7 +15,7 @@ namespace ConsoleApp1
         //La méthode suivante gère la préparation de gâteaux par le chat patissier
         public void Patisser(Gateaux gateau, Chats chat)
         {
-            gateau.Quantite += 3;
+            gateau.Quantite += 1;
             //on enlève un point à chacun des niveaux car le chat vient de réaliser une action
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;

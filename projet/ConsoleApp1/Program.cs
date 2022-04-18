@@ -22,38 +22,6 @@ namespace ConsoleApp1
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
             AfficherCarte(carte, listeChats[0], listeChats, false);
             FaireUnTour(listeChats, 0, carte, listeRessources, listeBatiments, listePnj, ref compteurTour);
-
-
-            //tests pour les fonctions AgirAutomatiquement
-            /*for (int i = 0; i < 8; i++)
-            {
-                Console.WriteLine(listeRessources[i]);
-            }
-            agriculteur.AgirAutomatiquement(ChatAgriculteur, listeRessources);
-            for (int i = 0; i < 8; i++)
-            {
-                Console.WriteLine(listeRessources[i]);
-            }
-            artiste.AgirAutomatiquement(ChatArtiste, listeRessources);
-            for (int i = 0; i<8; i++)
-            {
-                Console.WriteLine(listeRessources[i]);
-            }
-            batisseur.AgirAutomatiquement(ChatBatisseur, listeRessources);
-            for (int i = 0; i < 8; i++)
-            {
-                Console.WriteLine(listeRessources[i]);
-            }
-            patissier.AgirAutomatiquement(ChatPatissier, listeRessources);
-            for (int i = 0; i < 8; i++)
-            {
-                Console.WriteLine(listeRessources[i]);
-            }
-            pecheur.AgirAutomatiquement(ChatPecheur, listeRessources);
-            for (int i = 0; i < 8; i++)
-            {
-                Console.WriteLine(listeRessources[i]);
-            }*/
             Console.ReadLine();
         }
 
@@ -124,25 +92,42 @@ namespace ConsoleApp1
             int compteurAttaque = 0;
             Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement un chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veuiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom);
             int compteurAction = 0;
+            bool estAttaque = false;
             while(compteurAction<5)
             {
-                ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque);
+                compteurAttaque=ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque);
+                Console.WriteLine(chatCourant.PositionChat[0] + " " + chatCourant.PositionChat[1]);
+                AfficherCarte(map, chatCourant, listeChats, estAttaque);
+                estAttaque = false; //on réinitialise estAttaque à la valeur false pour l'affiche de le carte de la prochaine action
                 for(int i=0;i<listeChats.Count;i++)
                 {
-                    if(i!=chatJoue)
+                    if (i != chatJoue && (listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
                     {
                         Metier metier= listeChats[i].Fonction as Metier;
-                        metier.AgirAutomatiquement(chatCourant, listeRessources);
+                        metier.AgirAutomatiquement(listeChats[i], listeRessources);
                     }
                 }
             }
-            Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un recapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ?");
-            bool recap = bool.Parse(Console.ReadLine());
-            if(recap==true)
+            Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un recapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ? (Entrez OUI ou NON)");
+            string recap = "";
+            do
             {
-                AfficherRessources(listeRessources);
-                chatCourant.AfficherNiveaux();
-            }
+                recap = Console.ReadLine();
+                if (recap == "OUI")
+                {
+                    AfficherRessources(listeRessources);
+                    chatCourant.AfficherNiveaux();
+                }
+                else
+                {
+                    if (recap != "NON")
+                    {
+                        Console.WriteLine("Attention vous devez entrer OUI ou NON, toute autre entrée ne peut être prise en compte.");
+                        Console.WriteLine("Voulez-vous un récapitulatif ?");
+                    }
+                }
+            } while (recap != "OUI" && recap != "NON");
+            
         }
 
         public static List<Ressources> CreerListeRessoucres()
@@ -192,7 +177,7 @@ namespace ConsoleApp1
             Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ");
         }
 
-        public static int FaireApparaitreET(Chats chat, int compteurAttaque, ref int compteurAction, Carte carte, List<Chats> listeChats)
+        public static int SeFaireAttaquer(Chats chat, int compteurAttaque, ref int compteurAction, Carte carte, List<Chats> listeChats, ref bool estAttaque)
         {
             if(compteurAttaque==0)
             {
@@ -204,6 +189,7 @@ namespace ConsoleApp1
                     ET.AllerActivite(chat, chat.PositionChat);
                     AfficherCarte(carte, chat, listeChats, true);
                     Console.WriteLine("Vous êtes sur le point de vous faire attaquer par un extraterrestre, deux choix s'offrent à vous :\n 1 : Se protéger et perdre une action sur le tour\n 2 : Ne pas de se protéger et perdre 1 point dans chaque niveau de santé");//donc le joueur perdrait un point de NiveauFai, un point de NiveauDivertissement et un point de NiveauEnergie si il ne se protège pas.
+                    estAttaque = true;
                     int reponse = 0;
                     do
                     {
@@ -212,12 +198,14 @@ namespace ConsoleApp1
                         if (reponse == 2)
                         {
                             SubirAttaque(chat, ET);
+                            compteurAttaque += 1;                           
                         }
                         else
                         {
                             if (reponse == 1)
                             {
                                 compteurAction += 1;
+                                compteurAttaque += 1;
                             }
                             else
                             {
@@ -225,8 +213,7 @@ namespace ConsoleApp1
                             }
                         }
                     } while (reponse < 1 && reponse > 2);
-                }
-                compteurAttaque += 1;
+                }                
             }
             return compteurAttaque;
         }
@@ -320,7 +307,7 @@ namespace ConsoleApp1
             {
                 Agriculteur agriculteur = fonction as Agriculteur;
                 agriculteur.AllerActivite(chat, listeBatiments[2]);
-                agriculteur.Recolter(chat, listeRessources);
+                agriculteur.Recolter(chat, listeRessources, true);
             }
             else
             {   if (numeroAction == 11)
@@ -333,7 +320,7 @@ namespace ConsoleApp1
                     {
                         Agriculteur agriculteur = fonction as Agriculteur;
                         agriculteur.AllerActivite(chat, listeBatiments[2]);//la place des batiments dans la liste dépends de la liste créer par InitialiserCarte()
-                        listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines);
+                        listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines, true);
                     }
                     else
                     {   if (numeroAction == 12)
@@ -423,6 +410,8 @@ namespace ConsoleApp1
                                                 Batisseur batisseur = fonction as Batisseur;
                                                 batisseur.AllerActivite(chat, listeBatiments[1]);
                                                 batisseur.AbattreUnArbre(listeRessources, chat);
+                                                Console.WriteLine("Vous venez d'abattre un arbre, cela vous à permis d'ajouter 2 planches de bois en plus dans vos ressoucres.");
+                                                Console.WriteLine("Voici vos ressources actuelle de construction : {0} bois et {1} pierre(s)", listeRessources[3].Quantite, listeRessources[4].Quantite);
                                             }
                                             else
                                             {   if (numeroAction == 32)
@@ -436,6 +425,8 @@ namespace ConsoleApp1
                                                         Batisseur batisseur = fonction as Batisseur;
                                                         batisseur.AllerActivite(chat, listeBatiments[0]);
                                                         batisseur.Miner(listeRessources, chat);
+                                                        Console.WriteLine("Vous venez de miner, cela vous à permis d'ajouter 2 unité de pierre en plus dans vos ressoucres.");
+                                                        Console.WriteLine("Voici vos ressources actuelle de construction : {0} bois et {1} pierres", listeRessources[3].Quantite, listeRessources[4].Quantite);
                                                     }
                                                     else
                                                     {   if (numeroAction == 33)
@@ -622,7 +613,7 @@ namespace ConsoleApp1
             return compteurAction;
         }
 
-        public static void ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque)
+        public static int ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque, ref bool estAttaque)
         {
             //Affichage de la liste des actions 
             Console.WriteLine(" Vous pouvez choisir une action à effectuer parmi la liste suivante : ");
@@ -746,17 +737,17 @@ namespace ConsoleApp1
                 {
                     if(numeroAction!=4 && numeroAction!=5)
                     {
-                        compteurAttaque = FaireApparaitreET(chat, compteurAttaque, ref compteurAction, map, listeChats);
+                        compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
                     }
                     FaireActionBasique(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listeChats, map, ref compteurAction);
-                    Console.WriteLine(compteurAction);
+                    /*Console.WriteLine(compteurAction);*/
                     Console.WriteLine(compteurAttaque);
                 }
                 else
                 {
                     if ((numeroAction >= 11 && numeroAction <= 12) || (numeroAction >= 31 && numeroAction <= 33) || numeroAction==41 || numeroAction==21 || numeroAction == 51)
                     {
-                        compteurAttaque = FaireApparaitreET(chat, compteurAttaque, ref compteurAction, map, listeChats);
+                        compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
                         FaireActionMetier(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, map, ref compteurAction, listeChats, listePnj);
                         Console.WriteLine(compteurAction);
                         Console.WriteLine(compteurAttaque);
@@ -765,7 +756,7 @@ namespace ConsoleApp1
                     {
                         if (numeroAction >= 6 && numeroAction <= 7)
                         {
-                            compteurAttaque = FaireApparaitreET(chat, compteurAttaque, ref compteurAction, map, listeChats);
+                            compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
                             FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, ref compteurAction);
                             Console.WriteLine(compteurAction);
                             Console.WriteLine(compteurAttaque);
@@ -776,6 +767,7 @@ namespace ConsoleApp1
                 }
                 //Regarder comment faire pour relancer la proposition
             }while (actionRealisable==false); //boucle do...while pour redemander au joueur de choisir une action à faire tant que le numéro d'action saisi n'est pas correct           
+            return compteurAttaque;
         }
     }
 }

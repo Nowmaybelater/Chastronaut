@@ -19,7 +19,7 @@ namespace ConsoleApp1
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj);
+            Console.WriteLine(FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj));
             Console.ReadLine();
         }
 
@@ -459,8 +459,8 @@ namespace ConsoleApp1
                                                         Batisseur batisseur = fonction as Batisseur;
                                                         batisseur.AllerActivite(chat, listeBatiments[0]);
                                                         batisseur.Miner(listeRessources, chat);
-                                                        Console.WriteLine("Vous venez de miner, cela vous à permis d'ajouter 2 unité de pierre en plus dans vos ressoucres.");
-                                                        Console.WriteLine("Voici vos ressources actuelle de construction : {0} bois et {1} pierres", listeRessources[3].Quantite, listeRessources[4].Quantite);
+                                                        Console.WriteLine("Vous venez de miner, cela vous a permis d'ajouter 2 unité de pierre en plus dans vos ressoucres.");
+                                                        Console.WriteLine("Voici vos ressources actuelles de construction : {0} bois et {1} pierres", listeRessources[3].Quantite, listeRessources[4].Quantite);
                                                     }
                                                     else
                                                     {   if (numeroAction == 33)
@@ -593,7 +593,7 @@ namespace ConsoleApp1
                             } while (numeroCorrect==false);
                             Console.WriteLine("Quel nom voulez-vous lui donner ?");
                             listeChats[numChat].Nom = Console.ReadLine();
-                            Console.WriteLine("Votre chat {0} a bien été renommer {1}", listeChats[numChat].Fonction.Nom, listeChats[numChat].Nom);
+                            Console.WriteLine("Votre chat {0} a bien été renommé {1}", listeChats[numChat].Fonction.Nom, listeChats[numChat].Nom);
                             actionRealisee = false;
                         }
                         else

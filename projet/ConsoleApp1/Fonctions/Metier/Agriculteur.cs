@@ -35,17 +35,17 @@ namespace ConsoleApp1
         //La méthode suivante permet de planter des graines. 
         public int Planter(Chats chat, Graines graines, bool afficher)
         {
-            if(graines.Quantite>=5) //Automatiquement, les graines sont plantées cinq par cinq 
+            if(graines.Quantite>=10) //Automatiquement, les graines sont plantées cinq par cinq 
             {
-                graines.Quantite -= 5;
+                graines.Quantite -= 10;
                 chat.NiveauDeFaim -= 1;
                 chat.NiveauDivertissement -= 1;
                 chat.NiveauEnergie -= 1;
                 if (afficher == true)
                 {
-                    Console.WriteLine("Vous venez de planter 5 graines. Vous pouvez dès à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
+                    Console.WriteLine("Vous venez de planter 10 graines. Vous pouvez dès à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
                 }
-                return 5;
+                return 10;
             }
             else//s'il y a moins de cinq graines dans l'inventaire, toutes les graines de l'inventaire sont plantées
             {

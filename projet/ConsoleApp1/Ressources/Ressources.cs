@@ -12,6 +12,7 @@ namespace ConsoleApp1
         public int Numero { get; set; }
         public string Nom { get; set; }
 
+        //Constructeur qui donne une quantité par défaut à la ressource
         public Ressources()
         {
             this.Quantite = 5;

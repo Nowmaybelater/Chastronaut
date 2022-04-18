@@ -8,15 +8,9 @@ namespace ConsoleApp1
 {
     class Agriculteur : Metier
     {
-        //Constructeur 
         public Agriculteur() : base("Agriculteur", 1)
         { }
 
-        //Redéfinition 
-        public override void AllerActivite(Chats chat, Batiments lieu)
-        {
-            chat.PositionChat = lieu.PositionBatiment;
-        }
 
         public void Recolter(Chats chat, List<Ressources> listeRessources, bool afficher)
         {

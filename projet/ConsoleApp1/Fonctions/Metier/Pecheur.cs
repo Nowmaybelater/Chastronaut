@@ -11,10 +11,6 @@ namespace ConsoleApp1
         public Pecheur() : base("Pêcheur", 5)
         { }
 
-        public override void AllerActivite(Chats chat, Batiments lieu)
-        {
-            chat.PositionChat = lieu.PositionBatiment;
-        }
 
         public void Pecher(Poissons poisson, Chats chat)
         {

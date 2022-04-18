@@ -14,7 +14,10 @@ namespace ConsoleApp1
         {
         }
 
-        public abstract void AllerActivite(Chats chat, Batiments lieu);//méthode abstraite que l'on redéfinit dans ses classes filles
+        public void AllerActivite(Chats chat, Batiments lieu)
+        {
+            chat.PositionChat = lieu.PositionBatiment;
+        }
 
         public abstract void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources);//méthode abstraite que l'on redéfinit dans ses classes filles
     }

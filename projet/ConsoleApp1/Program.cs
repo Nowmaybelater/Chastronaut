@@ -20,8 +20,7 @@ namespace ConsoleApp1
             List<PnJ> listePnj = CreerListePnJ();
             int compteurTour = 0;
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            AfficherCarte(carte, listeChats[0], listeChats, false);
-            FaireUnTour(listeChats, 1, carte, listeRessources, listeBatiments, listePnj, ref compteurTour);
+            FaireUnTour(listeChats, 4, carte, listeRessources, listeBatiments, listePnj, ref compteurTour);
             Console.ReadLine();
         }
 

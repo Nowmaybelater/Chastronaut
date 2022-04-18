@@ -11,11 +11,7 @@ namespace ConsoleApp1
         public Patissier() : base("Pâtissier", 4)
         { }
 
-        public override void AllerActivite(Chats chat, Batiments lieu)
-        {
-            chat.PositionChat = lieu.PositionBatiment;
-        }
-
+        
         public void Patisser(Gateaux gateau, Chats chat)
         {
             gateau.Quantite += 3;

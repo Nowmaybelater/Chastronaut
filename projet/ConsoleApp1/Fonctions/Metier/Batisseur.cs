@@ -11,10 +11,6 @@ namespace ConsoleApp1
         public Batisseur() : base("Bâtisseur", 3)
         { }
 
-        public override void AllerActivite(Chats chat, Batiments lieu)
-        {
-            chat.PositionChat = lieu.PositionBatiment;
-        }
 
         public void Construire(int numeroBatiment, Carte map, Chats chat, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj)
         {

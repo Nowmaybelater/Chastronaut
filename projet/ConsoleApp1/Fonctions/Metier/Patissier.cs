@@ -28,18 +28,15 @@ namespace ConsoleApp1
             Patissier P = chat.Fonction as Patissier;
 
             //comportement automatique pour se nourrir
-            if (listeRessources[0].Quantite != 0) //le chat va commencer par manger le fruit de façon automatique car c'est le moins nourissant
+            int numNourriture = 0;
+            for (int i = 0; i <= 2; i++)
             {
-                chat.Manger(listeRessources[0] as Fruits);
+                if (listeRessources[i].Quantite > numNourriture)
+                {
+                    numNourriture = i;
+                }
             }
-            else if (listeRessources[2].Quantite != 0) //s'il n'y a pas de fruits, le chat mange un gateau
-            {
-                chat.Manger(listeRessources[2] as Poissons);
-            }
-            else if (listeRessources[1].Quantite != 0) //s'il n'y a ni fruits ni gateaux, le chat mange un poisson
-            {
-                chat.Manger(listeRessources[1] as Gateaux);
-            }
+            chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);//le chat va manger une ressource alimentaire existante de façon automatique, la ressource consommée est celle dont la quantité est la plus élevée dans l'inventaire
 
             //comportement automatique pour se divertir
             if (listeRessources[6].Quantite != 0) //le chat commence automatiquement par se divertir avec un livre

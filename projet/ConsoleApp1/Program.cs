@@ -18,7 +18,6 @@ namespace ConsoleApp1
             List<Chats> listeChats = CreerListeChats();//Création liste des Chats
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
-            int compteurTour = 0;
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
             FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj);
             Console.ReadLine();
@@ -542,7 +541,7 @@ namespace ConsoleApp1
                     chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
                     Console.WriteLine("\nVous venez de manger un {0}", listeRessources[numNourriture].Nom);
                     Console.WriteLine("\n{0} a à présent un niveau de faim de {1}", chat.Nom, chat.NiveauDeFaim);
-                } while (listeRessources[numNourriture - 1].Quantite == 0);
+                } while (listeRessources[numNourriture].Quantite == 0);
             }
             else
             {

@@ -14,14 +14,14 @@ namespace ConsoleApp1
             //pour tester l'initialisation du jeu
             bool veutJouer = true;
             string nomColonie = PresenterJeu(ref veutJouer);
-            List<Ressources> listeRessources = CreerListeRessoucres();//Création liste de ressources
+            List<Ressources> listeRessources = CreerListeRessources();//Création liste de ressources
             List<Chats> listeChats = CreerListeChats();//Création liste des Chats
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
             int compteurTour = 0;
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
             AfficherCarte(carte, listeChats[0], listeChats, false);
-            FaireUnTour(listeChats, 0, carte, listeRessources, listeBatiments, listePnj, ref compteurTour);
+            FaireUnTour(listeChats, 1, carte, listeRessources, listeBatiments, listePnj, ref compteurTour);
             Console.ReadLine();
         }
 
@@ -90,7 +90,7 @@ namespace ConsoleApp1
         {
             Chats chatCourant = listeChats[chatJoue];
             int compteurAttaque = 0;
-            Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement un chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veuiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom);
+            Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement un chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom);
             int compteurAction = 0;
             bool estAttaque = false;
             while(compteurAction<5)
@@ -98,7 +98,6 @@ namespace ConsoleApp1
                 compteurAttaque=ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque);
                 Console.WriteLine(chatCourant.PositionChat[0] + " " + chatCourant.PositionChat[1]);
                 AfficherCarte(map, chatCourant, listeChats, estAttaque);
-                estAttaque = false; //on réinitialise estAttaque à la valeur false pour l'affiche de le carte de la prochaine action
                 for(int i=0;i<listeChats.Count;i++)
                 {
                     if (i != chatJoue && (listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
@@ -108,7 +107,7 @@ namespace ConsoleApp1
                     }
                 }
             }
-            Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un recapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ? (Entrez OUI ou NON)");
+            Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ? (Entrez OUI ou NON)");
             string recap = "";
             do
             {
@@ -130,7 +129,7 @@ namespace ConsoleApp1
             
         }
 
-        public static List<Ressources> CreerListeRessoucres()
+        public static List<Ressources> CreerListeRessources()
         {
             Bois bois = new Bois(6);
             Pierres pierre = new Pierres(6);
@@ -206,6 +205,7 @@ namespace ConsoleApp1
                             {
                                 compteurAction += 1;
                                 compteurAttaque += 1;
+                                Console.WriteLine("Vous vous êtes bien protégé !");
                             }
                             else
                             {
@@ -213,6 +213,7 @@ namespace ConsoleApp1
                             }
                         }
                     } while (reponse < 1 && reponse > 2);
+                    estAttaque = false;//on réinitialise estAttaque à la valeur false pour l'affiche de le carte de la prochaine action
                 }                
             }
             return compteurAttaque;
@@ -518,8 +519,16 @@ namespace ConsoleApp1
                 {
                     if (numeroAction == 3) //Se divertir
                     {
-                        Console.WriteLine("Que voulez-vous utiliser comme ressource pour que votre chat se divertisse ? \n1 : Film \n2 : Livre");
-                        int numDivertissement = int.Parse(Console.ReadLine()) + 4;
+                        int numDivertissement = 0;
+                        do
+                        {
+                            Console.WriteLine("Que voulez-vous utiliser comme ressource pour que votre chat se divertisse ? \n1 : Film \n2 : Livre");
+                            numDivertissement = int.Parse(Console.ReadLine()) + 4;
+                            if(numDivertissement != 5 && numDivertissement != 6)
+                            {
+                                Console.WriteLine("Vous devez entrer un nombre entre  1 et 2");
+                            }
+                        } while (numDivertissement != 5 && numDivertissement != 6);
                         chat.SeDivertir(listeRessources[numDivertissement] as RessourceCulturelle);
                         Console.WriteLine("\nVous venez de vous divertir avec un {0}", listeRessources[numDivertissement].Nom);
                         Console.WriteLine("\n{0} a à présent un niveau de divertissement  de {1}", chat.Nom, chat.NiveauDivertissement);
@@ -616,33 +625,24 @@ namespace ConsoleApp1
         public static int ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque, ref bool estAttaque)
         {
             //Affichage de la liste des actions 
-            Console.WriteLine(" Vous pouvez choisir une action à effectuer parmi la liste suivante : ");
-            Console.WriteLine("\n 1 : Se nourrir");
-            Console.WriteLine("\n 2 : Se reposer");
-            Console.WriteLine("\n 3 : Se divertir");
-            Console.WriteLine("\n 4 : Changer le nom d'un chat");
-            Console.WriteLine("\n 5 : Afficher les différents niveaux d'un chat");
-            Console.WriteLine("\n 6 : Récolter");
-            Console.WriteLine("\n 7 : Planter");
-            Console.WriteLine("\n 8 : Construire");
-            Console.WriteLine("\n 9 : Abattre un arbre");
-            Console.WriteLine("\n 10 : Miner");
-            Console.WriteLine("\n 11 : Patisser");
-            Console.WriteLine("\n 12 : Créer un divertissement");
-
+            Console.WriteLine("Vous pouvez choisir une action à effectuer parmi la liste suivante : \n");
+            List<string> listeActionPossible = new List<string> { " 1 : Se nourrir" , " 2 : Se reposer" , " 3 : Se divertir" , " 4 : Changer le nom d'un chat" , " 5 : Afficher les différents niveaux d'un chat" , " 6 : Récolter" , " 7 : Planter" , " 8 : Construire" , " 9 : Abattre un arbre" , " 10 : Miner" , " 11 : Patisser" , " 12 : Créer un divertissement" };
             if (map.Map[2, 46] == " Zo")
             {
-                Console.WriteLine("\n 13 : Pecher");
+                listeActionPossible.Add("\n 13 : Pecher");
             }
             if (map.Map[12, 18] == "Inf")
             {
-                Console.WriteLine("\n 14 : Aller voir le guérisseur "); //6
+                listeActionPossible.Add("\n 14 : Aller voir le guérisseur ");
             }
             if(map.Map[8, 18] == "  Po")
             {
-                Console.WriteLine("\n 15 : Aller voir le messager"); //7
+                listeActionPossible.Add("\n 15 : Aller voir le messager");
             }
-
+            for(int i=0; i<listeActionPossible.Count; i++)
+            {
+                Console.WriteLine(listeActionPossible[i]);
+            }
             //Choix de l'action à effectuer par le joueur
             bool actionRealisable = true;
             int numeroAction;

@@ -533,15 +533,17 @@ namespace ConsoleApp1
             if (numeroAction == 1) //Se nourrir
             {
                 int numNourriture = 0;
+                int quantiteNourriture = 0;
                 do
                 {
                     Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
                     numNourriture = int.Parse(Console.ReadLine()) - 1;
+                    quantiteNourriture = listeRessources[numNourriture].Quantite;
                     chat.PositionChat = listeBatiments[3].PositionBatiment;
                     chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
                     Console.WriteLine("\nVous venez de manger un {0}", listeRessources[numNourriture].Nom);
                     Console.WriteLine("\n{0} a à présent un niveau de faim de {1}", chat.Nom, chat.NiveauDeFaim);
-                } while (listeRessources[numNourriture].Quantite == 0);
+                } while (quantiteNourriture == 0);
             }
             else
             {

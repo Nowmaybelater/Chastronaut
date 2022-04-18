@@ -8,6 +8,7 @@ namespace ConsoleApp1
 {
     abstract class RessourceConstruction : Ressources
     {
+        //Constructeur 
         public RessourceConstruction(int Quantite) : base(Quantite)
         { }
 

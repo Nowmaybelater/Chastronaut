@@ -12,11 +12,13 @@ namespace ConsoleApp1
         public int Numero { get; set; }
         public string Nom { get; set; }
 
-        //Constructeur qui donne une quantité par défaut à la ressource
+        //Constructeur qui donne une quantité par défaut à la ressource (il est nécessaire à la mise en place des constructeurs des classes filles)
         public Ressources()
         {
             this.Quantite = 5;
         }
+
+        //Constructeur qui donne une quantité choisie à la ressource
         public Ressources(int Quantite)
         {
             this.Quantite = Quantite;

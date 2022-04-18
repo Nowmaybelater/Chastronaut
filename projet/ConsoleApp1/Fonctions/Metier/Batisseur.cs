@@ -108,6 +108,12 @@ namespace ConsoleApp1
         {
             Batisseur B = chat.Fonction as Batisseur;
 
+            //comportement automatique de la récolte de bois (propre au chat batisseur)
+            B.AbattreUnArbre(listeRessources, chat);
+
+            //comportement automatique de la récolte de pierres (propre au chat batisseur)
+            B.Miner(listeRessources, chat);
+
             //comportement automatique pour se nourrir
             int numNourriture = 0;
             for (int i = 0; i <= 2; i++)
@@ -133,11 +139,6 @@ namespace ConsoleApp1
             //comportement automatique pour se reposer
             chat.SeReposer();
 
-            //comportement automatique de la récolte de bois (propre au chat batisseur)
-            B.AbattreUnArbre(listeRessources, chat);
-
-            //comportement automatique de la récolte de pierres (propre au chat batisseur)
-            B.Miner(listeRessources, chat);
         }
 
     }

@@ -27,6 +27,10 @@ namespace ConsoleApp1
         {
             Pecheur P = chat.Fonction as Pecheur;
 
+            //comportement automatique de peche d'un poisson (propre au chat pecheur) : on le fait deux fois pour avoir cinq actions = un tour
+            P.Pecher(listeRessources[2] as Poissons, chat);
+            P.Pecher(listeRessources[2] as Poissons, chat);
+
             //comportement automatique pour se nourrir
             int numNourriture = 0;
             for(int i=0; i<=2; i++)
@@ -50,12 +54,6 @@ namespace ConsoleApp1
 
             //comportement automatique pour se reposer
             chat.SeReposer();
-
-            //comportement automatique de peche d'un poisson (propre au chat pecheur) : on le fait deux fois pour avoir cinq actions = un tour
-            P.Pecher(listeRessources[2] as Poissons, chat);
-            P.Pecher(listeRessources[2] as Poissons, chat);
-
-
 
         }
     }

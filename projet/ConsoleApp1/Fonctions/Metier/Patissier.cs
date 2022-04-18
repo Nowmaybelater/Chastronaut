@@ -27,6 +27,10 @@ namespace ConsoleApp1
         {
             Patissier P = chat.Fonction as Patissier;
 
+            //comportement automatique de fabrication d'un gâteau (propre au chat patissier) : on le fait deux fois pour avoir cinq actions = un tour
+            P.Patisser(listeRessources[1] as Gateaux, chat);
+            P.Patisser(listeRessources[1] as Gateaux, chat);
+
             //comportement automatique pour se nourrir
             int numNourriture = 0;
             for (int i = 0; i <= 2; i++)
@@ -52,9 +56,6 @@ namespace ConsoleApp1
             //comportement automatique pour se reposer
             chat.SeReposer();
 
-            //comportement automatique de fabrication d'un gâteau (propre au chat patissier) : on le fait deux fois pour avoir cinq actions = un tour
-            P.Patisser(listeRessources[1] as Gateaux, chat);
-            P.Patisser(listeRessources[1] as Gateaux, chat);
         }
     }
 }

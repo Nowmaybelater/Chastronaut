@@ -28,6 +28,12 @@ namespace ConsoleApp1
         {
             Artiste A = chat.Fonction as Artiste;
 
+            //comportement automatique de fabrication d'un livre (propre au chat artiste)
+            A.Creer(chat, listeRessources[6] as Livres);
+
+            //comportement automatique de fabrication d'un film (propre au chat artiste)
+            A.Creer(chat, listeRessources[5] as Films);
+
             //comportement automatique pour se nourrir
             int numNourriture = 0;
             for (int i = 0; i <= 2; i++)
@@ -53,11 +59,6 @@ namespace ConsoleApp1
             //comportement automatique pour se reposer
             chat.SeReposer();
 
-            //comportement automatique de fabrication d'un livre (propre au chat artiste)
-            A.Creer(chat, listeRessources[6] as Livres);
-
-            //comportement automatique de fabrication d'un film (propre au chat artiste)
-            A.Creer(chat, listeRessources[5] as Films);
         }
     }
 }

@@ -64,6 +64,12 @@ namespace ConsoleApp1
         {
             Agriculteur agriculteur = chat.Fonction as Agriculteur;
 
+            //comportement automatique de récolte (propre au chat agriculteur)
+            agriculteur.Recolter(chat, listeRessources, false);
+
+            //comportement automatique de plantation (propre au chat agriculteur)
+            listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines, false);
+
             //comportement automatique pour se nourrir
             int numNourriture = 0;
             for (int i = 0; i <= 2; i++)
@@ -89,11 +95,6 @@ namespace ConsoleApp1
             //comportement automatique pour se reposer
             chat.SeReposer();
 
-            //comportement automatique de récolte (propre au chat agriculteur)
-            agriculteur.Recolter(chat, listeRessources, false);
-
-            //comportement automatique de plantation (propre au chat agriculteur)
-            listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines, false);
         }
     }
 }

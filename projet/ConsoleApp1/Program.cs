@@ -663,7 +663,7 @@ namespace ConsoleApp1
         {
             //Affichage de la liste des actions 
             Console.WriteLine("Vous pouvez choisir une action à effectuer parmi la liste suivante : \n");
-            List<string> listeActionPossible = new List<string> { " 1 : Se nourrir" , " 2 : Se reposer" , " 3 : Se divertir" , " 4 : Changer le nom d'un chat" , " 5 : Afficher les différents niveaux d'un chat" , " 6 : Récolter" , " 7 : Planter" , " 8 : Construire" , " 9 : Abattre un arbre" , " 10 : Miner" , " 11 : Patisser" , " 12 : Créer un divertissement" };
+            List<string> listeActionPossible = new List<string> { " 1 : Se nourrir" , " 2 : Se reposer" , " 3 : Se divertir" , " 4 : Changer le nom d'un chat" , " 5 : Afficher les différents niveaux d'un chat" , " 6 : Récolter (propre au chat Agriculteur)" , " 7 : Planter (propre au chat Agriculteur)", " 8 : Construire (propre au chat Batisseur)", " 9 : Abattre un arbre (propre au chat Batisseur)", " 10 : Miner (propre au chat Batisseur)", " 11 : Patisser (propre au chat Patissier)", " 12 : Créer un divertissement (propre au chat Artiste)" };
             if (map.Map[2, 46] == " Zo")
             {
                 listeActionPossible.Add(" 13 : Pecher");

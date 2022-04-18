@@ -11,7 +11,6 @@ namespace ConsoleApp1
         public Agriculteur() : base("Agriculteur", 1)
         { }
 
-
         public void Recolter(Chats chat, List<Ressources> listeRessources, bool afficher)
         {
             listeRessources[0].Quantite += listeRessources[8].Quantite;

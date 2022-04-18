@@ -55,14 +55,17 @@ namespace ConsoleApp1
         public bool Manger(RessourceAlimentaire aliment)
         {
             bool actionRealisee = true;
-            NiveauDeFaim += aliment.ValeurNutritionnelle;
-            if (NiveauDeFaim >= 10)
+            if(aliment.Quantite>0)
             {
-                NiveauDeFaim = 10;
+                NiveauDeFaim += aliment.ValeurNutritionnelle;
+                if (NiveauDeFaim >= 10)
+                {
+                    NiveauDeFaim = 10;
+                }
+                NiveauDivertissement -= 1;
+                NiveauEnergie -= 1;
+                aliment.Quantite -= 1;
             }
-            NiveauDivertissement -= 1;
-            NiveauEnergie -= 1;
-            aliment.Quantite -= 1;
             return actionRealisee;
         }
 

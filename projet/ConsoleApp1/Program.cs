@@ -20,7 +20,7 @@ namespace ConsoleApp1
             List<PnJ> listePnj = CreerListePnJ();
             int compteurTour = 0;
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            FaireUnTour(listeChats, 4, carte, listeRessources, listeBatiments, listePnj, ref compteurTour);
+            FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj);
             Console.ReadLine();
         }
 
@@ -127,6 +127,41 @@ namespace ConsoleApp1
             } while (recap != "OUI" && recap != "NON");
             
         }
+
+
+        public static string FaireDesTours(List<Chats> listeChats, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj)
+        {
+            int compteurTour = 0;
+            for(compteurTour=0; compteurTour<listeChats.Count; compteurTour++)
+            {
+                for (int i = 0; i < listeChats.Count; i++)
+                {
+                    if((listeChats[i].Fonction is Guerisseur)==false && (listeChats[i].Fonction is Messager) == false)
+                    {
+                        FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour);
+                        int numChat = 0;
+                        int numChatMort = 0;
+                        bool gameover = false;
+                        while(numChat!=listeChats.Count)
+                        {
+                            if(listeChats[numChat].NiveauDeFaim==0 || listeChats[numChat].NiveauDivertissement == 0 || listeChats[numChat].NiveauEnergie== 0)
+                            {
+                                gameover = true;
+                            }
+                            numChat += 1;
+                            numChatMort = numChat;
+                        }
+                        if(gameover==true)
+                        {
+                            string message = "GAME OVER !!! \nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
+                            return message;
+                        }
+                    }
+                }
+            }
+            return "Félicitation ! Vous avez réussi à aider les Chastronautes à reprendre leur voyage sans perdre aucun membre de leur équipage !";
+        }
+
 
         public static List<Ressources> CreerListeRessources()
         {
@@ -498,12 +533,16 @@ namespace ConsoleApp1
             bool actionRealisee = true;
             if (numeroAction == 1) //Se nourrir
             {
-                Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
-                int numNourriture = int.Parse(Console.ReadLine()) - 1;
-                chat.PositionChat = listeBatiments[3].PositionBatiment;
-                chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
-                Console.WriteLine("\nVous venez de manger un {0}", listeRessources[numNourriture].Nom);
-                Console.WriteLine("\n{0} a à présent un niveau de faim de {1}", chat.Nom, chat.NiveauDeFaim);
+                int numNourriture = 0;
+                do
+                {
+                    Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
+                    numNourriture = int.Parse(Console.ReadLine()) - 1;
+                    chat.PositionChat = listeBatiments[3].PositionBatiment;
+                    chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
+                    Console.WriteLine("\nVous venez de manger un {0}", listeRessources[numNourriture].Nom);
+                    Console.WriteLine("\n{0} a à présent un niveau de faim de {1}", chat.Nom, chat.NiveauDeFaim);
+                } while (listeRessources[numNourriture - 1].Quantite == 0);
             }
             else
             {
@@ -628,15 +667,15 @@ namespace ConsoleApp1
             List<string> listeActionPossible = new List<string> { " 1 : Se nourrir" , " 2 : Se reposer" , " 3 : Se divertir" , " 4 : Changer le nom d'un chat" , " 5 : Afficher les différents niveaux d'un chat" , " 6 : Récolter" , " 7 : Planter" , " 8 : Construire" , " 9 : Abattre un arbre" , " 10 : Miner" , " 11 : Patisser" , " 12 : Créer un divertissement" };
             if (map.Map[2, 46] == " Zo")
             {
-                listeActionPossible.Add("\n 13 : Pecher");
+                listeActionPossible.Add(" 13 : Pecher");
             }
             if (map.Map[12, 18] == "Inf")
             {
-                listeActionPossible.Add("\n 14 : Aller voir le guérisseur ");
+                listeActionPossible.Add(" 14 : Aller voir le guérisseur ");
             }
             if(map.Map[8, 18] == "  Po")
             {
-                listeActionPossible.Add("\n 15 : Aller voir le messager");
+                listeActionPossible.Add(" 15 : Aller voir le messager");
             }
             for(int i=0; i<listeActionPossible.Count; i++)
             {

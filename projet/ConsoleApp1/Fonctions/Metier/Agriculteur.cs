@@ -38,9 +38,6 @@ namespace ConsoleApp1
             if(graines.Quantite>=4) //Automatiquement, les graines sont plantées cinq par cinq 
             {
                 graines.Quantite -= 4;
-                chat.NiveauDeFaim -= 1;
-                chat.NiveauDivertissement -= 1;
-                chat.NiveauEnergie -= 1;
                 if (afficher == true)
                 {
                     Console.WriteLine("Vous venez de planter 10 graines. Vous pouvez dès à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
@@ -56,7 +53,9 @@ namespace ConsoleApp1
                 return graines.Quantite;
                 graines.Quantite = 0;
             }
-
+            chat.NiveauDeFaim -= 1;
+            chat.NiveauDivertissement -= 1;
+            chat.NiveauEnergie -= 1;
         }
 
         //La méthode suivante gère le comportement automatique du chat agriculteur, qui réalise les cinq actions suivantes : manger, se reposer, se divertir, planter et récolter

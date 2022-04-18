@@ -8,10 +8,13 @@ namespace ConsoleApp1
 {
     abstract class PnJ : Fonction
     {
+        //Constructeur 
         public PnJ(string nom, int num) : base(nom, num)
         {
         }
-        public abstract void AllerActivite(Chats chat, int[] lieu);//cette méthode permettra aux Chastronautes (et non aux PnJ)de se rendre au lieu dans lequel se trouvent les PnJ afin de réaliser l'action qui leur est associée
+
+        //La méthode abstraite suivante sera redéfinie dans les classes dérivées de PnJ
+        public abstract void AllerActivite(Chats chat, int[] lieu);
 
     }
 }

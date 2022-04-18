@@ -8,18 +8,22 @@ namespace ConsoleApp1
 {
     class Artiste : Metier
     {
+        //Constructeur 
         public Artiste() : base("Artiste", 2)
         { }
 
+        //La méthode suivante permet de gérer la création de ressources culturelles par le chat artiste 
         public void Creer(Chats chat, RessourceCulturelle divertissement)
         {
             divertissement.Quantite += 4;
+            //on enlève un point à chacun des niveaux car le chat vient de réaliser une action
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
 
         }
 
+        //La méthode suivante gère le comportement automatique du chat artiste, qui réalise les cinq actions suivantes : manger, se reposer, se divertir et créer un divertissement (deux fois)
         public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Artiste A = chat.Fonction as Artiste;

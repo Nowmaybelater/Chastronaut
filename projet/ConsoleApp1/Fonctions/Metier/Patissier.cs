@@ -8,17 +8,21 @@ namespace ConsoleApp1
 {
     class Patissier : Metier
     {
+        //Constructeur 
         public Patissier() : base("Pâtissier", 4)
         { }
 
-        
+        //La méthode suivante gère la préparation de gâteaux par le chat patissier
         public void Patisser(Gateaux gateau, Chats chat)
         {
             gateau.Quantite += 3;
+            //on enlève un point à chacun des niveaux car le chat vient de réaliser une action
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
         }
+
+        //La méthode suivante gère le comportement automatique du chat patissier, qui réalise les cinq actions suivantes : manger, se reposer, se divertir et faire un gâteau (deux fois)
         public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Patissier P = chat.Fonction as Patissier;

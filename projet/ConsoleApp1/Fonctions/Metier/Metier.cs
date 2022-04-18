@@ -14,9 +14,10 @@ namespace ConsoleApp1
         {
         }
 
+        //La méthode AllerActivite gère la téléportation d'un chat vers le lieu correspondant à l'activité qu'il doit réaliser
         public void AllerActivite(Chats chat, Batiments lieu)
         {
-            chat.PositionChat = lieu.PositionBatiment;
+            chat.PositionChat = lieu.PositionBatiment; 
         }
 
         public abstract void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources);//méthode abstraite que l'on redéfinit dans ses classes filles

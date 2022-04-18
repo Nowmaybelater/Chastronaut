@@ -8,13 +8,14 @@ namespace ConsoleApp1
 {
     class Batisseur : Metier
     {
+        //constructeur
         public Batisseur() : base("Bâtisseur", 3)
         { }
 
-
+        //La méthode suivante permet de gérer la construction d'un bâtiment par le chat batisseur 
         public void Construire(int numeroBatiment, Carte map, Chats chat, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj)
         {
-            if (numeroBatiment == 7)
+            if (numeroBatiment == 7)//pour construire l'infirmerie
             {
                 Infirmerie infirmerie = new Infirmerie();
                 infirmerie.Construire(map, listeRessources, listeBatiments);
@@ -29,7 +30,7 @@ namespace ConsoleApp1
             }
             else
             {
-                if (numeroBatiment == 8)
+                if (numeroBatiment == 8)//pour construire le bureau de poste 
                 {
                     Poste poste = new Poste();
                     poste.Construire(map, listeRessources, listeBatiments);
@@ -45,7 +46,7 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    if (numeroBatiment == 9)
+                    if (numeroBatiment == 9)//pour construire le second potager 
                     {
                         Potager potager = new Potager(5,3);
                         potager.Construire(map, listeRessources, listeBatiments);
@@ -57,7 +58,7 @@ namespace ConsoleApp1
                     }
                     else
                     {
-                        if (numeroBatiment == 10)
+                        if (numeroBatiment == 10)//pour construire la zone de pêche
                         {
                             ZoneDePeche zoneDePeche = new ZoneDePeche();
                             zoneDePeche.Construire(map, listeRessources, listeBatiments);
@@ -74,30 +75,35 @@ namespace ConsoleApp1
                     }
                 }
             }
+            //on enlève un point à chacun des niveaux car le chat vient de réaliser une action
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
         }
 
+        //La méthode suivante permet de gérer la récolte de bois par le chat bâtisseur 
         public void AbattreUnArbre(List<Ressources> listeRessources, Chats chat)
         {
             Bois bois = listeRessources[3] as Bois;
-            bois.Quantite += 2;
+            bois.Quantite += 2;//ajout du bois récupéré à l'inventaire 
+            //on enlève un point à chacun des niveaux car le chat vient de réaliser une action
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;            
         }
 
-
+        //La méthode suivante permet de gérer la récolte de pierre par le chat bâtisseur 
         public void Miner(List<Ressources> listeRessources, Chats chat)
         {
             Pierres pierre = listeRessources[4] as Pierres;
-            pierre.Quantite += 2;
+            pierre.Quantite += 2;//ajout des pierres récupérées à l'inventaire 
+            //on enlève un point à chacun des niveaux car le chat vient de réaliser une action
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
         }
 
+        //La méthode suivante gère le comportement automatique du chat batisseur, qui réalise les cinq actions suivantes : manger, se reposer, se divertir, abattre un arbre et miner
         public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Batisseur B = chat.Fonction as Batisseur;

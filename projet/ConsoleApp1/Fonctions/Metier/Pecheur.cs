@@ -8,18 +8,21 @@ namespace ConsoleApp1
 {
     class Pecheur : Metier
     {
+        //Constructeur 
         public Pecheur() : base("Pêcheur", 5)
         { }
 
-
+        //La méthode suivante gère la pêche de poissons par le chat pêcheur
         public void Pecher(Poissons poisson, Chats chat)
         {
             poisson.Quantite += 5;
+            //on enlève un point à chacun des niveaux car le chat vient de réaliser une action
             chat.NiveauDeFaim -= 1;
             chat.NiveauDivertissement -= 1;
             chat.NiveauEnergie -= 1;
         }
 
+        //La méthode suivante gère le comportement automatique du chat pêcheur, qui réalise les cinq actions suivantes : manger, se reposer, se divertir et pêcher(deux fois)
         public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Pecheur P = chat.Fonction as Pecheur;

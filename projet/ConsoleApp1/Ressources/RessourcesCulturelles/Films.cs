@@ -8,7 +8,8 @@ namespace ConsoleApp1
 {
     class Films : RessourceCulturelle
     {
-        public Films(int Quantite) : base(Quantite, 5) //on fixe le taux de divertissement à 5
+        //Constructeur qui attribue le numéro 6 à la ressource Films et fixe son taux de divertissement à 5
+        public Films(int Quantite) : base(Quantite, 5) 
         {
             Numero = 6;
             Nom = "Film";

@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     class Fruits : RessourceAlimentaire
     {
-
+        //Constructeur qui attribue le numéro 1 à la ressource Fruits et fixe sa valeur nutritionnelle à 2
         public Fruits(int Quantite) : base(Quantite, 2) 
         {
             Numero = 1;

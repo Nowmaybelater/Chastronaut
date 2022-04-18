@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
         public int ValeurNutritionnelle { get; set; }
 
-
+        //Constructeur 
         public RessourceAlimentaire(int Quantite, int ValeurNutritionnelle)
         {
             this.Quantite = Quantite;

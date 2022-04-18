@@ -8,6 +8,7 @@ namespace ConsoleApp1
 {
     class Pierres : RessourceConstruction
     {
+        //Constructeur qui attribue le numéro 5 à la ressource Pierres
         public Pierres(int Quantite) : base(Quantite)
         {
             Numero = 5;

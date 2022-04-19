@@ -19,7 +19,7 @@ namespace ConsoleApp1
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            Console.WriteLine(FaireDesTours(listeChats,carte, listeRessources, listeBatiments, listePnj));
+            FaireDesTours(listeChats,carte, listeRessources, listeBatiments, listePnj);
             Console.ReadLine();
         }
 
@@ -84,7 +84,7 @@ namespace ConsoleApp1
 
         }
 
-        public static void FaireUnTour(List<Chats> listeChats, int chatJoue, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, ref int compteurTour)
+        public static bool FaireUnTour(List<Chats> listeChats, int chatJoue, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, ref int compteurTour)
         {
 
             Chats chatCourant = listeChats[chatJoue];
@@ -93,7 +93,8 @@ namespace ConsoleApp1
             int compteurAction = 0;
             bool estAttaque = false;
             bool seProtege = false;
-            while(compteurAction<5)
+            bool gameover = false;
+            while (compteurAction<5)
             {
                 for (int c = 0; c < listeChats.Count; c++)
                 {
@@ -116,6 +117,32 @@ namespace ConsoleApp1
                     }
                 }
                 seProtege = false;
+                int numChat = 0;
+                int numChatMort = 0;
+                while (numChat != listeChats.Count - 1)
+                {
+                    if (listeChats[numChat].NiveauDeFaim == 0)
+                    {
+                        if (listeChats[numChat].NiveauDivertissement == 0)
+                        {
+                            if (listeChats[numChat].NiveauEnergie == 0)
+                            {
+                                gameover = true;
+                            }
+                        }
+                    }
+                    numChat += 1;
+                    numChatMort = numChat;
+                }
+                if (gameover == true)
+                {
+                    string message = "GAME OVER !!! \nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
+                    Console.WriteLine(message);
+                }
+                else
+                {
+                    Console.WriteLine("Félicitation ! Vous avez réussi à aider les Chastronautes à reprendre leur voyage sans perdre aucun membre de leur équipage !");
+                }
             }
 
             Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ? (Entrez OUI ou NON)");
@@ -137,46 +164,24 @@ namespace ConsoleApp1
                     }
                 }
             } while (recap != "OUI" && recap != "NON");
-            
+            return gameover;
         }
 
 
-        public static string FaireDesTours(List<Chats> listeChats, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj)
+        public static void FaireDesTours(List<Chats> listeChats, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj)
         {            
             int compteurTour = 0;
-            for (int i = 0; i < listeChats.Count; i++)
+            bool gameover = false;
+            int i = 0;
+            do
             {
-                if((listeChats[i].Fonction is Guerisseur)==false && (listeChats[i].Fonction is Messager) == false)
+                if ((listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
                 {
-                    FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour);
+                    gameover = FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour);
                     compteurTour += 1;
-
-                    int numChat = 0;
-                    int numChatMort = 0;
-                    bool gameover = false;
-                    while(numChat!=listeChats.Count-1)
-                    {
-                        if(listeChats[numChat].NiveauDeFaim==0)
-                        {
-                            if(listeChats[numChat].NiveauDivertissement == 0 )
-                            {
-                                if(listeChats[numChat].NiveauEnergie == 0)
-                                {
-                                    gameover = true;
-                                }
-                            }
-                        }
-                        numChat += 1;
-                        numChatMort = numChat;
-                    }
-                    if(gameover==true)
-                    {
-                        string message = "GAME OVER !!! \nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
-                        return message;
-                    }
                 }
-            }
-            return "Félicitation ! Vous avez réussi à aider les Chastronautes à reprendre leur voyage sans perdre aucun membre de leur équipage !";
+                i += 1;
+            } while (i < listeChats.Count && gameover != true);    
         }
 
 

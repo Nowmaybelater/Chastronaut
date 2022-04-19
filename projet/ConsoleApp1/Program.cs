@@ -123,14 +123,18 @@ namespace ConsoleApp1
                 {
                     if (listeChats[numChat].NiveauDeFaim == 0)
                     {
-                        if (listeChats[numChat].NiveauDivertissement == 0)
-                        {
-                            if (listeChats[numChat].NiveauEnergie == 0)
-                            {
-                                gameover = true;
-                                numChatMort = numChat;
-                            }
-                        }
+                        gameover = true;
+                        numChatMort = numChat;
+                    }
+                    if (listeChats[numChat].NiveauDivertissement == 0)
+                    {
+                        gameover = true;
+                        numChatMort = numChat;
+                    }
+                    if (listeChats[numChat].NiveauEnergie == 0)
+                    {
+                        gameover = true;
+                        numChatMort = numChat;
                     }
                     numChat += 1;
                 }

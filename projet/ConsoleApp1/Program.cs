@@ -20,9 +20,7 @@ namespace ConsoleApp1
             List<PnJ> listePnj = CreerListePnJ();
             int compteurTour = 0;
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            Metier metier= listeChats[5].Fonction as Metier;
-            metier.AgirAutomatiquement(listeChats[5], listeRessources);
-            //FaireUnTour(listeChats, 0,carte, listeRessources, listeBatiments, listePnj, ref compteurTour);
+            FaireDesTours(listeChats,carte, listeRessources, listeBatiments, listePnj);
             Console.ReadLine();
         }
 
@@ -89,6 +87,7 @@ namespace ConsoleApp1
 
         public static void FaireUnTour(List<Chats> listeChats, int chatJoue, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, ref int compteurTour)
         {
+
             Chats chatCourant = listeChats[chatJoue];
             int compteurAttaque = 0;
             Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement un chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom);
@@ -96,18 +95,24 @@ namespace ConsoleApp1
             bool estAttaque = false;
             while(compteurAction<5)
             {
-                compteurAttaque=ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque);
+                for (int c = 0; c < listeChats.Count; c++)
+                {
+                    Console.WriteLine(listeChats[c].Nom);
+                    listeChats[c].AfficherNiveaux();
+                }
+                compteurAttaque =ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque);
                 Console.WriteLine(chatCourant.PositionChat[0] + " " + chatCourant.PositionChat[1]);
                 AfficherCarte(map, chatCourant, listeChats, estAttaque);
-                for(int i=0;i<listeChats.Count;i++)
+                for (int i = 0; i < listeChats.Count; i++)
                 {
                     if (i != chatJoue && (listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
                     {
-                        Metier metier= listeChats[i].Fonction as Metier;
-                        metier.AgirAutomatiquement(listeChats[i], listeRessources);
+                        Metier metier = listeChats[i].Fonction as Metier;
+                        metier.AgirAutomatiquement(listeChats[i], listeRessources, i + 1);
                     }
                 }
             }
+
             Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ? (Entrez OUI ou NON)");
             string recap = "";
             do
@@ -132,7 +137,7 @@ namespace ConsoleApp1
 
 
         public static string FaireDesTours(List<Chats> listeChats, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj)
-        {
+        {            
             int compteurTour = 0;
             for(compteurTour=0; compteurTour<listeChats.Count; compteurTour++)
             {
@@ -205,9 +210,7 @@ namespace ConsoleApp1
             Chats chatBatisseur2 = new Chats("Chat4", batisseur2, 10, 10, 10);
             Patissier patissier = new Patissier();
             Chats chatPatissier = new Chats("Chat5", patissier, 10, 10, 10);
-            Pecheur pecheur = new Pecheur();
-            Chats chatpecheur = new Chats("Chat5", pecheur, 10, 10, 10);
-            List<Chats> listeChats = new List<Chats> { chatBatisseur1, chatAgriculteur1, chatArtiste, chatBatisseur2, chatPatissier, chatpecheur};
+            List<Chats> listeChats = new List<Chats> { chatBatisseur1, chatAgriculteur1, chatArtiste, chatBatisseur2, chatPatissier};
             return listeChats;
         }
 

@@ -63,38 +63,55 @@ namespace ConsoleApp1
         }
 
         //La méthode suivante gère le comportement automatique du chat agriculteur, qui réalise les cinq actions suivantes : manger, se reposer, se divertir, planter et récolter
-        public override void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
+        public override void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources, int numeroAction)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Agriculteur agriculteur = chat.Fonction as Agriculteur;
             //comportement automatique de récolte (propre au chat agriculteur)
-            agriculteur.Recolter(chat, listeRessources, false);
-            //comportement automatique de plantation (propre au chat agriculteur)
-            listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines, false);
-            //comportement automatique pour se nourrir
-            int numNourriture = 0;
-            for (int i = 0; i <= 2; i++)
+            if(numeroAction==1)
             {
-                if (listeRessources[i].Quantite > numNourriture)
-                {
-                    numNourriture = i;
-                }
+                agriculteur.Recolter(chat, listeRessources, false);
             }
-            chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);//le chat va manger une ressource alimentaire existante de façon automatique, la ressource consommée est celle dont la quantité est la plus élevée dans l'inventaire
+            //comportement automatique de plantation (propre au chat agriculteur)
+            if (numeroAction == 2)
+            {
+                listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines, false);
+            }
+            //comportement automatique pour se nourrir
+            if (numeroAction == 3)
+            {
+                int numNourriture = 0;
+                for (int i = 0; i <= 2; i++)
+                {
+                    if (listeRessources[i].Quantite > numNourriture)
+                    {
+                        numNourriture = i;
+                    }
+                }
+                chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);//le chat va manger une ressource alimentaire existante de façon automatique, la ressource consommée est celle dont la quantité est la plus élevée dans l'inventaire
+            }
 
             //comportement automatique pour se divertir
-            if (listeRessources[6].Quantite != 0) //le chat commence automatiquement par se divertir avec un livre
+            if (numeroAction == 4)
             {
-                chat.SeDivertir(listeRessources[6] as Livres);
-            }
-            else
-            {
-                if (listeRessources[5].Quantite != 0)//s'il n'y a pas de livre, le chat se divertit avec un film
+                if (listeRessources[6].Quantite != 0) //le chat commence automatiquement par se divertir avec un livre
                 {
-                    chat.SeDivertir(listeRessources[5] as Films);
+                    chat.SeDivertir(listeRessources[6] as Livres);
+                }
+                else
+                {
+                    if (listeRessources[5].Quantite != 0)//s'il n'y a pas de livre, le chat se divertit avec un film
+                    {
+                        chat.SeDivertir(listeRessources[5] as Films);
+                    }
                 }
             }
+            
             //comportement automatique pour se reposer
-            chat.SeReposer();
+            if (numeroAction == 5)
+            {
+                chat.SeReposer();
+            }
+
         }
     }
 }

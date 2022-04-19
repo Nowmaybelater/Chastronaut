@@ -24,7 +24,7 @@ namespace ConsoleApp1
         }
 
         //La méthode suivante gère le comportement automatique du chat artiste, qui réalise les cinq actions suivantes : manger, se reposer, se divertir et créer un divertissement (deux fois)
-        public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
+        public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources, int numeroAction)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Artiste A = chat.Fonction as Artiste;
             //comportement automatique de fabrication d'un livre (propre au chat artiste)

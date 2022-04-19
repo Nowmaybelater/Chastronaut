@@ -104,7 +104,7 @@ namespace ConsoleApp1
         }
 
         //La méthode suivante gère le comportement automatique du chat batisseur, qui réalise les cinq actions suivantes : manger, se reposer, se divertir, abattre un arbre et miner
-        public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
+        public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources, int numeroAction) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Batisseur B = chat.Fonction as Batisseur;
 

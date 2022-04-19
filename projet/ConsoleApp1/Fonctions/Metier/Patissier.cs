@@ -23,7 +23,7 @@ namespace ConsoleApp1
         }
 
         //La méthode suivante gère le comportement automatique du chat patissier, qui réalise les cinq actions suivantes : manger, se reposer, se divertir et faire un gâteau (deux fois)
-        public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
+        public override void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources, int numeroAction) //correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Patissier P = chat.Fonction as Patissier;
             //comportement automatique de fabrication d'un gâteau (propre au chat patissier) : on le fait deux fois pour avoir cinq actions = un tour

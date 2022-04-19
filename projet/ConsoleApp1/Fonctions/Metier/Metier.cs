@@ -20,6 +20,6 @@ namespace ConsoleApp1
             chat.PositionChat = lieu.PositionBatiment; 
         }
 
-        public abstract void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources);//méthode abstraite que l'on redéfinit dans ses classes filles
+        public abstract void AgirAutomatiquement(Chats chat, List<Ressources> listeRessources, int numeroAction);//méthode abstraite que l'on redéfinit dans ses classes filles
     }
 }

@@ -40,7 +40,7 @@ namespace ConsoleApp1
                 graines.Quantite -= 4;
                 if (afficher == true)
                 {
-                    Console.WriteLine("Vous venez de planter 10 graines. Vous pouvez dès à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
+                    Console.WriteLine("Vous venez de planter 4 graines. Vous pouvez dès à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
                 }
                 chat.NiveauDeFaim -= 1;
                 chat.NiveauDivertissement -= 1;
@@ -74,7 +74,7 @@ namespace ConsoleApp1
             //comportement automatique de plantation (propre au chat agriculteur)
             if (numeroAction == 2)
             {
-                listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines, false);
+                listeRessources[8].Quantite += agriculteur.Planter(chat, listeRessources[7] as Graines, false);
             }
             //comportement automatique pour se nourrir
             if (numeroAction == 3)

@@ -144,6 +144,8 @@ namespace ConsoleApp1
                     }
                 }
                 seProtege = false;
+
+                //gestion du game over
                 int numChat = 0;
                 int numChatMort = 0;
                 while (numChat != listeChats.Count - 1)
@@ -179,7 +181,8 @@ namespace ConsoleApp1
                 }
             }
 
-            Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ? (Entrez OUI ou NON)");
+            //gestion du récapitulatif à la fin d'un tour
+            Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de vos chats avant de commencer le tour suivant ? (Entrez OUI ou NON)");
             string recap = "";
             do
             {
@@ -187,13 +190,16 @@ namespace ConsoleApp1
                 if (recap == "OUI")
                 {
                     AfficherRessources(listeRessources);
-                    chatCourant.AfficherNiveaux();
+                    foreach(Chats chat in listeChats)
+                    {
+                        chat.AfficherNiveaux();
+                    }
                 }
                 else
                 {
                     if (recap != "NON")
                     {
-                        Console.WriteLine("Attention vous devez entrer OUI ou NON, toute autre entrée ne peut être prise en compte.");
+                        Console.WriteLine("\nAttention vous devez entrer OUI ou NON, toute autre entrée ne peut être prise en compte.\n");
                         Console.WriteLine("Voulez-vous un récapitulatif ?");
                     }
                 }
@@ -273,7 +279,7 @@ namespace ConsoleApp1
             ET.VolerEnergie(chat);
             ET.VolerDivertissement(chat);
 
-            Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ");
+            Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 2 points de Faim, 2 points d'Energie et 2 points de Divertissement ");
         }
 
         public static int SeFaireAttaquer(Chats chat, int compteurAttaque, ref int compteurAction, Carte carte, List<Chats> listeChats, ref bool estAttaque, ref bool seProtege)
@@ -294,7 +300,7 @@ namespace ConsoleApp1
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write(" =================================== ");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("\nVous êtes sur le point de vous faire attaquer par un extraterrestre, deux choix s'offrent à vous :\n 1 : Se protéger et perdre une action sur le tour\n 2 : Ne pas de se protéger et perdre 1 point dans chaque niveau de santé");//donc le joueur perdrait un point de NiveauFai, un point de NiveauDivertissement et un point de NiveauEnergie si il ne se protège pas.
+                    Console.WriteLine("\nVous êtes sur le point de vous faire attaquer par un extraterrestre, deux choix s'offrent à vous :\n 1 : Se protéger et perdre une action sur le tour\n 2 : Ne pas de se protéger et perdre 2 points dans chaque niveau de santé");//donc le joueur perdrait un point de NiveauFai, un point de NiveauDivertissement et un point de NiveauEnergie si il ne se protège pas.
                     estAttaque = true;
                     int reponse = 0;
                     do
@@ -317,10 +323,10 @@ namespace ConsoleApp1
                             }
                             else
                             {
-                                Console.WriteLine("Attention, vous devez rentrer une valeur entre 1 et 2 !");
+                                Console.WriteLine("\nAttention, vous devez rentrer une valeur entre 1 et 2 !\n");
                             }
                         }
-                    } while (reponse < 1 && reponse > 2);
+                    } while (reponse!=1 && reponse!=2);
                     estAttaque = false;//on réinitialise estAttaque à la valeur false pour l'affiche de le carte de la prochaine action
                 }                
             }
@@ -388,11 +394,11 @@ namespace ConsoleApp1
         }
 
         public static void AfficherRessources(List<Ressources> listeRessources)//affiche toutes les ressources
-                                                                               //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
+        //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
         {
-            foreach (Ressources ressource in listeRessources)
+            for(int i=0; i<listeRessources.Count-1;i++)//on n'affiche pas la dernière ressource de la liste qui permet de garder la quantité de graine planter la dernière fois en mémoire.
             {
-                Console.WriteLine(ressource);
+                Console.WriteLine(listeRessources[i]);
             }
         }
 
@@ -406,7 +412,7 @@ namespace ConsoleApp1
                 i += 1;
             }
         }
-
+        
         public static int FaireActionMetier(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, Carte map, ref int compteurAction, List<Chats> listeChats, List<PnJ> listePnj)
         //ajouter le fait qu'il puisse se faire attaquer par extraterrestre
         //rajouter test si list pnj vide
@@ -421,7 +427,7 @@ namespace ConsoleApp1
             else
             {   if (numeroAction == 11)
                 {
-                    Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter");
+                    Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter\n");
                     actionRealisee = false;
                 }
                 else
@@ -429,12 +435,12 @@ namespace ConsoleApp1
                     {
                         Agriculteur agriculteur = fonction as Agriculteur;
                         agriculteur.AllerActivite(chat, listeBatiments[2]);//la place des batiments dans la liste dépends de la liste créer par InitialiserCarte()
-                        listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines, true);
+                        listeRessources[8].Quantite += agriculteur.Planter(chat, listeRessources[7] as Graines, true);
                     }
                     else
                     {   if (numeroAction == 12)
                         {
-                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Planter");
+                            Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Planter\n");
                             actionRealisee = false;
                         }
                         else
@@ -462,7 +468,7 @@ namespace ConsoleApp1
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Attention vous devez entrer un nombre entre 1 et 2.");
+                                            Console.WriteLine("\nAttention vous devez entrer un nombre entre 1 et 2.\n");
                                         }
                                     }
                                 } while (numRessourceCulturelle != 1 && numRessourceCulturelle != 2);                                
@@ -470,7 +476,7 @@ namespace ConsoleApp1
                             else
                             {   if (numeroAction == 21)
                                 {
-                                    Console.WriteLine("Attention ! Vous devez jouer en tant que chat artiste pour réaliser l'action Créer");
+                                    Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat artiste pour réaliser l'action Créer\n");
                                     actionRealisee = false;
                                 }
                                 else
@@ -501,7 +507,7 @@ namespace ConsoleApp1
                                             }
                                             if(numConsCorrect==false)
                                             {
-                                                Console.WriteLine("Attention le numéro entré est incorrect. Veuillez réessayer :");
+                                                Console.WriteLine("\nAttention le numéro entré est incorrect. Veuillez réessayer : ");
                                             }
                                         } while (numConsCorrect == false);
                                         Batisseur batisseur = fonction as Batisseur;
@@ -510,7 +516,7 @@ namespace ConsoleApp1
                                     else
                                     {   if (numeroAction == 31)
                                         {
-                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action Construire");
+                                            Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action Construire\n");
                                             actionRealisee = false;
                                         }
                                         else
@@ -525,7 +531,7 @@ namespace ConsoleApp1
                                             else
                                             {   if (numeroAction == 32)
                                                 {
-                                                    Console.WriteLine("Attention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action AbattreUnArbre");
+                                                    Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action AbattreUnArbre\n");
                                                     actionRealisee = false;
                                                 }
                                                 else
@@ -540,7 +546,7 @@ namespace ConsoleApp1
                                                     else
                                                     {   if (numeroAction == 33)
                                                         {
-                                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action Miner");
+                                                            Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat Bâtisseur pour réaliser l'action Miner\n");
                                                             actionRealisee = false;
                                                         }
                                                         else
@@ -554,7 +560,7 @@ namespace ConsoleApp1
                                                             else
                                                             {   if (numeroAction == 41)
                                                                 {
-                                                                    Console.WriteLine("Attention ! Vous devez jouer en tant que chat Pâtissier pour réaliser l'action Patisser");
+                                                                    Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat Pâtissier pour réaliser l'action Patisser\n");
                                                                     actionRealisee = false;
                                                                 }
                                                                 else
@@ -577,7 +583,7 @@ namespace ConsoleApp1
                                                                     else
                                                                     {   if (numeroAction == 51)
                                                                         {
-                                                                            Console.WriteLine("Attention ! Vous devez jouer en tant que chat Pêcheur pour réaliser l'action Pecher");
+                                                                            Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat Pêcheur pour réaliser l'action Pecher\n");
                                                                             actionRealisee = false;
                                                                         }
                                                                     }
@@ -611,8 +617,15 @@ namespace ConsoleApp1
                 int quantiteNourriture = 0;
                 do
                 {
-                    Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
-                    numNourriture = int.Parse(Console.ReadLine()) - 1;
+                    do
+                    {
+                        Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
+                        numNourriture = int.Parse(Console.ReadLine()) - 1;
+                        if(numNourriture != 0 && numNourriture != 1 && numNourriture != 2)
+                        {
+                            Console.WriteLine("\nAttention ! Vous devez entrer un nombre entre 1 et 3\n");
+                        }
+                    } while (numNourriture != 0 && numNourriture != 1 && numNourriture != 2);                    
                     quantiteNourriture = listeRessources[numNourriture].Quantite;
                     chat.PositionChat = listeBatiments[3].PositionBatiment;
                     chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
@@ -640,7 +653,7 @@ namespace ConsoleApp1
                             numDivertissement = int.Parse(Console.ReadLine()) + 4;
                             if(numDivertissement != 5 && numDivertissement != 6)
                             {
-                                Console.WriteLine("Vous devez entrer un nombre entre  1 et 2");
+                                Console.WriteLine("\nAttention ! Vous devez entrer un nombre entre  1 et 2\n");
                             }
                         } while (numDivertissement != 5 && numDivertissement != 6);
                         chat.SeDivertir(listeRessources[numDivertissement] as RessourceCulturelle);
@@ -665,7 +678,7 @@ namespace ConsoleApp1
                                 }
                                 if(numeroCorrect==false)
                                 {
-                                    Console.WriteLine("Le numéro entré n'est pas correct veuillez réessayer.");
+                                    Console.WriteLine("\nLe numéro entré n'est pas correct veuillez réessayer.\n");
                                 }
                             } while (numeroCorrect==false);
                             Console.WriteLine("Quel nom voulez-vous lui donner ?");
@@ -708,7 +721,7 @@ namespace ConsoleApp1
             {
                 if (numeroAction == 6)
                 {
-                    Console.WriteLine("Attention ! Vous devez d'abord débloquer le chat guérisseur en construisant l'infirmerie pour réaliser l'action Soigner");
+                    Console.WriteLine("\nAttention ! Vous devez d'abord débloquer le chat guérisseur en construisant l'infirmerie pour réaliser l'action Soigner\n");
                     actionRealisee = false;
                 }
                 else
@@ -723,7 +736,7 @@ namespace ConsoleApp1
                     {
                         if (numeroAction == 7)
                         {
-                            Console.WriteLine("Attention ! Vous devez d'abord débloquer le chat messager en construisant le bureau de poste pour réaliser l'action Livrer");
+                            Console.WriteLine("\nAttention ! Vous devez d'abord débloquer le chat messager en construisant le bureau de poste pour réaliser l'action Livrer\n");
                             actionRealisee = false;
                         }
                     }
@@ -882,7 +895,7 @@ namespace ConsoleApp1
                             Console.WriteLine(compteurAttaque);
                         }
                         else
-                            Console.WriteLine("Attention, vous devez choisir un numéro d'action existant");
+                            Console.WriteLine("\nAttention, vous devez choisir un numéro d'action existant\n");
                     }
                 }
                 //Regarder comment faire pour relancer la proposition
@@ -891,8 +904,3 @@ namespace ConsoleApp1
         }
     }
 }
-
-
-
-
-

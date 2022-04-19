@@ -128,11 +128,11 @@ namespace ConsoleApp1
                             if (listeChats[numChat].NiveauEnergie == 0)
                             {
                                 gameover = true;
+                                numChatMort = numChat;
                             }
                         }
                     }
                     numChat += 1;
-                    numChatMort = numChat;
                 }
                 if (gameover == true)
                 {

@@ -139,10 +139,6 @@ namespace ConsoleApp1
                     string message = "GAME OVER !!! \nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
                     Console.WriteLine(message);
                 }
-                else
-                {
-                    Console.WriteLine("Félicitation ! Vous avez réussi à aider les Chastronautes à reprendre leur voyage sans perdre aucun membre de leur équipage !");
-                }
             }
 
             Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ? (Entrez OUI ou NON)");
@@ -181,7 +177,11 @@ namespace ConsoleApp1
                     compteurTour += 1;
                 }
                 i += 1;
-            } while (i < listeChats.Count && gameover != true);    
+            } while (i < listeChats.Count && gameover != true);
+            if(gameover!=true)
+            {
+                Console.WriteLine("Félicitation ! Vous avez réussi à aider les Chastronautes à reprendre leur voyage sans perdre aucun membre de leur équipage !");
+            }
         }
 
 
@@ -483,7 +483,7 @@ namespace ConsoleApp1
                                                         Batisseur batisseur = fonction as Batisseur;
                                                         batisseur.AllerActivite(chat, listeBatiments[0]);
                                                         batisseur.Miner(listeRessources, chat);
-                                                        Console.WriteLine("Vous venez de miner, cela vous a permis d'ajouter 2 unité de pierre en plus dans vos ressoucres.");
+                                                        Console.WriteLine("Vous venez de miner, cela vous a permis d'ajouter 2 unité de pierre en plus dans vos ressources.");
                                                         Console.WriteLine("Voici vos ressources actuelles de construction : {0} bois et {1} pierres", listeRessources[3].Quantite, listeRessources[4].Quantite);
                                                     }
                                                     else

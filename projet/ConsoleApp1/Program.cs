@@ -150,6 +150,7 @@ namespace ConsoleApp1
                 {
                     FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour);
                     compteurTour += 1;
+
                     int numChat = 0;
                     int numChatMort = 0;
                     bool gameover = false;

@@ -18,7 +18,6 @@ namespace ConsoleApp1
             List<Chats> listeChats = CreerListeChats();//Création liste des Chats
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
-            int compteurTour = 0;
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
             Console.WriteLine(FaireDesTours(listeChats,carte, listeRessources, listeBatiments, listePnj));
             Console.ReadLine();
@@ -90,9 +89,10 @@ namespace ConsoleApp1
 
             Chats chatCourant = listeChats[chatJoue];
             int compteurAttaque = 0;
-            Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement un chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom);
+            Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement {2} le chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom, chatCourant.Nom);
             int compteurAction = 0;
             bool estAttaque = false;
+            bool seProtege = false;
             while(compteurAction<5)
             {
                 for (int c = 0; c < listeChats.Count; c++)
@@ -100,7 +100,7 @@ namespace ConsoleApp1
                     Console.WriteLine(listeChats[c].Nom);
                     listeChats[c].AfficherNiveaux();
                 }
-                compteurAttaque =ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque);
+                compteurAttaque =ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque, ref seProtege);
                 Console.WriteLine(chatCourant.PositionChat[0] + " " + chatCourant.PositionChat[1]);
                 AfficherCarte(map, chatCourant, listeChats, estAttaque);
                 for (int i = 0; i < listeChats.Count; i++)
@@ -109,8 +109,13 @@ namespace ConsoleApp1
                     {
                         Metier metier = listeChats[i].Fonction as Metier;
                         metier.AgirAutomatiquement(listeChats[i], listeRessources, compteurAction);
+                        if(seProtege==true)
+                        {
+                            metier.AgirAutomatiquement(listeChats[i], listeRessources, compteurAction);//le chat va agir automatiquement une deuxième fois car le chat s'est protéger donc le joueur à réaliser deux actions
+                        }
                     }
                 }
+                seProtege = false;
             }
 
             Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de votre chat avant de commencer le tour suivant ? (Entrez OUI ou NON)");
@@ -221,7 +226,7 @@ namespace ConsoleApp1
             Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 1 point de Faim, 1 point d'Energie et 1 point de Divertissement ");
         }
 
-        public static int SeFaireAttaquer(Chats chat, int compteurAttaque, ref int compteurAction, Carte carte, List<Chats> listeChats, ref bool estAttaque)
+        public static int SeFaireAttaquer(Chats chat, int compteurAttaque, ref int compteurAction, Carte carte, List<Chats> listeChats, ref bool estAttaque, ref bool seProtege)
         {
             if(compteurAttaque==0)
             {
@@ -250,6 +255,7 @@ namespace ConsoleApp1
                             {
                                 compteurAction += 1;
                                 compteurAttaque += 1;
+                                seProtege = true;
                                 Console.WriteLine("Vous vous êtes bien protégé !");
                             }
                             else
@@ -673,7 +679,7 @@ namespace ConsoleApp1
             return compteurAction;
         }
 
-        public static int ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque, ref bool estAttaque)
+        public static int ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque, ref bool estAttaque, ref bool seProtege)
         {
             //Affichage de la liste des actions 
             Console.WriteLine("Vous pouvez choisir une action à effectuer parmi la liste suivante : \n");
@@ -788,7 +794,7 @@ namespace ConsoleApp1
                 {
                     if(numeroAction!=4 && numeroAction!=5)
                     {
-                        compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
+                        compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
                     }
                     chat.AfficherNiveaux();
                     FaireActionBasique(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listeChats, map, ref compteurAction);
@@ -800,7 +806,7 @@ namespace ConsoleApp1
                 {
                     if ((numeroAction >= 11 && numeroAction <= 12) || (numeroAction >= 31 && numeroAction <= 33) || numeroAction==41 || numeroAction==21 || numeroAction == 51)
                     {
-                        compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
+                        compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
                         chat.AfficherNiveaux();
                         FaireActionMetier(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, map, ref compteurAction, listeChats, listePnj);
                         chat.AfficherNiveaux();
@@ -811,7 +817,7 @@ namespace ConsoleApp1
                     {
                         if (numeroAction >= 6 && numeroAction <= 7)
                         {
-                            compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
+                            compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
                             chat.AfficherNiveaux();
                             FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, ref compteurAction);
                             chat.AfficherNiveaux();

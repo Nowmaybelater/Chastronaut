@@ -36,7 +36,7 @@ namespace ConsoleApp1
             }
             else
             {
-                chat.NiveauDeFaim = chat.NiveauDeFaim - 1;
+                chat.NiveauDeFaim = chat.NiveauDeFaim - 2;
             }
         }
 
@@ -49,7 +49,7 @@ namespace ConsoleApp1
             }
             else
             {
-                chat.NiveauEnergie = chat.NiveauEnergie - 1;
+                chat.NiveauEnergie = chat.NiveauEnergie - 2;
             }
         }
 
@@ -62,7 +62,7 @@ namespace ConsoleApp1
             }
             else
             {
-                chat.NiveauDivertissement = chat.NiveauDivertissement - 1;
+                chat.NiveauDivertissement = chat.NiveauDivertissement - 2;
             }
         }
     }

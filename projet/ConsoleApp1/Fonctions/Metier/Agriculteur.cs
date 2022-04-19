@@ -52,7 +52,7 @@ namespace ConsoleApp1
                 int quantite = graines.Quantite;
                 if (afficher == true)
                 {
-                    Console.WriteLine("Vous avez pu planter {0} graines. Attention, vous ne posséder plus de graines dans votre inventaire, \npensez à récolter avant la prochaine plantation de graine.", quantite);
+                    Console.WriteLine("Vous avez pu planter {0} graines. Attention, vous ne possédez plus de graines dans votre inventaire, \npensez à récolter avant la prochaine plantation de graine.", quantite);
                 }
                 graines.Quantite = 0;
                 chat.NiveauDeFaim -= 1;

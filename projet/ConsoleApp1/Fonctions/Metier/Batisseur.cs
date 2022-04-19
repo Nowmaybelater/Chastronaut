@@ -109,35 +109,52 @@ namespace ConsoleApp1
             Batisseur B = chat.Fonction as Batisseur;
 
             //comportement automatique de la récolte de bois (propre au chat batisseur)
-            B.AbattreUnArbre(listeRessources, chat);
+            if (numeroAction == 1)
+            {
+                B.AbattreUnArbre(listeRessources, chat);
+            }
 
             //comportement automatique de la récolte de pierres (propre au chat batisseur)
-            B.Miner(listeRessources, chat);
+            if (numeroAction == 2)
+            {
+                B.Miner(listeRessources, chat);
+            }
 
             //comportement automatique pour se nourrir
-            int numNourriture = 0;
-            for (int i = 0; i <= 2; i++)
+            if (numeroAction == 3)
             {
-                if (listeRessources[i].Quantite > numNourriture)
+                int numNourriture = 0;
+                for (int i = 0; i <= 2; i++)
                 {
-                    numNourriture = i;
+                    if (listeRessources[i].Quantite > numNourriture)
+                    {
+                        numNourriture = i;
+                    }
                 }
+                chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);//le chat va manger une ressource alimentaire existante de façon automatique, la ressource consommée est celle dont la quantité est la plus élevée dans l'inventaire
+
             }
-            chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);//le chat va manger une ressource alimentaire existante de façon automatique, la ressource consommée est celle dont la quantité est la plus élevée dans l'inventaire
             //comportement automatique pour se divertir
-            if (listeRessources[6].Quantite != 0) //le chat commence automatiquement par se divertir avec un livre
+            if (numeroAction == 4)
             {
-                chat.SeDivertir(listeRessources[6] as Livres);
-            }
-            else
-            {
-                if (listeRessources[5].Quantite != 0)//s'il n'y a pas de livre, le chat se divertit avec un film
+                if (listeRessources[6].Quantite != 0) //le chat commence automatiquement par se divertir avec un livre
                 {
-                    chat.SeDivertir(listeRessources[5] as Films);
+                    chat.SeDivertir(listeRessources[6] as Livres);
+                }
+                else
+                {
+                    if (listeRessources[5].Quantite != 0)//s'il n'y a pas de livre, le chat se divertit avec un film
+                    {
+                        chat.SeDivertir(listeRessources[5] as Films);
+                    }
                 }
             }
+            
             //comportement automatique pour se reposer
-            chat.SeReposer();
+            if (numeroAction == 5)
+            {
+                chat.SeReposer();
+            }
 
         }
 

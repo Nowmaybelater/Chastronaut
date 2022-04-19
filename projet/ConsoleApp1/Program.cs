@@ -20,7 +20,7 @@ namespace ConsoleApp1
             List<PnJ> listePnj = CreerListePnJ();
             int compteurTour = 0;
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            FaireDesTours(listeChats,carte, listeRessources, listeBatiments, listePnj);
+            Console.WriteLine(FaireDesTours(listeChats,carte, listeRessources, listeBatiments, listePnj));
             Console.ReadLine();
         }
 
@@ -108,7 +108,7 @@ namespace ConsoleApp1
                     if (i != chatJoue && (listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
                     {
                         Metier metier = listeChats[i].Fonction as Metier;
-                        metier.AgirAutomatiquement(listeChats[i], listeRessources, i + 1);
+                        metier.AgirAutomatiquement(listeChats[i], listeRessources, compteurAction);
                     }
                 }
             }
@@ -139,36 +139,34 @@ namespace ConsoleApp1
         public static string FaireDesTours(List<Chats> listeChats, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj)
         {            
             int compteurTour = 0;
-            for(compteurTour=0; compteurTour<listeChats.Count; compteurTour++)
+            for (int i = 0; i < listeChats.Count; i++)
             {
-                for (int i = 0; i < listeChats.Count; i++)
+                if((listeChats[i].Fonction is Guerisseur)==false && (listeChats[i].Fonction is Messager) == false)
                 {
-                    if((listeChats[i].Fonction is Guerisseur)==false && (listeChats[i].Fonction is Messager) == false)
+                    FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour);
+                    compteurTour += 1;
+                    int numChat = 0;
+                    int numChatMort = 0;
+                    bool gameover = false;
+                    while(numChat!=listeChats.Count-1)
                     {
-                        FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour);
-                        int numChat = 0;
-                        int numChatMort = 0;
-                        bool gameover = false;
-                        while(numChat!=listeChats.Count-1)
+                        if(listeChats[numChat].NiveauDeFaim==0)
                         {
-                            if(listeChats[numChat].NiveauDeFaim==0)
+                            if(listeChats[numChat].NiveauDivertissement == 0 )
                             {
-                                if(listeChats[numChat].NiveauDivertissement == 0 )
+                                if(listeChats[numChat].NiveauEnergie == 0)
                                 {
-                                    if(listeChats[numChat].NiveauEnergie == 0)
-                                    {
-                                        gameover = true;
-                                    }
+                                    gameover = true;
                                 }
                             }
-                            numChat += 1;
-                            numChatMort = numChat;
                         }
-                        if(gameover==true)
-                        {
-                            string message = "GAME OVER !!! \nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
-                            return message;
-                        }
+                        numChat += 1;
+                        numChatMort = numChat;
+                    }
+                    if(gameover==true)
+                    {
+                        string message = "GAME OVER !!! \nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
+                        return message;
                     }
                 }
             }

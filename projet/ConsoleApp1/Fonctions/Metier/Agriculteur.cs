@@ -42,33 +42,34 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine("Vous venez de planter 10 graines. Vous pouvez dès à présent ramasser votre récolte ou laisser un chat agriculteur s'en occuper lors du prochain tour.");
                 }
+                chat.NiveauDeFaim -= 1;
+                chat.NiveauDivertissement -= 1;
+                chat.NiveauEnergie -= 1;
                 return 4;
             }
             else//s'il y a moins de cinq graines dans l'inventaire, toutes les graines de l'inventaire sont plantées
             {
+                int quantite = graines.Quantite;
                 if (afficher == true)
                 {
-                    Console.WriteLine("Vous avez pu planter {0} graines. Attention, vous ne posséder plus de graines dans votre inventaire, \npensez à récolter avant la prochaine plantation de graine.", graines.Quantite);
+                    Console.WriteLine("Vous avez pu planter {0} graines. Attention, vous ne posséder plus de graines dans votre inventaire, \npensez à récolter avant la prochaine plantation de graine.", quantite);
                 }
-                return graines.Quantite;
                 graines.Quantite = 0;
+                chat.NiveauDeFaim -= 1;
+                chat.NiveauDivertissement -= 1;
+                chat.NiveauEnergie -= 1;
+                return quantite;
             }
-            chat.NiveauDeFaim -= 1;
-            chat.NiveauDivertissement -= 1;
-            chat.NiveauEnergie -= 1;
         }
 
         //La méthode suivante gère le comportement automatique du chat agriculteur, qui réalise les cinq actions suivantes : manger, se reposer, se divertir, planter et récolter
         public override void AgirAutomatiquement (Chats chat, List<Ressources> listeRessources)//correspond à cinq actions, car un tour est caractérisé par cinq actions pour chaque chat
         {
             Agriculteur agriculteur = chat.Fonction as Agriculteur;
-
             //comportement automatique de récolte (propre au chat agriculteur)
             agriculteur.Recolter(chat, listeRessources, false);
-
             //comportement automatique de plantation (propre au chat agriculteur)
             listeRessources[8].Quantite = agriculteur.Planter(chat, listeRessources[7] as Graines, false);
-
             //comportement automatique pour se nourrir
             int numNourriture = 0;
             for (int i = 0; i <= 2; i++)
@@ -79,7 +80,6 @@ namespace ConsoleApp1
                 }
             }
             chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);//le chat va manger une ressource alimentaire existante de façon automatique, la ressource consommée est celle dont la quantité est la plus élevée dans l'inventaire
-
 
             //comportement automatique pour se divertir
             if (listeRessources[6].Quantite != 0) //le chat commence automatiquement par se divertir avec un livre
@@ -93,10 +93,8 @@ namespace ConsoleApp1
                     chat.SeDivertir(listeRessources[5] as Films);
                 }
             }
-
             //comportement automatique pour se reposer
             chat.SeReposer();
-
         }
     }
 }

@@ -124,18 +124,18 @@ namespace ConsoleApp1
                 }
             }
             chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);//le chat va manger une ressource alimentaire existante de façon automatique, la ressource consommée est celle dont la quantité est la plus élevée dans l'inventaire
-
             //comportement automatique pour se divertir
             if (listeRessources[6].Quantite != 0) //le chat commence automatiquement par se divertir avec un livre
             {
                 chat.SeDivertir(listeRessources[6] as Livres);
             }
-
-            if (listeRessources[5].Quantite != 0)//s'il n'y a pas de livre, le chat se divertit avec un film
+            else
             {
-                chat.SeDivertir(listeRessources[5] as Films);
+                if (listeRessources[5].Quantite != 0)//s'il n'y a pas de livre, le chat se divertit avec un film
+                {
+                    chat.SeDivertir(listeRessources[5] as Films);
+                }
             }
-
             //comportement automatique pour se reposer
             chat.SeReposer();
 

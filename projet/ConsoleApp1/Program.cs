@@ -18,8 +18,11 @@ namespace ConsoleApp1
             List<Chats> listeChats = CreerListeChats();//Création liste des Chats
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
+            int compteurTour = 0;
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            Console.WriteLine(FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj));
+            Metier metier= listeChats[5].Fonction as Metier;
+            metier.AgirAutomatiquement(listeChats[5], listeRessources);
+            //FaireUnTour(listeChats, 0,carte, listeRessources, listeBatiments, listePnj, ref compteurTour);
             Console.ReadLine();
         }
 
@@ -202,7 +205,9 @@ namespace ConsoleApp1
             Chats chatBatisseur2 = new Chats("Chat4", batisseur2, 10, 10, 10);
             Patissier patissier = new Patissier();
             Chats chatPatissier = new Chats("Chat5", patissier, 10, 10, 10);
-            List<Chats> listeChats = new List<Chats> { chatBatisseur1, chatAgriculteur1, chatArtiste, chatBatisseur2, chatPatissier};
+            Pecheur pecheur = new Pecheur();
+            Chats chatpecheur = new Chats("Chat5", pecheur, 10, 10, 10);
+            List<Chats> listeChats = new List<Chats> { chatBatisseur1, chatAgriculteur1, chatArtiste, chatBatisseur2, chatPatissier, chatpecheur};
             return listeChats;
         }
 
@@ -784,7 +789,9 @@ namespace ConsoleApp1
                     {
                         compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
                     }
+                    chat.AfficherNiveaux();
                     FaireActionBasique(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listeChats, map, ref compteurAction);
+                    chat.AfficherNiveaux();
                     /*Console.WriteLine(compteurAction);*/
                     Console.WriteLine(compteurAttaque);
                 }
@@ -793,7 +800,9 @@ namespace ConsoleApp1
                     if ((numeroAction >= 11 && numeroAction <= 12) || (numeroAction >= 31 && numeroAction <= 33) || numeroAction==41 || numeroAction==21 || numeroAction == 51)
                     {
                         compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
+                        chat.AfficherNiveaux();
                         FaireActionMetier(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, map, ref compteurAction, listeChats, listePnj);
+                        chat.AfficherNiveaux();
                         Console.WriteLine(compteurAction);
                         Console.WriteLine(compteurAttaque);
                     }
@@ -802,7 +811,9 @@ namespace ConsoleApp1
                         if (numeroAction >= 6 && numeroAction <= 7)
                         {
                             compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque);
+                            chat.AfficherNiveaux();
                             FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, ref compteurAction);
+                            chat.AfficherNiveaux();
                             Console.WriteLine(compteurAction);
                             Console.WriteLine(compteurAttaque);
                         }

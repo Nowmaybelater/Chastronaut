@@ -26,15 +26,27 @@ namespace ConsoleApp1
         public static string PresenterJeu(ref bool veutJouer)
         {
             veutJouer = true; //booléen utile dans le programme principal : selon la valeur de veutJouer, une partie se relance ou pas
-            Console.WriteLine(" \n ==================== BIENVENUE SUR LE JEU CHASTRONAUTES ! ==================== \n ");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" \n ======================= ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("BIENVENUE SUR LE JEU CHASTRONAUTES !");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" ======================= \n ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write(" Pour une meilleure expérience de jeu, pensez à afficher la console en plein écran ! \n");
 
             Console.WriteLine(" \n Voulez-vous afficher l'histoire ? (tapez NON pour passer, appuyez sur la touche entrée sinon)");
             string afficheHistoire = Console.ReadLine();
             if (afficheHistoire != "NON")
             {
-                Console.WriteLine(" \n ================================== HISTOIRE ================================== \n ");
-                Console.WriteLine(" Sur une charmante planète, dans une galaxie éloignée de la notre, " +
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write(" \n ===================================== ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("HISTOIRE ");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("===================================== \n ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n Sur une charmante planète, dans une galaxie éloignée de la notre, " +
                     "\n un peuple de chats vivait dans la paix et la prospérité. Alors que leur nombre" +
                     "\n grandissait, l'espace vint à manquer sur la planète des chats. Les plus courageux " +
                     "\n d'entre eux décidèrent de partir explorer l'espace à la recherche d'une nouvelle planète : " +
@@ -46,8 +58,14 @@ namespace ConsoleApp1
                     "\n plusieurs négociations, ils acceptèrent de partager leur territoire le temps " +
                     "\n pour les Chastronautes de reprendre contact avec les leurs...");
 
-                Console.WriteLine(" \n ================================ REGLES DU JEU ================================ \n ");
-                Console.WriteLine(" Au cours de la partie, vous allez devoir aider les Chastronautes à survivre le temps" +
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write(" \n =================================== ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("REGLES DU JEU ");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("=================================== \n ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n Au cours de la partie, vous allez devoir aider les Chastronautes à survivre le temps" +
                     "\n que leur appareil de communication soit réparé. A chaque tour, vous incarnez " +
                     "\n l'un des Chastronautes. Chacun des Chastronautes que vous incarnez possède un " +
                     "\n rôle particulier : bâtisseur, pêcheur, agriculteur, artiste ou pâtissier. " +
@@ -61,8 +79,9 @@ namespace ConsoleApp1
                     "\n divertissement et de repos de chacun des personnages que vous incarnerez." +
                     "\n Attention cependant aux extraterrestres qui, voyant que les Chastronautes" +
                     "\n tardent à repartir, lancent des attaques pour tenter de les chasser de la planète !");
-                Console.WriteLine(" \n ==================================================================================== \n ");
-
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine(" \n ====================================================================================== \n ");
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
             Console.Write(" \n Choisissez le nom de votre colonie : ");
@@ -78,8 +97,9 @@ namespace ConsoleApp1
                 Console.WriteLine(" \n A bientôt !");
                 veutJouer = false; //la valeur de veutJouer change parce que le joueur ici ne veut pas continuer à jouer après la lecture de l'histoire
             }
-            Console.WriteLine(" \n ==================================================================================== \n ");
-
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine(" \n ====================================================================================== \n ");
+            Console.ForegroundColor = ConsoleColor.White;
             return (nomColonie);
 
         }
@@ -89,6 +109,13 @@ namespace ConsoleApp1
 
             Chats chatCourant = listeChats[chatJoue];
             int compteurAttaque = 0;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write(" \n ====================================== ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("TOUR n°{0} ", compteurTour + 1);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("====================================== \n ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement {2} le chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom, chatCourant.Nom);
             int compteurAction = 0;
             bool estAttaque = false;
@@ -136,8 +163,15 @@ namespace ConsoleApp1
                 }
                 if (gameover == true)
                 {
-                    string message = "GAME OVER !!! \nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
+                    string message = "\nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(" \n ============================================================================ ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("GAME OVER !!! ");
                     Console.WriteLine(message);
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("============================================================================ \n ");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
 
@@ -180,7 +214,13 @@ namespace ConsoleApp1
             } while (i < listeChats.Count && gameover != true);
             if(gameover!=true)
             {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write(" \n ============================================================================ ");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Félicitation ! Vous avez réussi à aider les Chastronautes à reprendre leur voyage sans perdre aucun membre de leur équipage !");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write(" \n ============================================================================ ");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
 
@@ -243,7 +283,14 @@ namespace ConsoleApp1
                     Extraterrestre ET = new Extraterrestre();
                     ET.AllerActivite(chat, chat.PositionChat);
                     AfficherCarte(carte, chat, listeChats, true);
-                    Console.WriteLine("Vous êtes sur le point de vous faire attaquer par un extraterrestre, deux choix s'offrent à vous :\n 1 : Se protéger et perdre une action sur le tour\n 2 : Ne pas de se protéger et perdre 1 point dans chaque niveau de santé");//donc le joueur perdrait un point de NiveauFai, un point de NiveauDivertissement et un point de NiveauEnergie si il ne se protège pas.
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(" \n =================================== ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("ATTENTION ! ");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(" =================================== ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\nVous êtes sur le point de vous faire attaquer par un extraterrestre, deux choix s'offrent à vous :\n 1 : Se protéger et perdre une action sur le tour\n 2 : Ne pas de se protéger et perdre 1 point dans chaque niveau de santé");//donc le joueur perdrait un point de NiveauFai, un point de NiveauDivertissement et un point de NiveauEnergie si il ne se protège pas.
                     estAttaque = true;
                     int reponse = 0;
                     do

@@ -77,18 +77,19 @@ namespace ConsoleApp1
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("\n Au cours de la partie, vous allez devoir aider les Chastronautes à survivre le temps" +
                     "\n que leur appareil de communication soit réparé. A chaque tour, vous incarnez " +
-                    "\n l'un des Chastronautes. Chacun des Chastronautes que vous incarnez possède un " +
-                    "\n rôle particulier : bâtisseur, pêcheur, agriculteur, artiste ou pâtissier. " +
-                    "\n Pendant un tour, vous devez effectuer 5 actions avec le Chastronaute que " +
-                    "\n vous incarnez, actions qui dépendent du rôle du personnage. Une fois les " +
-                    "\n 5 actions réalisées, un nouveau tour commence, au cours duquel vous incarnez " +
+                    "\n l'un des Chastronautes, représenté sur la carte par un carré violet. Chacun des " +
+                    "\n Chastronautes que vous incarnez possède un rôle particulier : bâtisseur, pêcheur, " +
+                    "\n agriculteur, artiste ou pâtissier. Pendant un tour, vous devez effectuer 5 actions " +
+                    "\n avec le Chastronaute que vous incarnez, actions qui dépendent du rôle du personnage. " +
+                    "\n Une fois les 5 actions réalisées, un nouveau tour commence, au cours duquel vous incarnez " +
                     "\n un nouveau Chastronaute. Selon vos stratégies de jeu, vous incarnerez entre" +
-                    "\n 5 et 9 des Chastronautes. Il existe également un messager et un guérisseur " +
-                    "\n que vous pouvez débloquer mais que vous ne pourrez pas enrôler. Pour remporter" +
-                    "\n la partie, vous devez vous assurer de maintenir les niveaux de faim, de " +
-                    "\n divertissement et de repos de chacun des personnages que vous incarnerez." +
-                    "\n Attention cependant aux extraterrestres qui, voyant que les Chastronautes" +
-                    "\n tardent à repartir, lancent des attaques pour tenter de les chasser de la planète !");
+                    "\n 5 et 9 des Chastronautes. Il existe également un messager et un guérisseur : ce sont des " +
+                    "\n Personnages non Joueurs, ce qui signifie que vous pouvez les débloquer et interagir avec " +
+                    "\n eux mais que vous ne pourrez pas enrôler. Pour remporter la partie, vous devez vous " +
+                    "\n assurer de maintenir les niveaux de faim, de divertissement et de repos de chacun " +
+                    "\n des personnages que vous incarnerez. Attention cependant aux extraterrestres qui, " +
+                    "\n voyant que les Chastronautes tardent à repartir, lancent des attaques pour tenter " +
+                    "\n de les chasser de la planète !");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(" \n ====================================================================================== \n ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -252,7 +253,7 @@ namespace ConsoleApp1
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write(" \n ============================================================================ ");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\nFélicitation ! Vous avez réussi à aider les Chastronautes de la colonie {0}"+
+                Console.WriteLine("\nFélicitations ! Vous avez réussi à aider les Chastronautes de la colonie {0}"+
                                   "\n     à reprendre leur voyage sans perdre aucun membre de leur équipage !", nomColonie);
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write(" \n ============================================================================ ");

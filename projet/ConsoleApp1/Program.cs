@@ -21,7 +21,7 @@ namespace ConsoleApp1
                 List<Batiments> listeBatiments = new List<Batiments> { };//création de la liste de batiments
                 List<PnJ> listePnj = CreerListePnJ();
                 rejouer = false;
-                Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
+                Carte carte = InitialiserCarte(listeRessources, listeBatiments);
                 FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj, nomColonie);
                 Console.WriteLine("Voulez-vous refaire une partie ? (OUI ou NON)");
                 string reponse = Console.ReadLine();
@@ -128,8 +128,10 @@ namespace ConsoleApp1
             Console.Write("====================================== \n ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement {2} le chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom, chatCourant.Nom);
-            int compteurAction = 0;
+            Console.WriteLine("Voici votre carte de jeux :\n");
             bool estAttaque = false;
+            AfficherCarte(map, chatCourant, listeChats, estAttaque);
+            int compteurAction = 0;            
             bool seProtege = false;
             bool gameover = false;
             bool estSoigne = false;
@@ -363,7 +365,7 @@ namespace ConsoleApp1
             return compteurAttaque;
         }
 
-        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments, Chats chat)
+        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
             Carte map = new Carte();
             Bois bois = listeRessources[3] as Bois;
@@ -388,8 +390,6 @@ namespace ConsoleApp1
 
             Atelier atelier = new Atelier();//Création d'un atelier pour que les chats artistes puissent créer du divertissement
             atelier.Construire(map, listeRessources, listeBatiments);
-
-
             return map;
         }
 
@@ -433,7 +433,7 @@ namespace ConsoleApp1
         }
 
         public static void AfficherChats(List<Chats> listeChats)//affiche toutes les ressources
-                                                                               //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
+        //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
         {
             int i = 1;
             foreach (Chats chat in listeChats)

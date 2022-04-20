@@ -21,7 +21,8 @@ namespace ConsoleApp1
         //La méthode suivante permet au Guérisseur de soigner le chat qui est venu lui rendre visite, c'est-à-dire qu'il remet son niveau d'énergie au maximum
         public void Soigner(Chats chat)
         {
-            chat.NiveauEnergie = 10;
+                chat.NiveauEnergie = 10;
+                chat.NiveauDeFaim += 3;
             //on n'enlève pas de points au niveaux de santé de ce chat, car il vient de se faire soigner 
         }
     }

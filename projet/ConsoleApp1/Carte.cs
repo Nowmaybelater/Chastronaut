@@ -26,24 +26,5 @@ namespace ConsoleApp1
                 }
             }
         }
-
-        //à supprimer éventuellement ?
-        public override string ToString()
-        {
-            string affichage = "";
-            for (int i = 0; i < 20; i++)
-            {
-                for (int j = 0; j < 50; j++)
-                {
-                    affichage += Map[i, j];
-                }
-                affichage += "\n";
-            }
-            return affichage;
-        }
-
-
-
-
     }
 }

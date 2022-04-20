@@ -20,12 +20,8 @@ namespace ConsoleApp1
             List<PnJ> listePnj = CreerListePnJ();
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
             int compteur = 0;
-            bool estAttaque = false;
-            bool seProtege = false;
-            int compteur2 = 0;
-            FaireUnTour(listeChats,0, carte, listeRessources, listeBatiments, listePnj, ref compteur);
-            Console.WriteLine(estAttaque);
-            Console.WriteLine(seProtege);
+
+            FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj);
             //FaireUnTour(listeChats,0,carte, listeRessources, listeBatiments, listePnj, ref compteur);
             Console.ReadLine();
         }
@@ -128,16 +124,17 @@ namespace ConsoleApp1
             bool estAttaque = false;
             bool seProtege = false;
             bool gameover = false;
-            while (compteurAction<5)
-            {
-                for (int c = 0; c < listeChats.Count; c++)
-                {
-                    Console.WriteLine(listeChats[c].Nom);
-                    listeChats[c].AfficherNiveaux();
-                }
-                compteurAttaque =ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque, ref seProtege);
-                Console.WriteLine(chatCourant.PositionChat[0] + " " + chatCourant.PositionChat[1]);
+            bool estSoigne = false;
+            while (compteurAction<5 && gameover==false)
+            { 
+                compteurAttaque =ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque, ref seProtege, compteurTour+1, ref estSoigne);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("\n======================================================================================================================================================\n");
+                Console.ForegroundColor = ConsoleColor.White;
                 AfficherCarte(map, chatCourant, listeChats, estAttaque);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("\n======================================================================================================================================================\n");
+                Console.ForegroundColor = ConsoleColor.White;
                 for (int i = 0; i < listeChats.Count; i++)
                 {
                     if (i != chatJoue && (listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
@@ -181,20 +178,28 @@ namespace ConsoleApp1
                 }
                 if (gameover == true)
                 {
-                    string message = "\nVous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \nVotre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
+                    string message = "\n Vous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \n Votre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write(" \n ============================================================================ ");
+                    Console.Write(" \n ==================================================================================== ");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("GAME OVER !!! ");
+                    Console.Write(" \n                                     GAME OVER !!! ");
                     Console.WriteLine(message);
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("============================================================================ \n ");
+                    Console.Write("===================================================================================== \n ");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
 
             //gestion du récapitulatif à la fin d'un tour
-            Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de vos chats avant de commencer le tour suivant ? (Entrez OUI ou NON)");
+            if (gameover == false)
+            {
+                Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de vos chats avant de commencer le tour suivant ? (Entrez OUI ou NON)");
+
+            }
+            else
+            {
+                Console.WriteLine("Vous êtes arrivé à la fin du jeu, voulez-vous un récapitulatif des ressources et de l'état de santé de vos chats ? (Entrez OUI ou NON)");
+            }
             string recap = "";
             do
             {
@@ -204,6 +209,7 @@ namespace ConsoleApp1
                     AfficherRessources(listeRessources);
                     foreach(Chats chat in listeChats)
                     {
+                        Console.WriteLine(chat.Nom + " le chat " + chat.Fonction.Nom);
                         chat.AfficherNiveaux();
                     }
                 }
@@ -494,36 +500,86 @@ namespace ConsoleApp1
                                 else
                                 {   if (numeroAction == 31 && chat.Fonction is Batisseur) //Construire
                                     {
-                                        Console.WriteLine("Que voulez-vous construire ?  \n1 : Infirmerie (nécessite 1 bois et 1 pierre)\n2 : Poste (nécessite 1 bois et 1 pierre)\n3 : Potager (nécessite 2 bois)\n4 : Zone de pêche (nécessite 2 pierres)\n5 : Voir mes ressources");
-                                        int numConstruction = 0;
-                                        bool numConsCorrect = false;
-                                        do
-                                        {                                            
-                                            numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
-                                            if (numConstruction == 11)//5+6
+                                        if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")
+                                        {
+                                            Console.WriteLine("Vous avez déjà construit tous le bâtiments qu'un chat batisseur peut construire sur la carte choisissez une autre activité");
+                                            actionRealisee = false;
+                                        }
+                                        else
+                                        {
+                                            
+                                            Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);
+                                            Console.WriteLine("\nQue voulez-vous construire ?");
+                                            if (map.Map[12, 18] != "Inf")
                                             {
-                                                Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);
-                                                Console.WriteLine("Que voulez-vous construire ?  \n1 : Infirmerie (nécessite 1 bois et 1 pierre)\n2 : Poste (nécessite 1 bois et 1 pierre)\n3 : Potager (nécessite 2 bois)\n4 : Zone de pêche (nécessite 2 pierres)");
+                                                Console.WriteLine("1 : Infirmerie (nécessite 1 bois et 1 pierre)");
+                                            }
+                                            if (map.Map[8, 18] != "  Po")
+                                            {
+                                                Console.WriteLine("2 : Poste (nécessite 1 bois et 1 pierre)");
+                                            }
+                                            if (map.Map[7, 5] != " Po")
+                                            {
+                                                Console.WriteLine("3 : Potager (nécessite 2 bois)");
+                                            }
+                                            if (map.Map[2, 46] != " Zo")
+                                            {
+                                                Console.WriteLine("4 : Zone de pêche (nécessite 2 pierres)");
+                                            }
+                                            Console.WriteLine("5 : Voir mes ressources");
+                                            int numConstruction = 0;
+                                            bool numConsCorrect = false;
+                                            do
+                                            {
                                                 numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
-                                                if (numConstruction >= 7 && numConstruction <= 10)
+                                                if (numConstruction == 11)//5+6
                                                 {
-                                                    numConsCorrect = true;
+                                                    if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")
+                                                    {
+                                                        Console.WriteLine("Vous avez déjà construit tous le bâtiments qu'un chat batisseur peut construire sur la carte choisissez une autre activité");
+                                                    }
+                                                    else
+                                                    {
+                                                        Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);
+                                                        Console.WriteLine("\nQue voulez-vous construire ?");
+                                                        if (map.Map[12, 18] != "Inf")
+                                                        {
+                                                            Console.WriteLine("1 : Infirmerie (nécessite 1 bois et 1 pierre)");
+                                                        }
+                                                        if (map.Map[8, 18] != "  Po")
+                                                        {
+                                                            Console.WriteLine("2 : Poste (nécessite 1 bois et 1 pierre)");
+                                                        }
+                                                        if (map.Map[7, 5] != " Po")
+                                                        {
+                                                            Console.WriteLine("3 : Potager (nécessite 2 bois)");
+                                                        }
+                                                        if (map.Map[2, 46] != " Zo")
+                                                        {
+                                                            Console.WriteLine("4 : Zone de pêche (nécessite 2 pierres)");
+                                                        }
+                                                        numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
+                                                        if (numConstruction >= 7 && numConstruction <= 10)
+                                                        {
+                                                            numConsCorrect = true;
+                                                        }
+                                                    }
                                                 }
-                                            }
-                                            else
-                                            {
-                                                if (numConstruction >= 7 && numConstruction <= 11)
+                                                else
                                                 {
-                                                    numConsCorrect = true;
+                                                    if (numConstruction >= 7 && numConstruction <= 11)
+                                                    {
+                                                        numConsCorrect = true;
+                                                    }
                                                 }
-                                            }
-                                            if(numConsCorrect==false)
-                                            {
-                                                Console.WriteLine("\nAttention le numéro entré est incorrect. Veuillez réessayer : ");
-                                            }
-                                        } while (numConsCorrect == false);
-                                        Batisseur batisseur = fonction as Batisseur;
-                                        batisseur.Construire(numConstruction, map, chat, listeRessources, listeBatiments, listeChats, listePnj);
+                                                if (numConsCorrect == false)
+                                                {
+                                                    Console.WriteLine("\nAttention le numéro entré est incorrect. Veuillez réessayer : ");
+                                                }
+                                            } while (numConsCorrect == false);
+                                            Batisseur batisseur = fonction as Batisseur;
+                                            batisseur.Construire(numConstruction, map, chat, listeRessources, listeBatiments, listeChats, listePnj);
+                                        }
                                     }
                                     else
                                     {   if (numeroAction == 31)
@@ -537,7 +593,7 @@ namespace ConsoleApp1
                                                 Batisseur batisseur = fonction as Batisseur;
                                                 batisseur.AllerActivite(chat, listeBatiments[1]);
                                                 batisseur.AbattreUnArbre(listeRessources, chat);
-                                                Console.WriteLine("Vous venez d'abattre un arbre, cela vous à permis d'ajouter 2 planches de bois en plus dans vos ressoucres.");
+                                                Console.WriteLine("\nVous venez d'abattre un arbre, cela vous à permis d'ajouter 2 planches de bois en plus dans vos ressoucres.");
                                                 Console.WriteLine("Voici vos ressources actuelle de construction : {0} bois et {1} pierre(s)", listeRessources[3].Quantite, listeRessources[4].Quantite);
                                             }
                                             else
@@ -552,7 +608,7 @@ namespace ConsoleApp1
                                                         Batisseur batisseur = fonction as Batisseur;
                                                         batisseur.AllerActivite(chat, listeBatiments[0]);
                                                         batisseur.Miner(listeRessources, chat);
-                                                        Console.WriteLine("Vous venez de miner, cela vous a permis d'ajouter 2 unité de pierre en plus dans vos ressources.");
+                                                        Console.WriteLine("\nVous venez de miner, cela vous a permis d'ajouter 2 unité de pierre en plus dans vos ressources.");
                                                         Console.WriteLine("Voici vos ressources actuelles de construction : {0} bois et {1} pierres", listeRessources[3].Quantite, listeRessources[4].Quantite);
                                                     }
                                                     else
@@ -567,7 +623,7 @@ namespace ConsoleApp1
                                                                 Patissier patissier = fonction as Patissier;
                                                                 patissier.AllerActivite(chat, listeBatiments[5]);
                                                                 patissier.Patisser(listeRessources[1] as Gateaux, chat);
-                                                                Console.WriteLine("Vous venez de faire 3 gâteaux, voici l'inventaire de vos ressources alimentaires : \n" + listeRessources[0] + listeRessources[1] + listeRessources[2]);
+                                                                Console.WriteLine("\nVous venez de faire 3 gâteaux, voici l'inventaire de vos ressources alimentaires : \n" + listeRessources[0] + listeRessources[1] + listeRessources[2]);
                                                             }
                                                             else
                                                             {   if (numeroAction == 41)
@@ -589,7 +645,7 @@ namespace ConsoleApp1
                                                                         }
                                                                         pecheur.AllerActivite(chat, listeBatiments[placeZoneDePeche]);
                                                                         pecheur.Pecher(listeRessources[2] as Poissons, chat);
-                                                                        Console.WriteLine("Vous avez pêché 5 poissons.\nVoici vos ressources alimentaires.");
+                                                                        Console.WriteLine("\nVous avez pêché 5 poissons.\nVoici vos ressources alimentaires.");
                                                                         Console.WriteLine(listeRessources[0] + "" + listeRessources[1] + listeRessources[2]+ " ");
                                                                     }
                                                                     else
@@ -631,7 +687,7 @@ namespace ConsoleApp1
                 {
                     do
                     {
-                        Console.WriteLine("Que voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
+                        Console.WriteLine("\nQue voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
                         numNourriture = int.Parse(Console.ReadLine()) - 1;
                         if(numNourriture != 0 && numNourriture != 1 && numNourriture != 2)
                         {
@@ -661,7 +717,7 @@ namespace ConsoleApp1
                         int numDivertissement = 0;
                         do
                         {
-                            Console.WriteLine("Que voulez-vous utiliser comme ressource pour que votre chat se divertisse ? \n1 : Film \n2 : Livre");
+                            Console.WriteLine("\nQue voulez-vous utiliser comme ressource pour que votre chat se divertisse ? \n1 : Film \n2 : Livre");
                             numDivertissement = int.Parse(Console.ReadLine()) + 4;
                             if(numDivertissement != 5 && numDivertissement != 6)
                             {
@@ -676,13 +732,13 @@ namespace ConsoleApp1
                     {
                         if (numeroAction == 4) //Changer le nom  d'un chat
                         {
-                            Console.WriteLine("Voici la liste de vos chats :");
+                            Console.WriteLine("\nVoici la liste de vos chats :");
                             AfficherChats(listeChats);
                             int numChat = 0;
                             bool numeroCorrect = false;
                             do
                             {
-                                Console.WriteLine("Quel nom voulez - vous changer ?");
+                                Console.WriteLine("\nQuel nom voulez - vous changer ?");
                                 numChat = int.Parse(Console.ReadLine()) - 1;
                                 if(numChat>=0 && numChat<=listeChats.Count-1)
                                 {
@@ -693,9 +749,9 @@ namespace ConsoleApp1
                                     Console.WriteLine("\nLe numéro entré n'est pas correct veuillez réessayer.\n");
                                 }
                             } while (numeroCorrect==false);
-                            Console.WriteLine("Quel nom voulez-vous lui donner ?");
+                            Console.WriteLine("\nQuel nom voulez-vous lui donner ?");
                             listeChats[numChat].Nom = Console.ReadLine();
-                            Console.WriteLine("Votre chat {0} a bien été renommé {1}", listeChats[numChat].Fonction.Nom, listeChats[numChat].Nom);
+                            Console.WriteLine("\nVotre chat {0} a bien été renommé {1}", listeChats[numChat].Fonction.Nom, listeChats[numChat].Nom);
                             actionRealisee = false;
                         }
                         else
@@ -719,15 +775,24 @@ namespace ConsoleApp1
 
 
 
-        public static int FaireActionPnj(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, Carte map, ref int compteurAction)
+        public static int FaireActionPnj(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, Carte map, ref int compteurAction, int compteurTour, ref bool estSoigne)
         {
             bool actionRealisee = true;
             if (numeroAction == 6 && map.Map[12, 18] == "Inf") //Se faire soigner
             {
                 Guerisseur guerisseur = listePnj[0] as Guerisseur;
                 guerisseur.AllerActivite(chat, new int[] { 12, 19 });
-                guerisseur.Soigner(chat);
-                Console.WriteLine("Vous venez d'aller voir le guérisseur, votre chat a donc un niveau d'énergie à 10.");
+                if(compteurTour%2==0 && estSoigne==false)
+                {
+                    guerisseur.Soigner(chat);
+                    Console.WriteLine("\nVous venez d'aller voir le guérisseur, votre chat a donc un niveau d'énergie à 10, et avez un niveau de faim augmenté de 3 points.");
+                    estSoigne = true;
+                }
+                else
+                {
+                    actionRealisee = false;
+                    Console.WriteLine("\nAttention vous ne pouvez pas aller chez le guérisseur, il est en effet en congé lors des tours impairs.\n");
+                }
             }
             else
             {
@@ -761,10 +826,10 @@ namespace ConsoleApp1
             return compteurAction;
         }
 
-        public static int ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque, ref bool estAttaque, ref bool seProtege)
+        public static int ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque, ref bool estAttaque, ref bool seProtege, int compteurTour, ref bool estSoigne)
         {
             //Affichage de la liste des actions 
-            Console.WriteLine("Vous pouvez choisir une action à effectuer parmi la liste suivante : \n");
+            Console.WriteLine("\nVous pouvez choisir une action à effectuer parmi la liste suivante : \n");
             List<string> listeActionPossible = new List<string> { " 1 : Se nourrir" , " 2 : Se reposer" , " 3 : Se divertir" , " 4 : Changer le nom d'un chat" , " 5 : Afficher les différents niveaux d'un chat" , " 6 : Récolter (propre au chat Agriculteur)" , " 7 : Planter (propre au chat Agriculteur)", " 8 : Construire (propre au chat Batisseur)", " 9 : Abattre un arbre (propre au chat Batisseur)", " 10 : Miner (propre au chat Batisseur)", " 11 : Patisser (propre au chat Patissier)", " 12 : Créer un divertissement (propre au chat Artiste)" };
             if (map.Map[2, 46] == " Zo")
             {
@@ -878,33 +943,21 @@ namespace ConsoleApp1
                     {
                         compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
                     }
-                    chat.AfficherNiveaux();
                     FaireActionBasique(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listeChats, map, ref compteurAction);
-                    chat.AfficherNiveaux();
-                    /*Console.WriteLine(compteurAction);*/
-                    Console.WriteLine(compteurAttaque);
                 }
                 else
                 {
                     if ((numeroAction >= 11 && numeroAction <= 12) || (numeroAction >= 31 && numeroAction <= 33) || numeroAction==41 || numeroAction==21 || numeroAction == 51)
                     {
                         compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
-                        chat.AfficherNiveaux();
                         FaireActionMetier(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, map, ref compteurAction, listeChats, listePnj);
-                        chat.AfficherNiveaux();
-                        Console.WriteLine(compteurAction);
-                        Console.WriteLine(compteurAttaque);
                     }
                     else
                     {
                         if (numeroAction >= 6 && numeroAction <= 7)
                         {
                             compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
-                            chat.AfficherNiveaux();
-                            FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, ref compteurAction);
-                            chat.AfficherNiveaux();
-                            Console.WriteLine(compteurAction);
-                            Console.WriteLine(compteurAttaque);
+                            FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, ref compteurAction, compteurTour, ref estSoigne);
                         }
                         else
                             Console.WriteLine("\nAttention, vous devez choisir un numéro d'action existant\n");

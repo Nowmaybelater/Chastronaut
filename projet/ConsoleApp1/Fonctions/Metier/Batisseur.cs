@@ -26,7 +26,7 @@ namespace ConsoleApp1
                 Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un chat guérisseur. " +
                     "\n Celui - ci peut remettre au maximum les barres d'énergie du chat " +
                     "\n que vous incarnez. Pour cela, il vous faut vous rendre à l'infirmerie.Attention, vous ne pouvez " +
-                    "\n consulter le Guérisseur qu'une seule fois tous les x tours.");
+                    "\n consulter le Guérisseur que quand le tour en cours est un tour pair.");
             }
             else
             {

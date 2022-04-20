@@ -10,7 +10,6 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-
             //pour tester l'initialisation du jeu
             bool veutJouer = true;
             string nomColonie = PresenterJeu(ref veutJouer);
@@ -19,9 +18,7 @@ namespace ConsoleApp1
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            int compteur = 0;
-
-            FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj);
+            FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj, nomColonie);
             //FaireUnTour(listeChats,0,carte, listeRessources, listeBatiments, listePnj, ref compteur);
             Console.ReadLine();
         }
@@ -107,7 +104,7 @@ namespace ConsoleApp1
 
         }
 
-        public static bool FaireUnTour(List<Chats> listeChats, int chatJoue, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, ref int compteurTour)
+        public static bool FaireUnTour(List<Chats> listeChats, int chatJoue, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, ref int compteurTour, string nomColonie)
         {
 
             Chats chatCourant = listeChats[chatJoue];
@@ -226,7 +223,7 @@ namespace ConsoleApp1
         }
 
 
-        public static void FaireDesTours(List<Chats> listeChats, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj)
+        public static void FaireDesTours(List<Chats> listeChats, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, string nomColonie)
         {            
             int compteurTour = 0;
             bool gameover = false;
@@ -235,7 +232,7 @@ namespace ConsoleApp1
             {
                 if ((listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
                 {
-                    gameover = FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour);
+                    gameover = FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour, nomColonie);
                     compteurTour += 1;
                 }
                 i += 1;
@@ -245,7 +242,8 @@ namespace ConsoleApp1
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write(" \n ============================================================================ ");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Félicitation ! Vous avez réussi à aider les Chastronautes à reprendre leur voyage sans perdre aucun membre de leur équipage !");
+                Console.WriteLine("\nFélicitation ! Vous avez réussi à aider les Chastronautes de la colonie {0}"+
+                                  "\n     à reprendre leur voyage sans perdre aucun membre de leur équipage !", nomColonie);
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write(" \n ============================================================================ ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -338,6 +336,9 @@ namespace ConsoleApp1
                                 compteurAttaque += 1;
                                 seProtege = true;
                                 Console.WriteLine("Vous vous êtes bien protégé !");
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.Write(" \n ================================================================================ ");
+                                Console.ForegroundColor = ConsoleColor.White;
                             }
                             else
                             {

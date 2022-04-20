@@ -17,9 +17,19 @@ namespace ConsoleApp1
             List<Chats> listeChats = CreerListeChats();//Création liste des Chats
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
-            Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj, nomColonie);
-            //FaireUnTour(listeChats,0,carte, listeRessources, listeBatiments, listePnj, ref compteur);
+            bool rejouer = false;
+            do
+            {
+                rejouer = false;
+                Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
+                FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj, nomColonie);
+                Console.WriteLine("Voulez-vous refaire une partie ? (OUI ou NON)");
+                string reponse = Console.ReadLine();
+                if(reponse=="OUI")
+                {
+                    rejouer = true;
+                }
+            } while (rejouer == true);
             Console.ReadLine();
         }
 

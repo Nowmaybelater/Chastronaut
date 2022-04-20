@@ -337,7 +337,7 @@ namespace ConsoleApp1
                                 seProtege = true;
                                 Console.WriteLine("Vous vous êtes bien protégé !");
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.Write(" \n ================================================================================ ");
+                                Console.Write(" \n ======================================================================================== ");
                                 Console.ForegroundColor = ConsoleColor.White;
                             }
                             else

@@ -265,7 +265,7 @@ namespace ConsoleApp1
             }
         }
 
-
+        //La fonction suivante créée une liste contenant chacune des ressources ainsi que leur quantité initiale 
         public static List<Ressources> CreerListeRessources()
         {
             Bois bois = new Bois(6);
@@ -276,18 +276,21 @@ namespace ConsoleApp1
             Films film = new Films(6);
             Livres livre = new Livres(6);
             Graines graine = new Graines(3);
-            Graines grainePlantee = new Graines(5);
+            Graines grainePlantee = new Graines(5);//grainePlantee a pour quantité le nombre de graine plantées au tour précédant, il est initialisé à 5 en début de partie.
             List<Ressources> listeRessources = new List<Ressources> { fruit, gateau, poisson, bois, pierre, film, livre, graine, grainePlantee}; //grainePlantee a pour quantité le nombre de graine plantées au tour précédant, il est initialisé à 5 en début de partie.
             return listeRessources;
         }
 
+        //La fonction suivante créée une liste contenant  les Personnages Non Joueurs
         public static List<PnJ> CreerListePnJ()
         {
             PnJ guerisseur = new Guerisseur();
             PnJ messager = new Messager();
-            List<PnJ> listePnj = new List<PnJ> { guerisseur, messager}; //grainePlantee a pour quantité le nombre de graine plantées au tour précédant, il est initialisé à 5 en début de partie.
+            List<PnJ> listePnj = new List<PnJ> { guerisseur, messager}; 
             return listePnj;
         }
+
+        //La fonction suivante créée une liste contenant  les Personnages Non Joueurs
         public static List<Chats> CreerListeChats()
         {
             Batisseur batisseur1 = new Batisseur();
@@ -304,6 +307,7 @@ namespace ConsoleApp1
             return listeChats;
         }
 
+        //La fonction suivante simule les vols de faim, d'énergie et de divertissement effectués par les aliens lors d'une attaque sur un chat 
         public static void SubirAttaque(Chats chat, Extraterrestre ET)
         {
             ET.VolerFaim(chat);
@@ -313,6 +317,7 @@ namespace ConsoleApp1
             Console.WriteLine("Vous avez été attaqué ! Votre Chastronaute a perdu 2 points de Faim, 2 points d'Energie et 2 points de Divertissement ");
         }
 
+        //La fonction suivante gère le processus complet d'attaque par un alien
         public static int SeFaireAttaquer(Chats chat, int compteurAttaque, ref int compteurAction, Carte carte, List<Chats> listeChats, ref bool estAttaque, ref bool seProtege)
         {
             if(compteurAttaque==0)

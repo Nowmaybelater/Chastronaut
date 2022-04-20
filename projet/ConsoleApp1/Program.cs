@@ -33,6 +33,7 @@ namespace ConsoleApp1
             Console.ReadLine();
         }
 
+        //La fonction suivante gère l'expérience d'accueil du joueur
         public static string PresenterJeu(ref bool veutJouer)
         {
             veutJouer = true; //booléen utile dans le programme principal : selon la valeur de veutJouer, une partie se relance ou pas
@@ -47,7 +48,7 @@ namespace ConsoleApp1
 
             Console.WriteLine(" \n Voulez-vous afficher l'histoire ? (tapez NON pour passer, appuyez sur la touche entrée sinon)");
             string afficheHistoire = Console.ReadLine();
-            if (afficheHistoire != "NON")
+            if (afficheHistoire != "NON")//affichage de l'histoire 
             {
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.Write(" \n ===================================== ");
@@ -68,6 +69,7 @@ namespace ConsoleApp1
                     "\n plusieurs négociations, ils acceptèrent de partager leur territoire le temps " +
                     "\n pour les Chastronautes de reprendre contact avec les leurs...");
 
+                //affichage des règles du jeu 
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.Write(" \n =================================== ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -363,6 +365,7 @@ namespace ConsoleApp1
             return compteurAttaque;
         }
 
+        //La fonction suivante permet la génération de la carte de jeu
         public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments, Chats chat)
         {
             Carte map = new Carte();
@@ -393,13 +396,14 @@ namespace ConsoleApp1
             return map;
         }
 
+        //La fonction suivante permet d'afficher la carte générée grâce à la fonction précédente
         public static void AfficherCarte(Carte carte, Chats chat, List<Chats> ListeChats, bool estAttaque)// on utilise cette fonction plutôt que le ToString de Carte car cela permet un affichage avec des couleurs
         {
             for (int i = 0; i < 20; i++)
             {
                 for (int j = 0; j < 50; j++)
                 {
-                    if (i == chat.PositionChat[0] && j == chat.PositionChat[1])
+                    if (i == chat.PositionChat[0] && j == chat.PositionChat[1])//affichage du chat enrôlé sous la forme d'un carré violet
                     {
                         Console.BackgroundColor = ConsoleColor.DarkMagenta;
                         Console.Write(carte.Map[i, j]);
@@ -407,7 +411,7 @@ namespace ConsoleApp1
                     }
                     else
                     {
-                        if(estAttaque==true && i == chat.PositionChat[0]-1 && j == chat.PositionChat[1]-1)
+                        if(estAttaque==true && i == chat.PositionChat[0]-1 && j == chat.PositionChat[1]-1)//affichage de l'alien qui attaque sous la forme d'un carré vert
                         {
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
                             Console.Write(carte.Map[i, j]);
@@ -424,7 +428,7 @@ namespace ConsoleApp1
         }
 
         public static void AfficherRessources(List<Ressources> listeRessources)//affiche toutes les ressources
-        //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
+        //ListeRessources rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
         {
             for(int i=0; i<listeRessources.Count-1;i++)//on n'affiche pas la dernière ressource de la liste qui permet de garder la quantité de graine planter la dernière fois en mémoire.
             {
@@ -432,8 +436,7 @@ namespace ConsoleApp1
             }
         }
 
-        public static void AfficherChats(List<Chats> listeChats)//affiche toutes les ressources
-                                                                               //ListeRessoucres rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
+        public static void AfficherChats(List<Chats> listeChats)//affiche tous les chats
         {
             int i = 1;
             foreach (Chats chat in listeChats)
@@ -900,20 +903,21 @@ namespace ConsoleApp1
             return compteurAction;
         }
 
+        //La fonction suivante propose au joueur une liste des actions qu'il peut réaliser (selon le rôle du personnage qu'il incarne, etc.), lui demande de choisir une de ces actions et la réalise si c'est possible (en faisant appel aux fonctions FaireAction, FaireActionMetier et FaireActionBasique) 
         public static int ProposerAction(Chats chat, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, List<PnJ> listePnj, ref int compteurAction, int compteurAttaque, ref bool estAttaque, ref bool seProtege, int compteurTour, ref bool estSoigne)
         {
             //Affichage de la liste des actions 
             Console.WriteLine("\nVous pouvez choisir une action à effectuer parmi la liste suivante : \n");
             List<string> listeActionPossible = new List<string> { " 1 : Se nourrir" , " 2 : Se reposer" , " 3 : Se divertir" , " 4 : Changer le nom d'un chat" , " 5 : Afficher les différents niveaux d'un chat" , " 6 : Récolter (propre au chat Agriculteur)" , " 7 : Planter (propre au chat Agriculteur)", " 8 : Construire (propre au chat Batisseur)", " 9 : Abattre un arbre (propre au chat Batisseur)", " 10 : Miner (propre au chat Batisseur)", " 11 : Patisser (propre au chat Patissier)", " 12 : Créer un divertissement (propre au chat Artiste)" };
-            if (map.Map[2, 46] == " Zo")
+            if (map.Map[2, 46] == " Zo")//la condition porte sur le fait que la zone de pêche soit construite
             {
                 listeActionPossible.Add(" 13 : Pecher");
             }
-            if (map.Map[12, 18] == "Inf")
+            if (map.Map[12, 18] == "Inf")//la condition porte sur le fait que l'infirmerie soit construite
             {
                 listeActionPossible.Add(" 14 : Aller voir le guérisseur ");
             }
-            if(map.Map[8, 18] == "  Po")
+            if(map.Map[8, 18] == "  Po")//la condition porte sur le fait que le bureau de poste soit construite
             {
                 listeActionPossible.Add(" 15 : Aller voir le messager");
             }
@@ -1009,7 +1013,7 @@ namespace ConsoleApp1
                         }
                     }
                 }
-                //boucle pour choisir le "FaireAction"
+                //boucle pour choisir la fonction à appeler parmi : FaireAction, FaireActionMetier et FaireActionBasique
 
                 if (numeroAction >= 1 && numeroAction <= 5)
                 {
@@ -1047,7 +1051,6 @@ namespace ConsoleApp1
                             Console.WriteLine("\nAttention, vous devez choisir un numéro d'action existant\n");
                     }
                 }
-                //Regarder comment faire pour relancer la proposition
             }while (actionRealisable==false); //boucle do...while pour redemander au joueur de choisir une action à faire tant que le numéro d'action saisi n'est pas correct           
             return compteurAttaque;
         }

@@ -13,13 +13,13 @@ namespace ConsoleApp1
             //pour tester l'initialisation du jeu
             bool veutJouer = true;
             string nomColonie = PresenterJeu(ref veutJouer);
-            List<Ressources> listeRessources = CreerListeRessources();//Création liste de ressources
-            List<Chats> listeChats = CreerListeChats();//Création liste des Chats
-            List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
-            List<PnJ> listePnj = CreerListePnJ();
             bool rejouer = false;
             do
             {
+                List<Ressources> listeRessources = CreerListeRessources();//Création liste de ressources
+                List<Chats> listeChats = CreerListeChats();//Création liste des Chats
+                List<Batiments> listeBatiments = new List<Batiments> { };//création de la liste de batiments
+                List<PnJ> listePnj = CreerListePnJ();
                 rejouer = false;
                 Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
                 FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj, nomColonie);

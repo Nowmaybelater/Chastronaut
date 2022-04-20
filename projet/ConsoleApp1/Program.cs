@@ -19,7 +19,14 @@ namespace ConsoleApp1
             List<Batiments> listeBatiments = new List<Batiments> {};//création de la liste de batiments
             List<PnJ> listePnj = CreerListePnJ();
             Carte carte = InitialiserCarte(listeRessources, listeBatiments, listeChats[4]);
-            FaireDesTours(listeChats,carte, listeRessources, listeBatiments, listePnj);
+            int compteur = 0;
+            bool estAttaque = false;
+            bool seProtege = false;
+            int compteur2 = 0;
+            FaireUnTour(listeChats,0, carte, listeRessources, listeBatiments, listePnj, ref compteur);
+            Console.WriteLine(estAttaque);
+            Console.WriteLine(seProtege);
+            //FaireUnTour(listeChats,0,carte, listeRessources, listeBatiments, listePnj, ref compteur);
             Console.ReadLine();
         }
 
@@ -136,10 +143,15 @@ namespace ConsoleApp1
                     if (i != chatJoue && (listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
                     {
                         Metier metier = listeChats[i].Fonction as Metier;
-                        metier.AgirAutomatiquement(listeChats[i], listeRessources, compteurAction);
-                        if(seProtege==true)
+                        if (seProtege == true)
                         {
-                            metier.AgirAutomatiquement(listeChats[i], listeRessources, compteurAction);//le chat va agir automatiquement une deuxième fois car le chat s'est protéger donc le joueur à réaliser deux actions
+                            metier.AgirAutomatiquement(listeChats[i], listeRessources, compteurAction - 1);//le chat fait une première action automatique qui correpond à l'action SeProteger réaliser par la chat courant
+                            metier.AgirAutomatiquement(listeChats[i], listeRessources, compteurAction);//le chat va agir automatiquement une deuxième fois, cet action va correspondre à l'action que le chat courant devait réaliser originellement
+                        }
+                        else
+                        {
+                            metier.AgirAutomatiquement(listeChats[i], listeRessources, compteurAction);
+
                         }
                     }
                 }

@@ -24,9 +24,10 @@ namespace ConsoleApp1
                 listeChats.Add(chatGuerisseur);
                 listePnj.Add(guerisseur);
                 Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un chat guérisseur. " +
-                    "\n Celui - ci peut remettre au maximum les barres d'énergie du chat " +
-                    "\n que vous incarnez. Pour cela, il vous faut vous rendre à l'infirmerie.Attention, vous ne pouvez " +
-                    "\n consulter le Guérisseur que quand le tour en cours est un tour pair.");
+                    "\n Celui - ci peut remettre au maximum la barre d'énergie du chat que vous incarnez " +
+                    "\n et lui donner 3 points de faim. Pour cela, il vous faut vous rendre à l'infirmerie." +
+                    "\n Attention, vous ne pouvez consulter le Guérisseur que quand le tour en cours porte" +
+                    "\n un numéro pair.");
             }
             else
             {
@@ -40,8 +41,7 @@ namespace ConsoleApp1
                     listePnj.Add(messager);
                     Console.WriteLine(" La construction de ce bâtiment vous a permis de débloquer un chat messager. " +
                         "\n Celui - ci peut vous offrir des ressources supplémentaires, que vous obtiendrez en vous " +
-                        "\n rendant au bureau de poste. Attention, vous ne pouvez consulter le Messager que tous les" +
-                        "\n x tours.");
+                        "\n rendant au bureau de poste.");
 
                 }
                 else

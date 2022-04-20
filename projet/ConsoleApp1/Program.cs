@@ -500,86 +500,7 @@ namespace ConsoleApp1
                                 else
                                 {   if (numeroAction == 31 && chat.Fonction is Batisseur) //Construire
                                     {
-                                        if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")
-                                        {
-                                            Console.WriteLine("Vous avez déjà construit tous le bâtiments qu'un chat batisseur peut construire sur la carte choisissez une autre activité");
-                                            actionRealisee = false;
-                                        }
-                                        else
-                                        {
-                                            
-                                            Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);
-                                            Console.WriteLine("\nQue voulez-vous construire ?");
-                                            if (map.Map[12, 18] != "Inf")
-                                            {
-                                                Console.WriteLine("1 : Infirmerie (nécessite 1 bois et 1 pierre)");
-                                            }
-                                            if (map.Map[8, 18] != "  Po")
-                                            {
-                                                Console.WriteLine("2 : Poste (nécessite 1 bois et 1 pierre)");
-                                            }
-                                            if (map.Map[7, 5] != " Po")
-                                            {
-                                                Console.WriteLine("3 : Potager (nécessite 2 bois)");
-                                            }
-                                            if (map.Map[2, 46] != " Zo")
-                                            {
-                                                Console.WriteLine("4 : Zone de pêche (nécessite 2 pierres)");
-                                            }
-                                            Console.WriteLine("5 : Voir mes ressources");
-                                            int numConstruction = 0;
-                                            bool numConsCorrect = false;
-                                            do
-                                            {
-                                                numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
-                                                if (numConstruction == 11)//5+6
-                                                {
-                                                    if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")
-                                                    {
-                                                        Console.WriteLine("Vous avez déjà construit tous le bâtiments qu'un chat batisseur peut construire sur la carte choisissez une autre activité");
-                                                    }
-                                                    else
-                                                    {
-                                                        Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);
-                                                        Console.WriteLine("\nQue voulez-vous construire ?");
-                                                        if (map.Map[12, 18] != "Inf")
-                                                        {
-                                                            Console.WriteLine("1 : Infirmerie (nécessite 1 bois et 1 pierre)");
-                                                        }
-                                                        if (map.Map[8, 18] != "  Po")
-                                                        {
-                                                            Console.WriteLine("2 : Poste (nécessite 1 bois et 1 pierre)");
-                                                        }
-                                                        if (map.Map[7, 5] != " Po")
-                                                        {
-                                                            Console.WriteLine("3 : Potager (nécessite 2 bois)");
-                                                        }
-                                                        if (map.Map[2, 46] != " Zo")
-                                                        {
-                                                            Console.WriteLine("4 : Zone de pêche (nécessite 2 pierres)");
-                                                        }
-                                                        numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
-                                                        if (numConstruction >= 7 && numConstruction <= 10)
-                                                        {
-                                                            numConsCorrect = true;
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    if (numConstruction >= 7 && numConstruction <= 11)
-                                                    {
-                                                        numConsCorrect = true;
-                                                    }
-                                                }
-                                                if (numConsCorrect == false)
-                                                {
-                                                    Console.WriteLine("\nAttention le numéro entré est incorrect. Veuillez réessayer : ");
-                                                }
-                                            } while (numConsCorrect == false);
-                                            Batisseur batisseur = fonction as Batisseur;
-                                            batisseur.Construire(numConstruction, map, chat, listeRessources, listeBatiments, listeChats, listePnj);
-                                        }
+                                        FaireActionConstruire(map, fonction, actionRealisee, listeRessources, listeChats, chat, listeBatiments, listePnj);
                                     }
                                     else
                                     {   if (numeroAction == 31)
@@ -675,6 +596,147 @@ namespace ConsoleApp1
             }
             return compteurAction;
         }
+
+        public static void FaireActionConstruire(Carte map, Fonction fonction, bool actionRealisee, List<Ressources> listeRessources, List<Chats> listeChats, Chats chat, List<Batiments> listeBatiments, List<PnJ> listePnj)
+        {
+            if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")
+            {
+                Console.WriteLine("Vous avez déjà construit tous le bâtiments qu'un chat batisseur peut construire sur la carte choisissez une autre activité");
+                actionRealisee = false;
+            }
+            else
+            {
+
+                Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);
+                Console.WriteLine("\nQue voulez-vous construire ?");
+                if (map.Map[12, 18] != "Inf")
+                {
+                    Console.WriteLine("1 : Infirmerie (nécessite 1 bois et 1 pierre)");
+                }
+                if (map.Map[8, 18] != "  Po")
+                {
+                    Console.WriteLine("2 : Poste (nécessite 1 bois et 1 pierre)");
+                }
+                if (map.Map[7, 5] != " Po")
+                {
+                    Console.WriteLine("3 : Potager (nécessite 2 bois)");
+                }
+                if (map.Map[2, 46] != " Zo")
+                {
+                    Console.WriteLine("4 : Zone de pêche (nécessite 2 pierres)");
+                }
+                Console.WriteLine("5 : Voir mes ressources");
+                int numConstruction = 0;
+                bool numConsCorrect = false;
+                do
+                {
+                    numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
+                    if (numConstruction == 11)//5+6
+                    {
+                        if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")
+                        {
+                            Console.WriteLine("Vous avez déjà construit tous le bâtiments qu'un chat batisseur peut construire sur la carte choisissez une autre activité");
+                        }
+                        else
+                        {
+                            Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);
+                            Console.WriteLine("\nQue voulez-vous construire ?");
+                            if (map.Map[12, 18] != "Inf")
+                            {
+                                Console.WriteLine("1 : Infirmerie (nécessite 1 bois et 1 pierre)");
+                            }
+                            if (map.Map[8, 18] != "  Po")
+                            {
+                                Console.WriteLine("2 : Poste (nécessite 1 bois et 1 pierre)");
+                            }
+                            if (map.Map[7, 5] != " Po")
+                            {
+                                Console.WriteLine("3 : Potager (nécessite 2 bois)");
+                            }
+                            if (map.Map[2, 46] != " Zo")
+                            {
+                                Console.WriteLine("4 : Zone de pêche (nécessite 2 pierres)");
+                            }
+                            numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
+                            if (numConstruction >= 7 && numConstruction <= 10)
+                            {
+                                if (map.Map[12, 18] == "Inf" && numConstruction == 7)
+                                {
+                                    numConsCorrect = false;
+                                }
+                                else
+                                {
+                                    if (map.Map[8, 18] == "  Po" && numConstruction == 8)
+                                    {
+                                        numConsCorrect = false;
+                                    }
+                                    else
+                                    {
+                                        if (map.Map[7, 5] == " Po" && numConstruction == 9)
+                                        {
+                                            numConsCorrect = false;
+                                        }
+                                        else
+                                        {
+                                            if (map.Map[2, 46] == " Zo" && numConstruction == 10)
+                                            {
+                                                numConsCorrect = false;
+                                            }
+                                            else
+                                            {
+                                                numConsCorrect = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (numConstruction >= 7 && numConstruction <= 11)
+                        {
+                            if (map.Map[12, 18] == "Inf" && numConstruction == 7)
+                            {
+                                numConsCorrect = false;
+                            }
+                            else
+                            {
+                                if (map.Map[8, 18] == "  Po" && numConstruction == 8)
+                                {
+                                    numConsCorrect = false;
+                                }
+                                else
+                                {
+                                    if (map.Map[7, 5] == " Po" && numConstruction == 9)
+                                    {
+                                        numConsCorrect = false;
+                                    }
+                                    else
+                                    {
+                                        if (map.Map[2, 46] == " Zo" && numConstruction == 10)
+                                        {
+                                            numConsCorrect = false;
+                                        }
+                                        else
+                                        {
+                                            numConsCorrect = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (numConsCorrect == false)
+                    {
+                        Console.WriteLine("\nAttention le numéro entré est incorrect. Veuillez réessayer : ");
+                    }
+                } while (numConsCorrect == false);
+                Batisseur batisseur = fonction as Batisseur;
+                batisseur.Construire(numConstruction, map, chat, listeRessources, listeBatiments, listeChats, listePnj);
+            }
+        }
+
 
         public static int FaireActionBasique(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, Carte map, ref int compteurAction)
         {

@@ -10,10 +10,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //pour tester l'initialisation du jeu
             bool veutJouer = true;
-            string nomColonie = PresenterJeu(ref veutJouer);
             bool rejouer = false;
+            string nomColonie = PresenterJeu(ref veutJouer);
             do
             {
                 List<Ressources> listeRessources = CreerListeRessources();//Création liste de ressources

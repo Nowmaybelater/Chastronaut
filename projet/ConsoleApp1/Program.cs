@@ -368,7 +368,7 @@ namespace ConsoleApp1
         }
 
         //La fonction suivante permet la génération de la carte de jeu
-        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments, Chats chat)
+        public static Carte InitialiserCarte(List<Ressources> listeRessources, List<Batiments> listeBatiments)
         {
             Carte map = new Carte();
             Bois bois = listeRessources[3] as Bois;

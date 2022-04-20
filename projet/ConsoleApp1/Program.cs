@@ -336,9 +336,6 @@ namespace ConsoleApp1
                                 compteurAttaque += 1;
                                 seProtege = true;
                                 Console.WriteLine("Vous vous êtes bien protégé !");
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.Write(" \n ================================================================================ ");
-                                Console.ForegroundColor = ConsoleColor.White;
                             }
                             else
                             {
@@ -1006,21 +1003,31 @@ namespace ConsoleApp1
                     {
                         compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
                     }
-                    FaireActionBasique(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listeChats, map, ref compteurAction);
+                    if(compteurAction!=5)
+                    {
+                        FaireActionBasique(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listeChats, map, ref compteurAction);
+                    }
                 }
                 else
                 {
                     if ((numeroAction >= 11 && numeroAction <= 12) || (numeroAction >= 31 && numeroAction <= 33) || numeroAction==41 || numeroAction==21 || numeroAction == 51)
                     {
                         compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
-                        FaireActionMetier(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, map, ref compteurAction, listeChats, listePnj);
+                        if (compteurAction != 5)
+                        {
+                            FaireActionMetier(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, map, ref compteurAction, listeChats, listePnj);
+
+                        }
                     }
                     else
                     {
                         if (numeroAction >= 6 && numeroAction <= 7)
                         {
                             compteurAttaque = SeFaireAttaquer(chat, compteurAttaque, ref compteurAction, map, listeChats, ref estAttaque, ref seProtege);
-                            FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, ref compteurAction, compteurTour, ref estSoigne);
+                            if (compteurAction != 5)
+                            {
+                                FaireActionPnj(numeroAction, chat, chat.Fonction, listeRessources, listeBatiments, listePnj, map, ref compteurAction, compteurTour, ref estSoigne);
+                            }
                         }
                         else
                             Console.WriteLine("\nAttention, vous devez choisir un numéro d'action existant\n");

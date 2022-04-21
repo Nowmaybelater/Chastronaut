@@ -808,7 +808,7 @@ namespace ConsoleApp1
                         }
                         else
                         {
-                            Console.WriteLine("\nVous n'avez plus de cet nourriture !");
+                            Console.WriteLine("\nVous n'avez plus de cette nourriture !");
                         }
                     } while (quantiteNourriture == 0);
                 }

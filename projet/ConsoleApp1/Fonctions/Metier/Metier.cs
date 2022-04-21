@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
 
         //Constructeur
-        public Metier(string nom, int num) : base(nom, num)
+        protected Metier(string nom, int num) : base(nom, num)
         {
         }
 

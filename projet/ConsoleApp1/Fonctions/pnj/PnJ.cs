@@ -9,7 +9,7 @@ namespace ConsoleApp1
     abstract class PnJ : Fonction
     {
         //Constructeur 
-        public PnJ(string nom, int num) : base(nom, num)
+        protected PnJ(string nom, int num) : base(nom, num)
         {
         }
 

@@ -8,12 +8,12 @@ namespace ConsoleApp1
 {
     abstract class Batiments
     {
-        public int Ligne
+        protected int Ligne
         {
             get;
             set;
         }
-        public int Colonne
+        protected int Colonne
         {
             get;
             set;

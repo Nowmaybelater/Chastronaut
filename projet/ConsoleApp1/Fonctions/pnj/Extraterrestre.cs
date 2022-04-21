@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     class Extraterrestre:PnJ
     {
-        public int[] PositionExtraterrestre
+        private int[] PositionExtraterrestre
         {
             get;
             set;

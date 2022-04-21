@@ -829,16 +829,26 @@ namespace ConsoleApp1
                         int numDivertissement = 0;
                         do
                         {
-                            Console.WriteLine("\nQue voulez-vous utiliser comme ressource pour que votre chat se divertisse ? \n1 : Film \n2 : Livre");
-                            numDivertissement = int.Parse(Console.ReadLine()) + 4;
-                            if(numDivertissement != 5 && numDivertissement != 6)
+                            do
                             {
-                                Console.WriteLine("\nAttention ! Vous devez entrer un nombre entre  1 et 2\n");
+                                Console.WriteLine("\nQue voulez-vous utiliser comme ressource pour que votre chat se divertisse ? \n1 : Film (quantité : {0} ) \n2 : Livre (quantité : {1} )", listeRessources[5].Quantite, listeRessources[6].Quantite);
+                                numDivertissement = int.Parse(Console.ReadLine()) + 4;
+                                if (numDivertissement != 5 && numDivertissement != 6)
+                                {
+                                    Console.WriteLine("\nAttention ! Vous devez entrer un nombre entre  1 et 2\n");
+                                }
+                            } while (numDivertissement != 5 && numDivertissement != 6);
+                            if (listeRessources[numDivertissement].Quantite != 0)//changement d'affichage si quantité divertissement nulle ou non
+                            {
+                                chat.SeDivertir(listeRessources[numDivertissement] as RessourceCulturelle);
+                                Console.WriteLine("\nVous venez de vous divertir avec un {0}", listeRessources[numDivertissement].Nom);
+                                Console.WriteLine("\n{0} a à présent un niveau de divertissement  de {1}", chat.Nom, chat.NiveauDivertissement);
                             }
-                        } while (numDivertissement != 5 && numDivertissement != 6);
-                        chat.SeDivertir(listeRessources[numDivertissement] as RessourceCulturelle);
-                        Console.WriteLine("\nVous venez de vous divertir avec un {0}", listeRessources[numDivertissement].Nom);
-                        Console.WriteLine("\n{0} a à présent un niveau de divertissement  de {1}", chat.Nom, chat.NiveauDivertissement);
+                            else
+                            {
+                                Console.WriteLine("\nVous n'avez plus de ce divertissemente !");
+                            }
+                        } while (listeRessources[numDivertissement].Quantite == 0);
                     }
                     else
                     {

@@ -8,12 +8,12 @@ namespace ConsoleApp1
 {
     abstract class Batiments
     {
-        protected int Ligne
+        protected int Ligne //passé en protected car cette propriété n'est utile que dans les classes filles de la classe Batiments et pas dans l'entiereté du code
         {
             get;
             set;
         }
-        protected int Colonne
+        protected int Colonne //passé en protected car cette propriété n'est utile que dans les classes filles de la classe Batiments et pas dans l'entiereté du code
         {
             get;
             set;

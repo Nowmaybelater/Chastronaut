@@ -9,7 +9,7 @@ namespace ConsoleApp1
     abstract class Metier : Fonction
     {
 
-        //Constructeur
+        //Constructeur passé en protected car il n'est utile que dans les classes filles de la classe Metier et pas dans l'entiereté du code
         protected Metier(string nom, int num) : base(nom, num)
         {
         }

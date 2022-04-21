@@ -8,6 +8,7 @@ namespace ConsoleApp1
 {
     class Extraterrestre:PnJ
     {
+        //passé en private car cette propriété n'est utile que dans la classe Extraterrestre et pas dans les classes filles ni dans l'entiereté du code
         private int[] PositionExtraterrestre
         {
             get;

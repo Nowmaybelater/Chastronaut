@@ -10,26 +10,27 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            bool veutJouer = true;
-            bool rejouer = false;
+            bool veutJouer = true; // initialisée à true, le booléen sert de paramètre à la fonction PresenterJeu
+            bool rejouer = false; //initialisée à false, le booléen sert de condition à la boucle do....while (voir ligne 25-31)
             string nomColonie = PresenterJeu(ref veutJouer);
-            do
+            do //on commence une partie
             {
-                List<Ressources> listeRessources = CreerListeRessources();//Création liste de ressources
-                List<Chats> listeChats = CreerListeChats();//Création liste des Chats
-                List<Batiments> listeBatiments = new List<Batiments> { };//création de la liste de batiments
-                List<PnJ> listePnj = CreerListePnJ();
-                rejouer = false;
-                Carte carte = InitialiserCarte(listeRessources, listeBatiments);
-                FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj, nomColonie);
-                Console.WriteLine("Voulez-vous refaire une partie ? (OUI ou NON)");
-                string reponse = Console.ReadLine();
+                List<Ressources> listeRessources = CreerListeRessources();//Création liste de ressources et remplissage
+                List<Chats> listeChats = CreerListeChats();//Création liste des Chats et remplissage
+                List<Batiments> listeBatiments = new List<Batiments> { };//Création de la liste de batiments
+                List<PnJ> listePnj = CreerListePnJ();//Création liste des Pnjs et remplissage
+                rejouer = false; //on remet la valeur de rejouer à false pour qu'elle soit toujours fausse en début de partie
+                Carte carte = InitialiserCarte(listeRessources, listeBatiments); //Création de la carte et remplissage de celle-ci avec la fonction InitialiserCarte, cette fonction permet aussi de remplir listeBatiment
+                FaireDesTours(listeChats, carte, listeRessources, listeBatiments, listePnj, nomColonie); //On utilise la procédure FaireDesTours qui s'occupe de gérer tous les tours de jeux jusqu'à un gameover ou la fin de la partie.
+                //Un fois la partie finie
+                Console.WriteLine("Voulez-vous refaire une partie ? (OUI ou NON)"); //demande au joueur si il veut rejouer
+                string reponse = Console.ReadLine();// sa réponse est récupérer dans le string reponse
                 if(reponse=="OUI")
                 {
-                    rejouer = true;
+                    rejouer = true; //si reponse vaut "OUI" on change la valeur de rejouer à true
                 }
-            } while (rejouer == true);
-            Console.ReadLine();
+            } while (rejouer == true); //suivant si le joueur à répondu OUI ou NON la boucle continue ou non
+            Console.ReadLine();//fin du Main
         }
 
         //La fonction suivante gère l'expérience d'accueil du joueur
@@ -116,11 +117,13 @@ namespace ConsoleApp1
 
         }
 
+
+        //La fonction suivante gère un tour du jeu, elle fait faire 5 actions au joueur en vérifiant à chaque fois qu'il ne se retrouve pas en gameover
         public static bool FaireUnTour(List<Chats> listeChats, int chatJoue, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, ref int compteurTour, string nomColonie)
         {
 
-            Chats chatCourant = listeChats[chatJoue];
-            int compteurAttaque = 0;
+            Chats chatCourant = listeChats[chatJoue]; //on crée le chat qui est en train d'être joué à partir de la listeChats
+            int compteurAttaque = 0; //permet d'assurer un maximum de une attaque d'extraterrestre par tour
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write(" \n ====================================== ");
             Console.ForegroundColor = ConsoleColor.White;
@@ -130,13 +133,13 @@ namespace ConsoleApp1
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nVous commencez le tour numéro {0}, \n\nVous incarnez actuellement {2} le chat {1} \n\nComme à chaque tour, vous allez pouvoir réaliser un total de 5 actions.\n\nN'oubliez de veiller au bon état de santé de votre chat durant ce tour.", compteurTour+1, chatCourant.Fonction.Nom, chatCourant.Nom);
             Console.WriteLine("Voici votre carte de jeux :\n");
-            bool estAttaque = false;
+            bool estAttaque = false; //pour l'affichage de la carte (false indique pas d'extraterrestre).
             AfficherCarte(map, chatCourant, listeChats, estAttaque);
-            int compteurAction = 0;            
-            bool seProtege = false;
-            bool gameover = false;
-            bool estSoigne = false;
-            while (compteurAction<5 && gameover==false)
+            int compteurAction = 0; //permet de faire réaliser 5 actions au joueur sur un tour           
+            bool seProtege = false;//est passé à true grâce à ProposerAction, permet de faire faire deux activités aux chats en automatique car se protéger compte comme une action
+            bool gameover = false;//est passé à true si un des chats de la colonie a un niveau à zéro, si gameover est true la le tour et la partie s'arrête (ligne 140)
+            bool estSoigne = false;//estSoigne est utiliser dans FaireActionPnj et assure que le joueur ne peut pas utiliser le guérisseur (une fois celui ci débloqué) plus d'une fois par tour
+            while (compteurAction<5 && gameover==false)//un tour est constitué de 5 actions à part si l'on se retrouve en gameover
             { 
                 compteurAttaque =ProposerAction(chatCourant, map, listeRessources, listeBatiments, listeChats, listePnj, ref compteurAction, compteurAttaque, ref estAttaque, ref seProtege, compteurTour+1, ref estSoigne);
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -148,7 +151,7 @@ namespace ConsoleApp1
                 Console.ForegroundColor = ConsoleColor.White;
                 for (int i = 0; i < listeChats.Count; i++)
                 {
-                    if (i != chatJoue && (listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
+                    if (i != chatJoue && (listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)//les chats pnj ne sont pas joués, il n'y a donc pas de nécessité de les faire jouer
                     {
                         Metier metier = listeChats[i].Fonction as Metier;
                         if (seProtege == true)
@@ -163,12 +166,12 @@ namespace ConsoleApp1
                         }
                     }
                 }
-                seProtege = false;
+                seProtege = false;//on remet la valeur de seProtege à false pour le prochain tour
 
                 //gestion du game over
                 int numChat = 0;
                 int numChatMort = 0;
-                while (numChat != listeChats.Count - 1)
+                while (numChat != listeChats.Count - 1)//vérifie si tous les chats ont tous leurs niveaux au dessus de zéro
                 {
                     if (listeChats[numChat].NiveauDeFaim == 0)
                     {
@@ -187,7 +190,7 @@ namespace ConsoleApp1
                     }
                     numChat += 1;
                 }
-                if (gameover == true)
+                if (gameover == true)//si il y a gameover, le jeu s'arrête 
                 {
                     string message = "\n Vous n'avez malheureusement pas réussi à garder l'entièreté de votre colonie en vie. \n Votre chat " + listeChats[numChatMort].Nom + " a atteint un niveau  de santé critique";
                     Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -202,7 +205,7 @@ namespace ConsoleApp1
             }
 
             //gestion du récapitulatif à la fin d'un tour
-            if (gameover == false)
+            if (gameover == false)// pas de gameover donc on lui propose un récapitulatif de son tour
             {
                 Console.WriteLine("Vous êtes arrivé à la fin de ce tour, voulez-vous un récapitulatif des ressources et de l'état de santé de vos chats avant de commencer le tour suivant ? (Entrez OUI ou NON)");
 
@@ -233,24 +236,25 @@ namespace ConsoleApp1
                     }
                 }
             } while (recap != "OUI" && recap != "NON");
-            return gameover;
+            return gameover;//le variable gameover est retournée
         }
 
 
+        //La fonction suivante gère l'enchaînement des tours lors d'une partie, cet enchaînements'arrête si le joueur est en gameover
         public static void FaireDesTours(List<Chats> listeChats, Carte map, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, string nomColonie)
         {            
-            int compteurTour = 0;
-            bool gameover = false;
-            int i = 0;
+            int compteurTour = 0; //utilisé dans FAireUnTour
+            bool gameover = false; //utilisé et retourné par FaireUnTour
+            int i = 0;//utilisé pour parcourir la liste des chats
             do
             {
                 if ((listeChats[i].Fonction is Guerisseur) == false && (listeChats[i].Fonction is Messager) == false)
                 {
-                    gameover = FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour, nomColonie);
+                    gameover = FaireUnTour(listeChats, i, map, listeRessources, listeBatiments, listePnj, ref compteurTour, nomColonie);//faitt faire un tour à tous les chats non pnjs 
                     compteurTour += 1;
                 }
                 i += 1;
-            } while (i < listeChats.Count && gameover != true);
+            } while (i < listeChats.Count && gameover != true); //boucle continue jusqu'à ce que tous les chats aient joué ou que le joueur soit en gameover
             if(gameover!=true)
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -319,11 +323,11 @@ namespace ConsoleApp1
         //La fonction suivante gère le processus complet d'attaque par un alien
         public static int SeFaireAttaquer(Chats chat, int compteurAttaque, ref int compteurAction, Carte carte, List<Chats> listeChats, ref bool estAttaque, ref bool seProtege)
         {
-            if(compteurAttaque==0)
+            if(compteurAttaque==0)//le varieblee compteur attaque est réutilisée dans ProposerAction afin d'assurer que le joueur ne se fiat pas attaquer plus d'une fois par tour
             {
                 Random rnd = new Random();
                 int intervention = rnd.Next(1, 6);
-                if (intervention == 1)
+                if (intervention == 1)//attaque aléatoire de l'extraterrestre
                 {
                     Extraterrestre ET = new Extraterrestre();
                     ET.AllerActivite(chat, chat.PositionChat);
@@ -336,7 +340,7 @@ namespace ConsoleApp1
                     Console.Write(" =================================== ");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\nVous êtes sur le point de vous faire attaquer par un extraterrestre, deux choix s'offrent à vous :\n 1 : Se protéger et perdre une action sur le tour\n 2 : Ne pas de se protéger et perdre 2 points dans chaque niveau de santé");//donc le joueur perdrait un point de NiveauFai, un point de NiveauDivertissement et un point de NiveauEnergie si il ne se protège pas.
-                    estAttaque = true;
+                    estAttaque = true;//varirable utilisée pour le afficher carte
                     int reponse = 0;
                     do
                     {
@@ -361,7 +365,7 @@ namespace ConsoleApp1
                             }
                             else
                             {
-                                Console.WriteLine("\nAttention, vous devez rentrer une valeur entre 1 et 2 !\n");
+                                Console.WriteLine("\nAttention, vous devez rentrer une valeur entre 1 et 2 !\n"); //assure une bonne entrée du joueur
                             }
                         }
                     } while (reponse!=1 && reponse!=2);
@@ -431,6 +435,8 @@ namespace ConsoleApp1
             }
         }
 
+
+        //La fonction suivante permet d'afficher un à un les éléments de la liste de ressources
         public static void AfficherRessources(List<Ressources> listeRessources)//affiche toutes les ressources
         //ListeRessources rassemble toutes les ressources, la place de la ressource dans la liste correspond à son attribut numéro
         {
@@ -440,6 +446,8 @@ namespace ConsoleApp1
             }
         }
 
+
+        //La fonction suivante permet d'afficher un à un les éléments de la liste de chats
         public static void AfficherChats(List<Chats> listeChats)//affiche tous les chats
         {
             int i = 1;
@@ -449,20 +457,24 @@ namespace ConsoleApp1
                 i += 1;
             }
         }
-        
+
+
+
+        //La fonction suivante permet de faire réaliser des actions au joueur, cette fonction gère les action que l'ont trouve dans les méthodes des classes filles de métier
         public static int FaireActionMetier(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, Carte map, ref int compteurAction, List<Chats> listeChats, List<PnJ> listePnj)
         //ajouter le fait qu'il puisse se faire attaquer par extraterrestre
         //rajouter test si list pnj vide
         {
-            bool actionRealisee = true;
+            bool actionRealisee = true;//utilisé pour le compteur d'action, permet de compter où non l'action suivatn sa nature et si le joueur à réaliser une entrée valide en choisissant son action
             if (numeroAction == 11 && chat.Fonction is Agriculteur) //Recolter
-            {
-                Agriculteur agriculteur = fonction as Agriculteur;
-                agriculteur.AllerActivite(chat, listeBatiments[2]);
-                agriculteur.Recolter(chat, listeRessources, true);
+            {//toujours trois étape minimum par action
+                Agriculteur agriculteur = fonction as Agriculteur; // 1 : créer le métier avec as
+                agriculteur.AllerActivite(chat, listeBatiments[2]);// 2 : Envois le chat à la bonne position sur la carte
+                agriculteur.Recolter(chat, listeRessources, true);// 3 : Lui fait faire l'action
+                // 4 : potentiel affichage et/ou décisions à prendre par le joueur
             }
             else
-            {   if (numeroAction == 11)
+            {   if (numeroAction == 11)//comme à chaque autre action on si le joueur choisi une action non réalisable par son chat on lui indique, l'action n'est pas compté et on lui propose d'en choisir une autre
                 {
                     Console.WriteLine("\nAttention ! Vous devez jouer en tant que chat agriculteur pour réaliser l'action Récolter\n");
                     actionRealisee = false;
@@ -508,7 +520,7 @@ namespace ConsoleApp1
                                             Console.WriteLine("\nAttention vous devez entrer un nombre entre 1 et 2.\n");
                                         }
                                     }
-                                } while (numRessourceCulturelle != 1 && numRessourceCulturelle != 2);                                
+                                } while (numRessourceCulturelle != 1 && numRessourceCulturelle != 2); //assure une entrée valide du joueur                               
                             }
                             else
                             {   if (numeroAction == 21)
@@ -519,7 +531,7 @@ namespace ConsoleApp1
                                 else
                                 {   if (numeroAction == 31 && chat.Fonction is Batisseur) //Construire
                                     {
-                                        FaireActionConstruire(map, fonction, actionRealisee, listeRessources, listeChats, chat, listeBatiments, listePnj);
+                                        FaireActionConstruire(map, fonction, actionRealisee, listeRessources, listeChats, chat, listeBatiments, listePnj);//allège le code
                                     }
                                     else
                                     {   if (numeroAction == 31)
@@ -572,7 +584,7 @@ namespace ConsoleApp1
                                                                     actionRealisee = false;
                                                                 }
                                                                 else
-                                                                {   if (numeroAction == 51 && chat.Fonction is Pecheur && map.Map[2,46] == " Zo") //Pecher
+                                                                {   if (numeroAction == 51 && chat.Fonction is Pecheur && map.Map[2,46] == " Zo") //Pecher, si la zone de peche a été construite
                                                                     {
                                                                         Pecheur pecheur = fonction as Pecheur;
                                                                         int placeZoneDePeche = 0;
@@ -609,16 +621,18 @@ namespace ConsoleApp1
                     }
                 }
             }
-            if (actionRealisee == true)
+            if (actionRealisee == true)//augmente le compteur d'action si une action a été réalisée
             {
                 compteurAction += 1;
             }
             return compteurAction;
         }
 
+
+        //La fonction suivante permet de faire réaliser l'action construire aux chats batisseurs
         public static void FaireActionConstruire(Carte map, Fonction fonction, bool actionRealisee, List<Ressources> listeRessources, List<Chats> listeChats, Chats chat, List<Batiments> listeBatiments, List<PnJ> listePnj)
         {
-            if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")
+            if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")//vérifie si tous les batiments ont déjà été construit
             {
                 Console.WriteLine("Vous avez déjà construit tous le bâtiments qu'un chat batisseur peut construire sur la carte choisissez une autre activité");
                 actionRealisee = false;
@@ -626,7 +640,7 @@ namespace ConsoleApp1
             else
             {
 
-                Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);
+                Console.WriteLine(listeRessources[3] + "\n" + listeRessources[4]);//gère l'affichage pour n'afficher que les batiments non construits
                 Console.WriteLine("\nQue voulez-vous construire ?");
                 if (map.Map[12, 18] != "Inf")
                 {
@@ -650,7 +664,7 @@ namespace ConsoleApp1
                 do
                 {
                     numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
-                    if (numConstruction == 11)//5+6
+                    if (numConstruction == 11)//5+6 : action voir ressources
                     {
                         if (map.Map[12, 18] != "Inf" && map.Map[8, 18] == "  Po" && map.Map[7, 5] == " Po" && map.Map[2, 46] == " Zo")
                         {
@@ -677,7 +691,7 @@ namespace ConsoleApp1
                                 Console.WriteLine("4 : Zone de pêche (nécessite 2 pierres)");
                             }
                             numConstruction = int.Parse(Console.ReadLine()) + 6;// on ajoute 6 pour avoir le numéro entrée par le joueur correspondant au numéro du batiment recherché.
-                            if (numConstruction >= 7 && numConstruction <= 10)
+                            if (numConstruction >= 7 && numConstruction <= 10)//gère une mauvaise entrée potetiel (le joueur veut construire un batiment déjà existant
                             {
                                 if (map.Map[12, 18] == "Inf" && numConstruction == 7)
                                 {
@@ -711,7 +725,7 @@ namespace ConsoleApp1
                             }
                         }
                     }
-                    else
+                    else//affichage change si voir ressources pas demandé
                     {
                         if (numConstruction >= 7 && numConstruction <= 11)
                         {
@@ -752,35 +766,52 @@ namespace ConsoleApp1
                     }
                 } while (numConsCorrect == false);
                 Batisseur batisseur = fonction as Batisseur;
-                batisseur.Construire(numConstruction, map, chat, listeRessources, listeBatiments, listeChats, listePnj);
+                batisseur.Construire(numConstruction, map, chat, listeRessources, listeBatiments, listeChats, listePnj);//Réalise l'action Construire
             }
         }
 
 
+
+        //La fonction suivante permet de faire réaliser des actions au joueur, cette fonction gère les action basique tel que manger ou se reposer
         public static int FaireActionBasique(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<Chats> listeChats, Carte map, ref int compteurAction)
         {
-            bool actionRealisee = true;
+            bool actionRealisee = true;//utilisé pour le compteur d'action, permet de compter où non l'action suivatn sa nature et si le joueur à réaliser une entrée valide en choisissant son action
             if (numeroAction == 1) //Se nourrir
             {
                 int numNourriture = 0;
                 int quantiteNourriture = 0;
-                do
+                if(listeRessources[0].Quantite==0 && listeRessources[1].Quantite == 0 && listeRessources[2].Quantite == 0)
                 {
-                    do
+                    Console.WriteLine("\n Attention ! Vous n'avez plus de nourriture !\n");
+                    actionRealisee = false;
+                }
+                else
+                {
+                    do//vérifie que la nourriture demandé existe
                     {
-                        Console.WriteLine("\nQue voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
-                        numNourriture = int.Parse(Console.ReadLine()) - 1;
-                        if(numNourriture != 0 && numNourriture != 1 && numNourriture != 2)
+                        do//vérifie le numéro entré par le joueur
                         {
-                            Console.WriteLine("\nAttention ! Vous devez entrer un nombre entre 1 et 3\n");
+                            Console.WriteLine("\nQue voulez-vous que votre chat mange ? \n1 : Fruit (quantité : {0}) \n2 : Gateaux (quantité : {1}) \n3 : Poissons (quantité : {2}) ", listeRessources[0].Quantite, listeRessources[1].Quantite, listeRessources[2].Quantite);
+                            numNourriture = int.Parse(Console.ReadLine()) - 1;
+                            if (numNourriture != 0 && numNourriture != 1 && numNourriture != 2)
+                            {
+                                Console.WriteLine("\nAttention ! Vous devez entrer un nombre entre 1 et 3\n");
+                            }
+                        } while (numNourriture != 0 && numNourriture != 1 && numNourriture != 2);
+                        quantiteNourriture = listeRessources[numNourriture].Quantite;
+                        chat.PositionChat = listeBatiments[3].PositionBatiment;
+                        if(quantiteNourriture != 0)//changement d'affichage si quantité nourriture nulle ou non
+                        {
+                            chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
+                            Console.WriteLine("\nVous venez de manger un {0}", listeRessources[numNourriture].Nom);
+                            Console.WriteLine("\n{0} a à présent un niveau de faim de {1}", chat.Nom, chat.NiveauDeFaim);
                         }
-                    } while (numNourriture != 0 && numNourriture != 1 && numNourriture != 2);                    
-                    quantiteNourriture = listeRessources[numNourriture].Quantite;
-                    chat.PositionChat = listeBatiments[3].PositionBatiment;
-                    chat.Manger(listeRessources[numNourriture] as RessourceAlimentaire);
-                    Console.WriteLine("\nVous venez de manger un {0}", listeRessources[numNourriture].Nom);
-                    Console.WriteLine("\n{0} a à présent un niveau de faim de {1}", chat.Nom, chat.NiveauDeFaim);
-                } while (quantiteNourriture == 0);
+                        else
+                        {
+                            Console.WriteLine("\nVous n'avez plus de cet nourriture !");
+                        }
+                    } while (quantiteNourriture == 0);
+                }
             }
             else
             {
@@ -856,14 +887,15 @@ namespace ConsoleApp1
 
 
 
+        //La fonction suivante permet de faire réaliser des actions au joueur, cette fonction gère les action réaliser par des Pnj
         public static int FaireActionPnj(int numeroAction, Chats chat, Fonction fonction, List<Ressources> listeRessources, List<Batiments> listeBatiments, List<PnJ> listePnj, Carte map, ref int compteurAction, int compteurTour, ref bool estSoigne)
         {
-            bool actionRealisee = true;
+            bool actionRealisee = true; //utilisé pour le compteur d'action, permet de compter où non l'action suivatn sa nature et si le joueur à réaliser une entrée valide en choisissant son action
             if (numeroAction == 6 && map.Map[12, 18] == "Inf") //Se faire soigner
             {
                 Guerisseur guerisseur = listePnj[0] as Guerisseur;
                 guerisseur.AllerActivite(chat, new int[] { 12, 19 });
-                if(compteurTour%2==0 && estSoigne==false)
+                if(compteurTour%2==0 && estSoigne==false)//assure que le guérisseur ne soit utilisé que les tours pairs et une fois par tour
                 {
                     guerisseur.Soigner(chat);
                     Console.WriteLine("\nVous venez d'aller voir le guérisseur, votre chat a donc un niveau d'énergie à 10, et avez un niveau de faim augmenté de 3 points.");

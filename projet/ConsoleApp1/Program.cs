@@ -37,11 +37,11 @@ namespace ConsoleApp1
         public static string PresenterJeu(ref bool veutJouer)
         {
             veutJouer = true; //booléen utile dans le programme principal : selon la valeur de veutJouer, une partie se relance ou pas
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write(" \n ======================= ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("BIENVENUE SUR LE JEU CHASTRONAUTES !");
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(" ======================= \n ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(" Pour une meilleure expérience de jeu, pensez à afficher la console en plein écran ! \n");

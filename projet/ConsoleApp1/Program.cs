@@ -333,11 +333,11 @@ namespace ConsoleApp1
                     ET.AllerActivite(chat, chat.PositionChat);
                     AfficherCarte(carte, chat, listeChats, true);
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write(" \n =================================== ");
+                    Console.Write(" \n ========================================= ");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("ATTENTION ! ");
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write(" =================================== ");
+                    Console.Write(" ========================================= \n");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\nVous êtes sur le point de vous faire attaquer par un extraterrestre, deux choix s'offrent à vous :\n 1 : Se protéger et perdre une action sur le tour\n 2 : Ne pas de se protéger et perdre 2 points dans chaque niveau de santé");//donc le joueur perdrait un point de NiveauFai, un point de NiveauDivertissement et un point de NiveauEnergie si il ne se protège pas.
                     estAttaque = true;//varirable utilisée pour le afficher carte
@@ -358,9 +358,9 @@ namespace ConsoleApp1
                                 compteurAction += 1;
                                 compteurAttaque += 1;
                                 seProtege = true;
-                                Console.WriteLine("Vous vous êtes bien protégé !");
+                                Console.WriteLine("\n Vous vous êtes bien protégé !");
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.Write("\n ====================================================================================== \n");
+                                Console.Write("\n ================================================================================================ \n");
                                 Console.ForegroundColor = ConsoleColor.White;
                             }
                             else
